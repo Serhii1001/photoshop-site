@@ -1,39 +1,42 @@
 /* Общие стили */
+* {
+  box-sizing: border-box;
+}
+
 body {
   font-family: 'Roboto', sans-serif;
   margin: 0;
   padding: 0;
-  background-color: #121212; /* Темный фон */
-  color: #f0f0f0; /* Светлый текст для контраста */
+  background-color: #121212;
+  color: #f0f0f0;
 }
 
-/* Стиль для секции Hero */
+/* Hero */
 .hero {
   background: url('https://via.placeholder.com/1920x1080') no-repeat center center/cover;
   color: white;
   padding: 100px 0;
   text-align: center;
-  background-color: #111;
   position: relative;
 }
 
 .hero .overlay {
-  background-color: rgba(0, 0, 0, 0.7); /* Полупрозрачный фон */
+  background-color: rgba(0, 0, 0, 0.7);
   padding: 40px;
 }
 
 .hero h1 {
   font-size: 4rem;
   margin-bottom: 20px;
-  color: #00ffcc; /* Ярко неоновый цвет */
-  text-shadow: 0 0 15px #00ffcc, 0 0 25px #00ffcc, 0 0 35px #00ffcc; /* Эффект свечения */
+  color: #00ffcc;
+  text-shadow: 0 0 15px #00ffcc, 0 0 25px #00ffcc, 0 0 35px #00ffcc;
 }
 
 .hero p {
   font-size: 1.2rem;
   margin-bottom: 30px;
   color: #dcdcdc;
-  text-shadow: 0 0 10px #ff1493, 0 0 20px #ff1493; /* Легкое свечение для текста */
+  text-shadow: 0 0 10px #ff1493, 0 0 20px #ff1493;
 }
 
 .hero .cta-button {
@@ -50,49 +53,57 @@ body {
   background-color: #ff4c3b;
 }
 
-/* Стили для секции услуг */
+/* Секция услуг */
 .service-grid {
   display: grid;
-  grid-template-columns: repeat(4, 1fr);
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
   gap: 20px;
   margin: 50px auto;
   padding: 0 20px;
 }
 
 .service-card {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
   background-color: #1e1e1e;
   box-shadow: 0 4px 20px rgba(0, 0, 0, 0.5);
   border-radius: 10px;
   overflow: hidden;
   text-align: center;
   transition: transform 0.3s ease, box-shadow 0.3s ease;
+  height: 100%;
 }
 
 .service-card:hover {
   transform: translateY(-10px);
-  box-shadow: 0 4px 30px rgba(0, 255, 204, 0.7); /* Неоновый эффект при наведении */
+  box-shadow: 0 4px 30px rgba(0, 255, 204, 0.7);
 }
 
 .service-card img {
   width: 100%;
-  height: 180px;
+  height: auto;
+  max-height: 180px;
   object-fit: cover;
 }
 
 .service-card h3 {
   font-size: 1.5rem;
-  margin: 15px 0;
-  color: #00ffcc; /* Неоновый цвет для заголовков */
-  text-shadow: 0 0 10px #00ffcc, 0 0 20px #00ffcc; /* Свечение текста */
+  margin: 15px 10px 10px;
+  color: #00ffcc;
+  text-shadow: 0 0 10px #00ffcc, 0 0 20px #00ffcc;
+  word-wrap: break-word;
 }
 
 .service-card p {
   font-size: 1rem;
   color: #ccc;
-  margin-bottom: 20px;
+  margin: 0 10px 20px;
+  flex-grow: 1;
+  word-wrap: break-word;
 }
 
-/* Стили для секции "Как сделать заказ" */
+/* Секция "Как сделать заказ" */
 #how-to-order {
   padding: 50px 20px;
   background-color: #1c1c1c;
@@ -119,7 +130,7 @@ body {
 .order-step:hover {
   transform: translateY(-10px);
   background-color: #222222;
-  box-shadow: 0 0 10px rgba(0, 255, 204, 0.7); /* Неоновое свечение */
+  box-shadow: 0 0 10px rgba(0, 255, 204, 0.7);
 }
 
 .order-step .circle {
@@ -144,19 +155,20 @@ body {
   color: #ccc;
 }
 
-@media screen and (max-width: 768px) {
+/* Адаптив */
+@media screen and (max-width: 992px) {
   .order-step {
     flex: 0 0 48%;
   }
 }
 
-@media screen and (max-width: 480px) {
+@media screen and (max-width: 600px) {
   .order-step {
     flex: 0 0 100%;
   }
 }
 
-/* Стили для секции контактов */
+/* Контакты */
 #contacts {
   background-color: #222;
   color: white;
