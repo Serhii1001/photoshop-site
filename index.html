@@ -7,6 +7,10 @@
     <title>Photoshop Услуги</title>
     <link rel="stylesheet" href="styles.css" />
     <style>
+        html {
+            scroll-behavior: smooth;
+        }
+
         body {
             background-color: #121212;
             color: white;
@@ -15,10 +19,9 @@
             padding: 0;
         }
 
-        /* Шапка с футуристичным фоном */
         .hero {
             position: relative;
-            height: 40vh; /* уменьшено с 70vh размер шапки */
+            height: 40vh;
             background: linear-gradient(45deg, #ff4c60, #00ffc8, #8a2be2, #ff6f61);
             background-size: 400% 400%;
             animation: gradientMove 15s ease infinite, lightningEffect 5s ease-out infinite;
@@ -30,43 +33,15 @@
         }
 
         @keyframes gradientMove {
-            0% {
-                background-position: 0% 50%;
-            }
-
-            50% {
-                background-position: 100% 50%;
-            }
-
-            100% {
-                background-position: 0% 50%;
-            }
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
         }
 
         @keyframes lightningEffect {
-            0% {
-                opacity: 0.5;
-            }
-
-            25% {
-                opacity: 1;
-                transform: scale(1.05);
-            }
-
-            50% {
-                opacity: 0.8;
-                transform: scale(1);
-            }
-
-            75% {
-                opacity: 1;
-                transform: scale(1.05);
-            }
-
-            100% {
-                opacity: 0.5;
-                transform: scale(1);
-            }
+            0%, 100% { opacity: 0.5; transform: scale(1); }
+            25%, 75% { opacity: 1; transform: scale(1.05); }
+            50% { opacity: 0.8; }
         }
 
         .hero .overlay {
@@ -93,6 +68,13 @@
             animation: slideUp 4s ease-out;
         }
 
+        .hero-buttons {
+            display: flex;
+            gap: 20px;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+
         .cta-button {
             background-color: #ff4c60;
             color: white;
@@ -107,6 +89,14 @@
 
         .cta-button:hover {
             background-color: #e6334f;
+        }
+
+        .cta-button.contact {
+            background-color: #007bff;
+        }
+
+        .cta-button.contact:hover {
+            background-color: #0056b3;
         }
 
         .cta-button.telegram {
@@ -134,40 +124,20 @@
         }
 
         @keyframes fadeIn {
-            from {
-                opacity: 0;
-            }
-
-            to {
-                opacity: 1;
-            }
+            from { opacity: 0; }
+            to { opacity: 1; }
         }
 
         @keyframes slideDown {
-            from {
-                opacity: 0;
-                transform: translateY(-30px);
-            }
-
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
+            from { opacity: 0; transform: translateY(-30px); }
+            to { opacity: 1; transform: translateY(0); }
         }
 
         @keyframes slideUp {
-            from {
-                opacity: 0;
-                transform: translateY(30px);
-            }
-
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
+            from { opacity: 0; transform: translateY(30px); }
+            to { opacity: 1; transform: translateY(0); }
         }
 
-        /* Центровка блоков */
         section {
             padding: 60px 20px;
             text-align: center;
@@ -178,10 +148,9 @@
             margin-bottom: 40px;
         }
 
-        /* Стили для сетки услуг */
         .service-grid {
             display: grid;
-            grid-template-columns: repeat(4, 1fr); /* 4 блока в ряд */
+            grid-template-columns: repeat(4, 1fr);
             gap: 20px;
             justify-items: center;
         }
@@ -210,7 +179,6 @@
             color: #bbb;
         }
 
-        /* Центровка шагов по заказу */
         .order-steps {
             display: flex;
             justify-content: center;
@@ -249,11 +217,11 @@
             text-align: center;
         }
 
-        /* Стили кнопок для связи */
         .contact-buttons {
             display: flex;
             justify-content: center;
             gap: 20px;
+            flex-wrap: wrap;
         }
 
         footer {
@@ -272,68 +240,23 @@
             text-decoration: underline;
         }
 
-        /* Мобильная адаптация */
         @media screen and (max-width: 768px) {
-            .hero h1 {
-                font-size: 2.5rem;
-            }
-
-            .hero p {
-                font-size: 1.5rem;
-            }
-
-            .service-grid {
-                grid-template-columns: repeat(2, 1fr); /* 2 блока в ряд на мобильных устройствах */
-            }
-
-            .cta-button {
-                padding: 12px 25px;
-                font-size: 1rem;
-            }
-
-            .order-steps {
-                flex-direction: column;
-                align-items: center;
-            }
-
-            .order-step {
-                width: 100%;
-                margin-bottom: 20px;
-            }
-
-            .service-card {
-                width: 100%;
-            }
-
-            footer {
-                font-size: 0.9rem;
-            }
+            .hero h1 { font-size: 2.5rem; }
+            .hero p { font-size: 1.5rem; }
+            .service-grid { grid-template-columns: repeat(2, 1fr); }
+            .cta-button { padding: 12px 25px; font-size: 1rem; }
+            .order-steps { flex-direction: column; align-items: center; }
+            .order-step { width: 100%; margin-bottom: 20px; }
+            .service-card { width: 100%; }
         }
 
-        /* Для самых маленьких экранов */
         @media screen and (max-width: 480px) {
-            .hero h1 {
-                font-size: 2rem;
-            }
-
-            .hero p {
-                font-size: 1.2rem;
-            }
-
-            .cta-button {
-                padding: 10px 20px;
-                font-size: 0.9rem;
-            }
-
-            .service-card h3 {
-                font-size: 1.5rem;
-            }
-
-            .service-card p {
-                font-size: 0.9rem;
-            }
+            .hero h1 { font-size: 2rem; }
+            .hero p { font-size: 1.2rem; }
+            .cta-button { padding: 10px 20px; font-size: 0.9rem; }
+            .service-card h3 { font-size: 1.5rem; }
+            .service-card p { font-size: 0.9rem; }
         }
-
     </style>
 </head>
 
@@ -342,9 +265,13 @@
         <div class="overlay">
             <h1>Преобрази свои фото</h1>
             <p>Профессиональные услуги Photoshop для любого проекта</p>
-            <a href="#services" class="cta-button">Узнать больше</a>
+            <div class="hero-buttons">
+                <a href="#services" class="cta-button">Узнать больше</a>
+                <a href="#contacts" class="cta-button contact">Контакты</a>
+            </div>
         </div>
     </div>
+
 
     <section id="services">
         <h2>Что я делаю</h2>
