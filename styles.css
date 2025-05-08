@@ -170,3 +170,10 @@ body {
   color: #00ffcc;
   text-shadow: 0 0 15px #00ffcc;
 }
+
+.toggle-button.active {
+    background-color: #ff4c60;
+    color: white;
+    font-weight: bold;
+    box-shadow: 0 0 10px #ff4c60;
+}
