@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Photoshop Услуги</title>
+    <title>Photoshop и Web Услуги</title>
     <link rel="stylesheet" href="styles.css" />
     <style>
         html {
@@ -91,37 +91,14 @@
             background-color: #e6334f;
         }
 
-        .cta-button.contact {
-            background-color: #007bff;
-        }
-
-        .cta-button.contact:hover {
-            background-color: #0056b3;
-        }
-
-        .cta-button.telegram {
-            background-color: #0088cc;
-        }
-
-        .cta-button.telegram:hover {
-            background-color: #007bb5;
-        }
-
-        .cta-button.whatsapp {
-            background-color: #25d366;
-        }
-
-        .cta-button.whatsapp:hover {
-            background-color: #128c7e;
-        }
-
-        .cta-button.alt {
-            background-color: #555;
-        }
-
-        .cta-button.alt:hover {
-            background-color: #444;
-        }
+        .cta-button.contact { background-color: #007bff; }
+        .cta-button.contact:hover { background-color: #0056b3; }
+        .cta-button.telegram { background-color: #0088cc; }
+        .cta-button.telegram:hover { background-color: #007bb5; }
+        .cta-button.whatsapp { background-color: #25d366; }
+        .cta-button.whatsapp:hover { background-color: #128c7e; }
+        .cta-button.alt { background-color: #555; }
+        .cta-button.alt:hover { background-color: #444; }
 
         @keyframes fadeIn {
             from { opacity: 0; }
@@ -145,21 +122,34 @@
 
         h2 {
             font-size: 2.5rem;
-            margin-bottom: 40px;
+            margin-bottom: 20px;
+        }
+
+        .toggle-button {
+            margin-bottom: 30px;
+            background: #444;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            font-size: 1rem;
+            cursor: pointer;
+            border-radius: 5px;
         }
 
         .service-grid {
             display: grid;
-            grid-template-columns: repeat(4, 1fr);
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
             gap: 20px;
             justify-items: center;
+            display: none;
         }
 
         .service-card {
             background-color: #1f1f1f;
             padding: 20px;
             border-radius: 10px;
-            width: 280px;
+            width: 100%;
+            max-width: 280px;
             text-align: center;
         }
 
@@ -170,7 +160,7 @@
         }
 
         .service-card h3 {
-            font-size: 1.8rem;
+            font-size: 1.5rem;
             margin: 15px 0;
         }
 
@@ -206,24 +196,6 @@
             margin-bottom: 15px;
         }
 
-        .order-step h3 {
-            font-size: 1.2rem;
-            margin-bottom: 10px;
-        }
-
-        .order-step p {
-            font-size: 1rem;
-            color: #bbb;
-            text-align: center;
-        }
-
-        .contact-buttons {
-            display: flex;
-            justify-content: center;
-            gap: 20px;
-            flex-wrap: wrap;
-        }
-
         footer {
             background-color: #1f1f1f;
             text-align: center;
@@ -239,43 +211,26 @@
         footer a:hover {
             text-decoration: underline;
         }
-
-        @media screen and (max-width: 768px) {
-            .hero h1 { font-size: 2.5rem; }
-            .hero p { font-size: 1.5rem; }
-            .service-grid { grid-template-columns: repeat(2, 1fr); }
-            .cta-button { padding: 12px 25px; font-size: 1rem; }
-            .order-steps { flex-direction: column; align-items: center; }
-            .order-step { width: 100%; margin-bottom: 20px; }
-            .service-card { width: 100%; }
-        }
-
-        @media screen and (max-width: 480px) {
-            .hero h1 { font-size: 2rem; }
-            .hero p { font-size: 1.2rem; }
-            .cta-button { padding: 10px 20px; font-size: 0.9rem; }
-            .service-card h3 { font-size: 1.5rem; }
-            .service-card p { font-size: 0.9rem; }
-        }
     </style>
 </head>
 
 <body>
     <div class="hero">
         <div class="overlay">
-            <h1>Преобрази свои фото</h1>
-            <p>Профессиональные услуги Photoshop для любого проекта</p>
+            <h1>Преобрази свои фото и сайт</h1>
+            <p>Photoshop и Web-дизайн на заказ</p>
             <div class="hero-buttons">
-                <a href="#services" class="cta-button">Узнать больше</a>
+                <a href="#services" class="cta-button">Услуги</a>
                 <a href="#contacts" class="cta-button contact">Контакты</a>
             </div>
         </div>
     </div>
 
-
     <section id="services">
         <h2>Что я делаю</h2>
-        <div class="service-grid">
+
+        <button class="toggle-button" onclick="toggleServices('photoshop-services')">Photoshop Услуги</button>
+        <div class="service-grid" id="photoshop-services">
             <div class="service-card">
                 <img src="images/Blocki 1.png" alt="Ретушь" />
                 <h3>Ретушь</h3>
@@ -335,6 +290,45 @@
                 <img src="images/Blocki 12.png" alt="Дизайн буклетов" />
                 <h3>Дизайн буклетов</h3>
                 <p>Создание визуально привлекательных буклетов для рекламы и маркетинга.</p>
+            </div>
+        </div>
+
+        <button class="toggle-button" onclick="toggleServices('web-services')">Услуги по созданию сайтов</button>
+        <div class="service-grid" id="web-services">
+            <div class="service-card">
+                <img src="images/web1.png" alt="Лендинг">
+                <h3>Создание одностраничных сайтов</h3>
+                <p>Разработка лендингов, направленных на продажи и привлечение клиентов.</p>
+            </div>
+            <div class="service-card">
+                <img src="images/web2.png" alt="Адаптивность">
+                <h3>Адаптация под мобильные</h3>
+                <p>Корректное отображение на всех устройствах и экранах.</p>
+            </div>
+            <div class="service-card">
+                <img src="images/web3.png" alt="Верстка">
+                <h3>Верстка по макету</h3>
+                <p>Перевод дизайна из Figma или PSD в HTML, CSS и JS.</p>
+            </div>
+            <div class="service-card">
+                <img src="images/web4.png" alt="Формы">
+                <h3>Интеграция форм</h3>
+                <p>Формы обратной связи, подписки, отправка заявок.</p>
+            </div>
+            <div class="service-card">
+                <img src="images/web5.png" alt="Редизайн">
+                <h3>Редизайн сайта</h3>
+                <p>Обновление внешнего вида и улучшение UX/UI.</p>
+            </div>
+            <div class="service-card">
+                <img src="images/web6.png" alt="Графика">
+                <h3>Графика и иконки</h3>
+                <p>Разработка уникальных иконок, баннеров и иллюстраций.</p>
+            </div>
+            <div class="service-card">
+                <img src="images/web7.png" alt="Анимации">
+                <h3>Анимации</h3>
+                <p>Микроанимации и интерактивные элементы для вовлечения пользователей.</p>
             </div>
         </div>
     </section>
@@ -401,8 +395,25 @@
     </section>
 
     <footer>
-        <p>&copy; 2025 Djeks. Все права защищены. <a href="#">Политика конфиденциальности</a></p>
+        <p>&copy; 2025 . Все права защищены. <a href="#">Политика конфиденциальности</a></p>
     </footer>
 </body>
+<script>
+    function toggleServices(serviceId) {
+        const serviceGrid = document.getElementById(serviceId);
+        const button = document.querySelector(`button[onclick="toggleServices('${serviceId}')"]`);
+        
+        const isVisible = serviceGrid.style.display === "grid";
 
+        // Скрыть все сервисы и удалить активность с кнопок
+        document.querySelectorAll('.service-grid').forEach(grid => grid.style.display = 'none');
+        document.querySelectorAll('.toggle-button').forEach(btn => btn.classList.remove('active'));
+
+        if (!isVisible) {
+            serviceGrid.style.display = "grid";
+            button.classList.add('active');
+        }
+    }
+</script>
+  
 </html>
