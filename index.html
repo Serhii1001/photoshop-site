@@ -1,242 +1,244 @@
 <!DOCTYPE html>
 <html lang="ru">
-
 <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Photoshop и Web Услуги</title>
-    <link rel="stylesheet" href="styles.css" />
-    <style>
-        html {
-            scroll-behavior: smooth;
-        }
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Photoshop и Web Услуги</title>
+  <style>
+    html { scroll-behavior: smooth; }
+    body {
+      background-color: #121212;
+      color: white;
+      font-family: Arial, sans-serif;
+      margin: 0;
+      padding: 0;
+    }
 
-        body {
-            background-color: #121212;
-            color: white;
-            font-family: Arial, sans-serif;
-            margin: 0;
-            padding: 0;
-        }
+    .hero {
+      height: 40vh;
+      background: linear-gradient(45deg, #ff4c60, #00ffc8, #8a2be2, #ff6f61);
+      background-size: 400% 400%;
+      animation: gradientMove 15s ease infinite, lightningEffect 5s ease-out infinite;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      text-align: center;
+      overflow: hidden;
+    }
 
-        .hero {
-            position: relative;
-            height: 40vh;
-            background: linear-gradient(45deg, #ff4c60, #00ffc8, #8a2be2, #ff6f61);
-            background-size: 400% 400%;
-            animation: gradientMove 15s ease infinite, lightningEffect 5s ease-out infinite;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            text-align: center;
-            overflow: hidden;
-        }
+    @keyframes gradientMove {
+      0% { background-position: 0% 50%; }
+      50% { background-position: 100% 50%; }
+      100% { background-position: 0% 50%; }
+    }
 
-        @keyframes gradientMove {
-            0% { background-position: 0% 50%; }
-            50% { background-position: 100% 50%; }
-            100% { background-position: 0% 50%; }
-        }
+    @keyframes lightningEffect {
+      0%, 100% { opacity: 0.5; transform: scale(1); }
+      25%, 75% { opacity: 1; transform: scale(1.05); }
+      50% { opacity: 0.8; }
+    }
 
-        @keyframes lightningEffect {
-            0%, 100% { opacity: 0.5; transform: scale(1); }
-            25%, 75% { opacity: 1; transform: scale(1.05); }
-            50% { opacity: 0.8; }
-        }
+    .hero .overlay {
+      background: rgba(0, 0, 0, 0.5);
+      padding: 40px 20px;
+      border-radius: 10px;
+      animation: fadeIn 3s ease-out;
+      box-shadow: 0 0 15px rgba(255, 255, 255, 0.6);
+    }
 
-        .hero .overlay {
-            background: rgba(0, 0, 0, 0.5);
-            padding: 40px 20px;
-            border-radius: 10px;
-            animation: fadeIn 3s ease-out;
-            box-shadow: 0 0 15px rgba(255, 255, 255, 0.6);
-        }
+    .hero h1 {
+      font-size: 4rem;
+      margin: 0;
+      color: #ffffff;
+      text-shadow: 0 0 10px #ff00ff, 0 0 20px #00ffff, 0 0 30px #ff00ff;
+      animation: slideDown 3s ease-out;
+    }
 
-        .hero h1 {
-            font-size: 4rem;
-            margin: 0;
-            color: #ffffff;
-            text-shadow: 0 0 10px #ff00ff, 0 0 20px #00ffff, 0 0 30px #ff00ff;
-            animation: slideDown 3s ease-out;
-        }
+    .hero p {
+      font-size: 1.8rem;
+      margin: 20px 0;
+      color: #fff;
+      text-shadow: 0 0 8px #ff00cc, 0 0 16px #ff00cc;
+      animation: slideUp 4s ease-out;
+    }
 
-        .hero p {
-            font-size: 1.8rem;
-            margin: 20px 0;
-            color: #fff;
-            text-shadow: 0 0 8px #ff00cc, 0 0 16px #ff00cc;
-            animation: slideUp 4s ease-out;
-        }
+    .hero-buttons {
+      display: flex;
+      gap: 20px;
+      justify-content: center;
+      flex-wrap: wrap;
+    }
 
-        .hero-buttons {
-            display: flex;
-            gap: 20px;
-            justify-content: center;
-            flex-wrap: wrap;
-        }
+    .cta-button {
+      background-color: #ff4c60;
+      color: white;
+      padding: 15px 30px;
+      font-size: 1.2rem;
+      border: none;
+      border-radius: 5px;
+      text-decoration: none;
+      transition: background-color 0.3s ease;
+      animation: fadeIn 5s ease-out;
+    }
 
-        .cta-button {
-            background-color: #ff4c60;
-            color: white;
-            padding: 15px 30px;
-            font-size: 1.2rem;
-            border: none;
-            border-radius: 5px;
-            text-decoration: none;
-            transition: background-color 0.3s ease;
-            animation: fadeIn 5s ease-out;
-        }
+    .cta-button:hover { background-color: #e6334f; }
+    .cta-button.contact { background-color: #007bff; }
+    .cta-button.contact:hover { background-color: #0056b3; }
+    .cta-button.telegram { background-color: #0088cc; }
+    .cta-button.telegram:hover { background-color: #007bb5; }
+    .cta-button.whatsapp { background-color: #25d366; }
+    .cta-button.whatsapp:hover { background-color: #128c7e; }
+    .cta-button.alt { background-color: #555; }
+    .cta-button.alt:hover { background-color: #444; }
 
-        .cta-button:hover {
-            background-color: #e6334f;
-        }
+    @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
+    @keyframes slideDown { from { opacity: 0; transform: translateY(-30px); } to { opacity: 1; transform: translateY(0); } }
+    @keyframes slideUp { from { opacity: 0; transform: translateY(30px); } to { opacity: 1; transform: translateY(0); } }
 
-        .cta-button.contact { background-color: #007bff; }
-        .cta-button.contact:hover { background-color: #0056b3; }
-        .cta-button.telegram { background-color: #0088cc; }
-        .cta-button.telegram:hover { background-color: #007bb5; }
-        .cta-button.whatsapp { background-color: #25d366; }
-        .cta-button.whatsapp:hover { background-color: #128c7e; }
-        .cta-button.alt { background-color: #555; }
-        .cta-button.alt:hover { background-color: #444; }
+    section {
+      padding: 60px 20px;
+      text-align: center;
+    }
 
-        @keyframes fadeIn {
-            from { opacity: 0; }
-            to { opacity: 1; }
-        }
+    h2 {
+      font-size: 2.5rem;
+      margin-bottom: 20px;
+    }
 
-        @keyframes slideDown {
-            from { opacity: 0; transform: translateY(-30px); }
-            to { opacity: 1; transform: translateY(0); }
-        }
+    .toggle-container {
+      display: flex;
+      justify-content: center;
+      gap: 20px;
+      flex-wrap: wrap;
+      margin-bottom: 30px;
+    }
 
-        @keyframes slideUp {
-            from { opacity: 0; transform: translateY(30px); }
-            to { opacity: 1; transform: translateY(0); }
-        }
+    .toggle-button {
+      background: #444;
+      color: white;
+      border: none;
+      padding: 10px 20px;
+      font-size: 1rem;
+      cursor: pointer;
+      border-radius: 5px;
+    }
 
-        section {
-            padding: 60px 20px;
-            text-align: center;
-        }
+    .toggle-button.active {
+      background-color: #ff4c60;
+    }
 
-        h2 {
-            font-size: 2.5rem;
-            margin-bottom: 20px;
-        }
+    .service-grid {
+      display: none;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 20px;
+      justify-items: center;
+    }
 
-        .toggle-button {
-            margin-bottom: 30px;
-            background: #444;
-            color: white;
-            border: none;
-            padding: 10px 20px;
-            font-size: 1rem;
-            cursor: pointer;
-            border-radius: 5px;
-        }
+    .service-card {
+      background-color: #1f1f1f;
+      padding: 20px;
+      border-radius: 10px;
+      width: 100%;
+      max-width: 280px;
+      text-align: center;
+    }
 
-        .service-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-            gap: 20px;
-            justify-items: center;
-            display: none;
-        }
+    .service-card img {
+      width: 100%;
+      height: auto;
+      border-radius: 5px;
+    }
 
-        .service-card {
-            background-color: #1f1f1f;
-            padding: 20px;
-            border-radius: 10px;
-            width: 100%;
-            max-width: 280px;
-            text-align: center;
-        }
+    .service-card h3 {
+      font-size: 1.5rem;
+      margin: 15px 0;
+    }
 
-        .service-card img {
-            width: 100%;
-            height: auto;
-            border-radius: 5px;
-        }
+    .service-card p {
+      font-size: 1rem;
+      color: #bbb;
+    }
 
-        .service-card h3 {
-            font-size: 1.5rem;
-            margin: 15px 0;
-        }
+    .order-steps {
+      display: flex;
+      justify-content: center;
+      flex-wrap: wrap;
+      gap: 20px;
+    }
 
-        .service-card p {
-            font-size: 1rem;
-            color: #bbb;
-        }
+    .order-step {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      width: 200px;
+    }
 
-        .order-steps {
-            display: flex;
-            justify-content: center;
-            flex-wrap: wrap;
-            gap: 20px;
-        }
+    .order-step .circle {
+      background-color: #ff4c60;
+      color: white;
+      width: 50px;
+      height: 50px;
+      border-radius: 50%;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      font-size: 1.8rem;
+      margin-bottom: 15px;
+    }
 
-        .order-step {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            width: 200px;
-        }
+    .contact-buttons {
+      display: flex;
+      justify-content: center;
+      gap: 20px;
+      flex-wrap: wrap;
+    }
 
-        .order-step .circle {
-            background-color: #ff4c60;
-            color: white;
-            width: 50px;
-            height: 50px;
-            border-radius: 50%;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            font-size: 1.8rem;
-            margin-bottom: 15px;
-        }
+    footer {
+      background-color: #1f1f1f;
+      text-align: center;
+      padding: 20px;
+      color: #bbb;
+    }
 
-        footer {
-            background-color: #1f1f1f;
-            text-align: center;
-            padding: 20px;
-            color: #bbb;
-        }
+    footer a {
+      color: #00ffc8;
+      text-decoration: none;
+    }
 
-        footer a {
-            color: #00ffc8;
-            text-decoration: none;
-        }
-
-        footer a:hover {
-            text-decoration: underline;
-        }
-    </style>
+    footer a:hover {
+      text-decoration: underline;
+    }
+  </style>
 </head>
 
 <body>
-    <div class="hero">
-        <div class="overlay">
-            <h1>Преобрази свои фото и сайт</h1>
-            <p>Photoshop и Web-дизайн на заказ</p>
-            <div class="hero-buttons">
-                <a href="#services" class="cta-button">Услуги</a>
-                <a href="#contacts" class="cta-button contact">Контакты</a>
-            </div>
-        </div>
+  <div class="hero">
+    <div class="overlay">
+      <h1>Преобрази свои фото и сайт</h1>
+      <p>Photoshop и Web-дизайн на заказ</p>
+      <div class="hero-buttons">
+        <a href="#services" class="cta-button">Услуги</a>
+        <a href="#contacts" class="cta-button contact">Контакты</a>
+      </div>
+    </div>
+  </div>
+
+  <section id="services">
+    <h2>Что я делаю</h2>
+    <div class="toggle-container">
+      <button class="toggle-button" onclick="toggleServices('photoshop-services', this)">Photoshop Услуги</button>
+      <button class="toggle-button" onclick="toggleServices('web-services', this)">Услуги по созданию сайтов</button>
     </div>
 
-    <section id="services">
-        <h2>Что я делаю</h2>
-
-        <button class="toggle-button" onclick="toggleServices('photoshop-services')">Photoshop Услуги</button>
-        <div class="service-grid" id="photoshop-services">
-            <div class="service-card">
-                <img src="images/Blocki 1.png" alt="Ретушь" />
-                <h3>Ретушь</h3>
-                <p>Удаление дефектов, выравнивание кожи, цветокоррекция.</p>
-            </div>
-            <div class="service-card">
+    <div class="service-grid" id="photoshop-services">
+      <!-- Вставьте здесь карточки Photoshop услуг (Blocki 1–12) -->
+      <!-- Пример одной карточки: -->
+      <div class="service-card">
+        <img src="images/Blocki 1.png" alt="Ретушь" />
+        <h3>Ретушь</h3>
+        <p>Удаление дефектов, выравнивание кожи, цветокоррекция.</p>
+      </div>
+      <div class="service-card">
                 <img src="images/Blocki 2.png" alt="Фотомонтаж" />
                 <h3>Фотомонтаж</h3>
                 <p>Создание уникальных изображений, коллажи, фантазийные сцены.</p>
@@ -291,16 +293,16 @@
                 <h3>Дизайн буклетов</h3>
                 <p>Создание визуально привлекательных буклетов для рекламы и маркетинга.</p>
             </div>
-        </div>
+    </div>
 
-        <button class="toggle-button" onclick="toggleServices('web-services')">Услуги по созданию сайтов</button>
-        <div class="service-grid" id="web-services">
-            <div class="service-card">
-                <img src="images/web1.png" alt="Лендинг">
-                <h3>Создание одностраничных сайтов</h3>
-                <p>Разработка лендингов, направленных на продажи и привлечение клиентов.</p>
-            </div>
-            <div class="service-card">
+    <div class="service-grid" id="web-services">
+      <!-- Вставьте здесь карточки Web-услуг (web1–web7) -->
+      <div class="service-card">
+        <img src="images/web1.png" alt="Лендинг">
+        <h3>Создание одностраничных сайтов</h3>
+        <p>Разработка лендингов, направленных на продажи и привлечение клиентов.</p>
+      </div>
+      <div class="service-card">
                 <img src="images/web2.png" alt="Адаптивность">
                 <h3>Адаптация под мобильные</h3>
                 <p>Корректное отображение на всех устройствах и экранах.</p>
@@ -330,20 +332,20 @@
                 <h3>Анимации</h3>
                 <p>Микроанимации и интерактивные элементы для вовлечения пользователей.</p>
             </div>
-        </div>
-    </section>
+    </div>
+  </section>
 
-    <section id="how-to-order">
-        <h2>Как сделать заказ</h2>
-        <div class="order-steps">
-            <div class="order-step">
-                <div class="circle">1</div>
-                <div class="step-text">
-                    <h3>Написать нам.</h3>
-                    <p>Выберите мессенджер, в котором вам удобно общаться, и напишите нам.</p>
-                </div>
-            </div>
-            <div class="order-step">
+  <section id="how-to-order">
+    <h2>Как сделать заказ</h2>
+    <div class="order-steps">
+      <div class="order-step">
+        <div class="circle">1</div>
+        <div class="step-text">
+          <h3>Написать нам.</h3>
+          <p>Выберите мессенджер, в котором вам удобно общаться, и напишите нам.</p>
+        </div>
+      </div>
+<div class="order-step">
                 <div class="circle">2</div>
                 <div class="step-text">
                     <h3>Описание задания.</h3>
@@ -381,39 +383,34 @@
                     <p>3 правки бесплатные, но в рамках технического задания.</p>
                 </div>
             </div>
-        </div>
-    </section>
+    </div>
+  </section>
 
-    <section id="contacts">
-        <h2>Связаться со мной</h2>
-        <p>Напиши мне в мессенджер или на почту — отвечаю быстро!</p>
-        <div class="contact-buttons">
-            <a class="cta-button telegram" href="https://t.me/yourusername" target="_blank">Telegram</a>
-            <a class="cta-button whatsapp" href="https://wa.me/71234567890" target="_blank">WhatsApp</a>
-            <a class="cta-button alt" href="mailto:example@mail.ru?subject=Заказ%20Photoshop">Email</a>
-        </div>
-    </section>
+  <section id="contacts">
+    <h2>Связаться со мной</h2>
+    <p>Напиши мне в мессенджер или на почту — отвечаю быстро!</p>
+    <div class="contact-buttons">
+      <a class="cta-button telegram" href="https://t.me/yourusername" target="_blank">Telegram</a>
+      <a class="cta-button whatsapp" href="https://wa.me/71234567890" target="_blank">WhatsApp</a>
+      <a class="cta-button alt" href="mailto:example@mail.ru?subject=Заказ%20Photoshop">Email</a>
+    </div>
+  </section>
 
-    <footer>
-        <p>&copy; 2025 . Все права защищены. <a href="#">Политика конфиденциальности</a></p>
-    </footer>
-</body>
-<script>
-    function toggleServices(serviceId) {
-        const serviceGrid = document.getElementById(serviceId);
-        const button = document.querySelector(`button[onclick="toggleServices('${serviceId}')"]`);
-        
-        const isVisible = serviceGrid.style.display === "grid";
+  <footer>
+    <p>&copy; 2025. Все права защищены. <a href="#">Политика конфиденциальности</a></p>
+  </footer>
 
-        // Скрыть все сервисы и удалить активность с кнопок
-        document.querySelectorAll('.service-grid').forEach(grid => grid.style.display = 'none');
-        document.querySelectorAll('.toggle-button').forEach(btn => btn.classList.remove('active'));
+  <script>
+    function toggleServices(serviceId, button) {
+      const grids = document.querySelectorAll('.service-grid');
+      const buttons = document.querySelectorAll('.toggle-button');
 
-        if (!isVisible) {
-            serviceGrid.style.display = "grid";
-            button.classList.add('active');
-        }
+      grids.forEach(grid => grid.style.display = 'none');
+      buttons.forEach(btn => btn.classList.remove('active'));
+
+      document.getElementById(serviceId).style.display = 'grid';
+      button.classList.add('active');
     }
-</script>
-  
+  </script>
+</body>
 </html>
