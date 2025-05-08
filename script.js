@@ -1,179 +1,19 @@
-/* Общие стили */
-body {
-  font-family: 'Roboto', sans-serif;
-  margin: 0;
-  padding: 0;
-  background-color: #121212; /* Темный фон */
-  color: #f0f0f0; /* Светлый текст для контраста */
-}
+<script>
+    function toggleServices(serviceId, button) {
+        const serviceGrid = document.getElementById(serviceId);
+        const isActive = button.classList.contains('active');
 
-/* Стиль для секции Hero */
-.hero {
-  background: url('https://via.placeholder.com/1920x1080') no-repeat center center/cover;
-  color: white;
-  padding: 100px 0;
-  text-align: center;
-  background-color: #111;
-  position: relative;
-}
+        // Сброс всех кнопок и скрытие всех блоков
+        document.querySelectorAll('.toggle-button').forEach(btn => btn.classList.remove('active'));
+        document.querySelectorAll('.service-grid').forEach(grid => grid.style.display = "none");
 
-.hero .overlay {
-  background-color: rgba(0, 0, 0, 0.7); /* Полупрозрачный фон */
-  padding: 40px;
-}
+        if (!isActive) {
+            // Сделать кнопку активной и показать блок
+            button.classList.add('active');
+            serviceGrid.style.display = "grid";
 
-.hero h1 {
-  font-size: 4rem;
-  margin-bottom: 20px;
-  color: #00ffcc; /* Ярко неоновый цвет */
-  text-shadow: 0 0 15px #00ffcc, 0 0 25px #00ffcc, 0 0 35px #00ffcc; /* Эффект свечения */
-}
-
-.hero p {
-  font-size: 1.2rem;
-  margin-bottom: 30px;
-  color: #dcdcdc;
-  text-shadow: 0 0 10px #ff1493, 0 0 20px #ff1493; /* Легкое свечение для текста */
-}
-
-.hero .cta-button {
-  background-color: #ff6f61;
-  color: white;
-  padding: 10px 20px;
-  text-decoration: none;
-  border-radius: 5px;
-  font-size: 1.2rem;
-  transition: background-color 0.3s ease;
-}
-
-.hero .cta-button:hover {
-  background-color: #ff4c3b;
-}
-
-/* Стили для секции услуг */
-.service-grid {
-  display: grid;
-  grid-template-columns: repeat(4, 1fr);
-  gap: 20px;
-  margin: 50px auto;
-  padding: 0 20px;
-}
-
-.service-card {
-  background-color: #1e1e1e;
-  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.5);
-  border-radius: 10px;
-  overflow: hidden;
-  text-align: center;
-  transition: transform 0.3s ease, box-shadow 0.3s ease;
-}
-
-.service-card:hover {
-  transform: translateY(-10px);
-  box-shadow: 0 4px 30px rgba(0, 255, 204, 0.7); /* Неоновый эффект при наведении */
-}
-
-.service-card img {
-  width: 100%;
-  height: 180px;
-  object-fit: cover;
-}
-
-.service-card h3 {
-  font-size: 1.5rem;
-  margin: 15px 0;
-  color: #00ffcc; /* Неоновый цвет для заголовков */
-  text-shadow: 0 0 10px #00ffcc, 0 0 20px #00ffcc; /* Свечение текста */
-}
-
-.service-card p {
-  font-size: 1rem;
-  color: #ccc;
-  margin-bottom: 20px;
-}
-
-/* Стили для секции "Как сделать заказ" */
-#how-to-order {
-  padding: 50px 20px;
-  background-color: #1c1c1c;
-}
-
-.order-steps {
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: space-between;
-  gap: 20px;
-  margin-top: 30px;
-}
-
-.order-step {
-  flex: 0 0 30%;
-  background-color: #282828;
-  padding: 20px;
-  border-radius: 8px;
-  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
-  text-align: center;
-  transition: transform 0.3s ease;
-}
-
-.order-step:hover {
-  transform: translateY(-10px);
-  background-color: #222222;
-  box-shadow: 0 0 10px rgba(0, 255, 204, 0.7); /* Неоновое свечение */
-}
-
-.order-step .circle {
-  background-color: #00ffcc;
-  color: white;
-  width: 50px;
-  height: 50px;
-  border-radius: 50%;
-  display: inline-block;
-  line-height: 50px;
-  font-size: 1.5rem;
-  margin-bottom: 15px;
-}
-
-.order-step h3 {
-  font-size: 1.2rem;
-  color: #00ffcc;
-}
-
-.order-step p {
-  font-size: 1rem;
-  color: #ccc;
-}
-
-@media screen and (max-width: 768px) {
-  .order-step {
-    flex: 0 0 48%;
-  }
-}
-
-@media screen and (max-width: 480px) {
-  .order-step {
-    flex: 0 0 100%;
-  }
-}
-
-/* Стили для секции контактов */
-#contacts {
-  background-color: #222;
-  color: white;
-  padding: 50px 20px;
-  text-align: center;
-}
-
-#contacts h2 {
-  font-size: 2rem;
-  margin-bottom: 20px;
-  color: #00ffcc;
-  text-shadow: 0 0 15px #00ffcc;
-}
-
-.toggle-button.active {
-    background-color: #ff4c60;
-    color: white;
-    font-weight: bold;
-    box-shadow: 0 0 10px #ff4c60;
-}
+            // Плавный скролл
+            serviceGrid.scrollIntoView({ behavior: 'smooth' });
+        }
+    }
+</script>
