@@ -184,3 +184,19 @@ body {
     gap: 15px;
     margin-top: 30px;
 }
+/* Убираем стандартное оформление ссылок */
+.service-card a {
+    text-decoration: none; /* Убираем подчеркивание */
+    color: inherit; /* Цвет текста наследуется от родительского элемента */
+}
+
+/* При необходимости, добавьте стиль для самой карточки */
+.service-card {
+    border: 1px solid #ccc;
+    padding: 20px;
+    transition: transform 0.3s ease; /* Пример анимации */
+}
+
+.service-card:hover {
+    transform: scale(1.05); /* Немного увеличиваем карточку при наведении */
+}
