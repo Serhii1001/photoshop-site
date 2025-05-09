@@ -211,52 +211,6 @@
         footer a:hover {
             text-decoration: underline;
         }
-
-        /* Media queries for mobile responsiveness */
-        @media (max-width: 767px) {
-            .hero h1 {
-                font-size: 2.5rem;
-            }
-
-            .hero p {
-                font-size: 1.2rem;
-            }
-
-            .service-grid {
-                display: grid;
-                grid-template-columns: repeat(2, 1fr); /* 2 cards per row */
-                gap: 15px;
-            }
-
-            .service-card {
-                max-width: 100%; /* Make cards fill available width */
-                padding: 15px;
-                height: 280px; /* Make the card height more consistent */
-            }
-
-            .cta-button {
-                padding: 10px 20px;
-                font-size: 1rem;
-            }
-
-            h2 {
-                font-size: 2rem;
-            }
-
-            .order-step .circle {
-                width: 40px;
-                height: 40px;
-                font-size: 1.4rem;
-            }
-
-            .order-step .step-text h3 {
-                font-size: 1.1rem;
-            }
-
-            .order-step .step-text p {
-                font-size: 0.9rem;
-            }
-        }
     </style>
 </head>
 
@@ -294,8 +248,7 @@
             </div>
             <div class="service-card">
                 <img src="images/Blocki 4.png" alt="Редактирование документов" />
-                <h3>Редактирова
-                  ние документов</h3>
+                <h3>Редактирование документов</h3>
                 <p>Корректировка текста, изменение формата и оформление документов.</p>
             </div>
             <div class="service-card">
@@ -305,8 +258,7 @@
             </div>
             <div class="service-card">
                 <img src="images/Blocki 6.png" alt="Цветокоррекция" />
-                <h3>Цветокоррек
-                  ция</h3>
+                <h3>Цветокоррекция</h3>
                 <p>Подбор и корректировка цветовой гаммы, улучшение визуального восприятия.</p>
             </div>
             <div class="service-card">
@@ -321,8 +273,7 @@
             </div>
             <div class="service-card">
                 <img src="images/Blocki 9.png" alt="Инфографика" />
-                <h3>Инфогра
-                  фика</h3>
+                <h3>Инфографика</h3>
                 <p>Создание визуальных представлений данных, диаграмм и графиков.</p>
             </div>
             <div class="service-card">
@@ -346,79 +297,123 @@
         <div class="service-grid" id="web-services">
             <div class="service-card">
                 <img src="images/web1.png" alt="Лендинг">
-                <h3>Создание одностранич
-                  ных сайтов</h3>
+                <h3>Создание одностраничных сайтов</h3>
                 <p>Разработка лендингов, направленных на продажи и привлечение клиентов.</p>
             </div>
             <div class="service-card">
                 <img src="images/web2.png" alt="Адаптивность">
-                <h3>Адаптивный дизайн</h3>
-                <p>Ваш сайт будет красиво выглядеть на всех устройствах, от ПК до смартфонов.</p>
+                <h3>Адаптация под мобильные</h3>
+                <p>Корректное отображение на всех устройствах и экранах.</p>
             </div>
             <div class="service-card">
                 <img src="images/web3.png" alt="Верстка">
                 <h3>Верстка по макету</h3>
-                <p>Точная вёрстка сайта по предоставленному дизайну.</p>
+                <p>Перевод дизайна из Figma или PSD в HTML, CSS и JS.</p>
             </div>
             <div class="service-card">
-                <img src="images/web4.png" alt="Интеграция форм">
+                <img src="images/web4.png" alt="Формы">
                 <h3>Интеграция форм</h3>
-                <p>Создание и интеграция форм для сбора данных, контактов и подписок.</p>
+                <p>Формы обратной связи, подписки, отправка заявок.</p>
             </div>
             <div class="service-card">
                 <img src="images/web5.png" alt="Редизайн">
                 <h3>Редизайн сайта</h3>
-                <p>Обновление старых сайтов с учётом современных тенденций и требований.</p>
+                <p>Обновление внешнего вида и улучшение UX/UI.</p>
             </div>
             <div class="service-card">
-                <img src="images/web6.png" alt="Графика и анимации">
-                <h3>Графика и анимации</h3>
-                <p>Создание красивых графических элементов и анимаций для улучшения интерфейса.</p>
+                <img src="images/web6.png" alt="Графика">
+                <h3>Графика и иконки</h3>
+                <p>Разработка уникальных иконок, баннеров и иллюстраций.</p>
+            </div>
+            <div class="service-card">
+                <img src="images/web7.png" alt="Анимации">
+                <h3>Анимации</h3>
+                <p>Микроанимации и интерактивные элементы для вовлечения пользователей.</p>
             </div>
         </div>
     </section>
 
-    <section id="contacts">
-        <h2>Контакты</h2>
+    <section id="how-to-order">
+        <h2>Как сделать заказ</h2>
         <div class="order-steps">
             <div class="order-step">
                 <div class="circle">1</div>
                 <div class="step-text">
-                    <h3>Оставьте заявку</h3>
-                    <p>Заполните форму или свяжитесь со мной напрямую.</p>
+                    <h3>Написать нам.</h3>
+                    <p>Выберите мессенджер, в котором вам удобно общаться, и напишите нам.</p>
                 </div>
             </div>
             <div class="order-step">
                 <div class="circle">2</div>
                 <div class="step-text">
-                    <h3>Обсудим детали</h3>
-                    <p>Я свяжусь с вами для уточнения всех условий работы.</p>
+                    <h3>Описание задания.</h3>
+                    <p>В точности опишите ваше задание и прикрепите фотографии, которые нужно отредактировать.</p>
                 </div>
             </div>
             <div class="order-step">
                 <div class="circle">3</div>
                 <div class="step-text">
-                    <h3>Получите результат</h3>
-                    <p>Получите готовый проект в срок и с учётом всех ваших пожеланий.</p>
+                    <h3>Озвучивание стоимости и сроков.</h3>
+                    <p>Мы озвучиваем цену и договариваемся о сроках, в которые нам нужно уложиться.</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="order-steps">
+            <div class="order-step">
+                <div class="circle">4</div>
+                <div class="step-text">
+                    <h3>Предоплата.</h3>
+                    <p>Работаем только по предоплате! 50% в начале и 50% в конце работы.</p>
+                </div>
+            </div>
+            <div class="order-step">
+                <div class="circle">5</div>
+                <div class="step-text">
+                    <h3>Финал.</h3>
+                    <p>Вы проверяете работу и говорите, всё ли вам понравилось.</p>
+                </div>
+            </div>
+            <div class="order-step">
+                <div class="circle">6</div>
+                <div class="step-text">
+                    <h3>Правки.</h3>
+                    <p>3 правки бесплатные, но в рамках технического задания.</p>
                 </div>
             </div>
         </div>
     </section>
 
+    <section id="contacts">
+        <h2>Связаться со мной</h2>
+        <p>Напиши мне в мессенджер или на почту — отвечаю быстро!</p>
+        <div class="contact-buttons">
+            <a class="cta-button telegram" href="https://t.me/yourusername" target="_blank">Telegram</a>
+            <a class="cta-button whatsapp" href="https://wa.me/71234567890" target="_blank">WhatsApp</a>
+            <a class="cta-button alt" href="mailto:example@mail.ru?subject=Заказ%20Photoshop">Email</a>
+        </div>
+    </section>
+
     <footer>
-        <p>© 2025 Все права защищены | <a href="mailto:info@website.com">Напишите нам</a></p>
+        <p>&copy; 2025 Ваше имя. Все права защищены. <a href="#">Политика конфиденциальности</a></p>
     </footer>
-
-    <script>
-        function toggleServices(serviceId) {
-            var serviceGrid = document.getElementById(serviceId);
-            if (serviceGrid.style.display === "grid") {
-                serviceGrid.style.display = "none";
-            } else {
-                serviceGrid.style.display = "grid";
-            }
-        }
-    </script>
 </body>
+<script>
+    function toggleServices(serviceId) {
+        const serviceGrid = document.getElementById(serviceId);
+        const button = document.querySelector(`button[onclick="toggleServices('${serviceId}')"]`);
+        
+        const isVisible = serviceGrid.style.display === "grid";
 
+        // Скрыть все сервисы и удалить активность с кнопок
+        document.querySelectorAll('.service-grid').forEach(grid => grid.style.display = 'none');
+        document.querySelectorAll('.toggle-button').forEach(btn => btn.classList.remove('active'));
+
+        if (!isVisible) {
+            serviceGrid.style.display = "grid";
+            button.classList.add('active');
+        }
+    }
+</script>
+  
 </html>
