@@ -250,15 +250,11 @@
             }
 
             .order-step .step-text h3 {
-                font-size: 1rem;
+                font-size: 1.1rem;
             }
 
             .order-step .step-text p {
                 font-size: 0.9rem;
-            }
-
-            .service-card h3 {
-                font-size: 1.2rem;
             }
         }
     </style>
@@ -331,79 +327,92 @@
                 <h3>Дизайн визиток</h3>
                 <p>Создание креативных и профессиональных визиток для бизнеса.</p>
             </div>
+            <div class="service-card">
+                <img src="images/Blocki 11.png" alt="Дизайн логотипов" />
+                <h3>Дизайн логотипов</h3>
+                <p>Разработка уникальных логотипов для компаний и брендов.</p>
+            </div>
+            <div class="service-card">
+                <img src="images/Blocki 12.png" alt="Дизайн буклетов" />
+                <h3>Дизайн буклетов</h3>
+                <p>Создание визуально привлекательных буклетов для рекламы и маркетинга.</p>
+            </div>
         </div>
 
-        <button class="toggle-button" onclick="toggleServices('web-services')">Web Услуги</button>
+        <button class="toggle-button" onclick="toggleServices('web-services')">Услуги по созданию сайтов</button>
         <div class="service-grid" id="web-services">
             <div class="service-card">
-                <img src="images/Blocki 11.png" alt="Лендинг" />
-                <h3>Лендинг</h3>
-                <p>Разработка эффективных и красивых посадочных страниц для бизнеса.</p>
+                <img src="images/web1.png" alt="Лендинг">
+                <h3>Создание одностраничных сайтов</h3>
+                <p>Разработка лендингов, направленных на продажи и привлечение клиентов.</p>
             </div>
             <div class="service-card">
-                <img src="images/Blocki 12.png" alt="Адаптивный дизайн" />
+                <img src="images/web2.png" alt="Адаптивность">
                 <h3>Адаптивный дизайн</h3>
-                <p>Создание сайтов, которые отлично смотрятся на любом устройстве.</p>
+                <p>Ваш сайт будет красиво выглядеть на всех устройствах, от ПК до смартфонов.</p>
             </div>
             <div class="service-card">
-                <img src="images/Blocki 13.png" alt="Верстка по макету" />
+                <img src="images/web3.png" alt="Верстка">
                 <h3>Верстка по макету</h3>
-                <p>Точная верстка сайтов по предоставленным макетам.</p>
+                <p>Точная вёрстка сайта по предоставленному дизайну.</p>
             </div>
             <div class="service-card">
-                <img src="images/Blocki 14.png" alt="Интеграция форм" />
+                <img src="images/web4.png" alt="Интеграция форм">
                 <h3>Интеграция форм</h3>
-                <p>Интеграция форм для сбора данных и обратной связи с пользователями.</p>
+                <p>Создание и интеграция форм для сбора данных, контактов и подписок.</p>
             </div>
             <div class="service-card">
-                <img src="images/Blocki 15.png" alt="Редизайн сайтов" />
-                <h3>Редизайн сайтов</h3>
-                <p>Обновление дизайна существующих сайтов для улучшения пользовательского опыта.</p>
+                <img src="images/web5.png" alt="Редизайн">
+                <h3>Редизайн сайта</h3>
+                <p>Обновление старых сайтов с учётом современных тенденций и требований.</p>
             </div>
             <div class="service-card">
-                <img src="images/Blocki 16.png" alt="Графика и анимации" />
+                <img src="images/web6.png" alt="Графика и анимации">
                 <h3>Графика и анимации</h3>
-                <p>Создание уникальных графических элементов и анимаций для сайтов.</p>
+                <p>Создание красивых графических элементов и анимаций для улучшения интерфейса.</p>
             </div>
         </div>
     </section>
 
-    <section id="order">
-        <h2>Как заказать</h2>
+    <section id="contacts">
+        <h2>Контакты</h2>
         <div class="order-steps">
             <div class="order-step">
                 <div class="circle">1</div>
                 <div class="step-text">
-                    <h3>Свяжитесь со мной</h3>
-                    <p>Напишите через форму или мессенджеры.</p>
+                    <h3>Оставьте заявку</h3>
+                    <p>Заполните форму или свяжитесь со мной напрямую.</p>
                 </div>
             </div>
             <div class="order-step">
                 <div class="circle">2</div>
                 <div class="step-text">
-                    <h3>Обсуждение задачи</h3>
-                    <p>Мы уточняем все детали и ваши пожелания.</p>
+                    <h3>Обсудим детали</h3>
+                    <p>Я свяжусь с вами для уточнения всех условий работы.</p>
                 </div>
             </div>
             <div class="order-step">
                 <div class="circle">3</div>
                 <div class="step-text">
                     <h3>Получите результат</h3>
-                    <p>В течение обговорённого времени получите готовую работу.</p>
+                    <p>Получите готовый проект в срок и с учётом всех ваших пожеланий.</p>
                 </div>
             </div>
         </div>
     </section>
 
     <footer>
-        <p>&copy; 2025 Все права защищены</p>
-        <p>Контакт: <a href="mailto:info@website.com">info@website.com</a></p>
+        <p>© 2025 Все права защищены | <a href="mailto:info@website.com">Напишите нам</a></p>
     </footer>
 
     <script>
         function toggleServices(serviceId) {
-            const serviceElement = document.getElementById(serviceId);
-            serviceElement.style.display = serviceElement.style.display === 'grid' ? 'none' : 'grid';
+            var serviceGrid = document.getElementById(serviceId);
+            if (serviceGrid.style.display === "grid") {
+                serviceGrid.style.display = "none";
+            } else {
+                serviceGrid.style.display = "grid";
+            }
         }
     </script>
 </body>
