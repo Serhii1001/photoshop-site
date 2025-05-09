@@ -212,13 +212,8 @@
             text-decoration: underline;
         }
 
-        /* Мобильная адаптация */
-        @media (max-width: 768px) {
-            .service-card {
-                width: 100%;
-                max-width: 100%;
-            }
-
+        /* Media queries for mobile responsiveness */
+        @media (max-width: 767px) {
             .hero h1 {
                 font-size: 2.5rem;
             }
@@ -227,27 +222,38 @@
                 font-size: 1.2rem;
             }
 
-            .cta-button {
-                font-size: 1rem;
-                padding: 12px 20px;
+            .service-grid {
+                display: grid;
+                grid-template-columns: repeat(2, 1fr); /* 2 cards per row */
+                gap: 15px;
             }
 
-            .toggle-button {
-                font-size: 0.9rem;
-                padding: 8px 16px;
-            }
-
-            .order-steps {
-                flex-direction: column;
-            }
-
-            .order-step {
-                width: 100%;
-                margin-bottom: 20px;
-            }
-
-            footer {
+            .service-card {
+                max-width: 100%; /* Make cards fill available width */
                 padding: 15px;
+            }
+
+            .cta-button {
+                padding: 10px 20px;
+                font-size: 1rem;
+            }
+
+            h2 {
+                font-size: 2rem;
+            }
+
+            .order-step .circle {
+                width: 40px;
+                height: 40px;
+                font-size: 1.4rem;
+            }
+
+            .order-step .step-text h3 {
+                font-size: 1.1rem;
+            }
+
+            .order-step .step-text p {
+                font-size: 0.9rem;
             }
         }
     </style>
@@ -341,59 +347,67 @@
             </div>
             <div class="service-card">
                 <img src="images/web2.png" alt="Адаптивность">
-                <h3>Адаптация под мобильные</h3>
-                <p>Корректное отображение на всех устройствах и экранах.</p>
+                <h3>Адаптивный дизайн</h3>
+                <p>Ваш сайт будет красиво выглядеть на всех устройствах, от ПК до смартфонов.</p>
             </div>
             <div class="service-card">
                 <img src="images/web3.png" alt="Верстка">
                 <h3>Верстка по макету</h3>
-                <p>Перевод дизайна из Figma или PSD в HTML, CSS и JS.</p>
+                <p>Точная вёрстка сайта по предоставленному дизайну.</p>
             </div>
             <div class="service-card">
-                <img src="images/web4.png" alt="Формы">
+                <img src="images/web4.png" alt="Интеграция форм">
                 <h3>Интеграция форм</h3>
-                <p>Настройка форм для обратной связи и сбора данных с пользователей.</p>
+                <p>Создание и интеграция форм для сбора данных, контактов и подписок.</p>
             </div>
             <div class="service-card">
                 <img src="images/web5.png" alt="Редизайн">
-                <h3>Редизайн сайтов</h3>
-                <p>Обновление дизайна и функционала для улучшения пользовательского опыта.</p>
+                <h3>Редизайн сайта</h3>
+                <p>Обновление старых сайтов с учётом современных тенденций и требований.</p>
             </div>
             <div class="service-card">
-                <img src="images/web6.png" alt="Графика">
-                <h3>Дизайн графики</h3>
-                <p>Создание графических элементов для сайта, баннеров и кнопок.</p>
-            </div>
-            <div class="service-card">
-                <img src="images/web7.png" alt="Анимации">
-                <h3>Анимации</h3>
-                <p>Динамичные элементы на сайте, которые привлекают внимание.</p>
+                <img src="images/web6.png" alt="Графика и анимации">
+                <h3>Графика и анимации</h3>
+                <p>Создание красивых графических элементов и анимаций для улучшения интерфейса.</p>
             </div>
         </div>
     </section>
 
     <section id="contacts">
         <h2>Контакты</h2>
-        <p>Свяжитесь со мной для получения подробной информации и оценки стоимости.</p>
-        <div class="cta-button contact">Написать мне</div>
+        <div class="order-steps">
+            <div class="order-step">
+                <div class="circle">1</div>
+                <div class="step-text">
+                    <h3>Запрос</h3>
+                    <p>Оставьте заявку и опишите проект.</p>
+                </div>
+            </div>
+            <div class="order-step">
+                <div class="circle">2</div>
+                <div class="step-text">
+                    <h3>Обсуждение</h3>
+                    <p>Мы обсудим детали проекта и условия выполнения.</p>
+                </div>
+            </div>
+            <div class="order-step">
+                <div class="circle">3</div>
+                <div class="step-text">
+                    <h3>Выполнение</h3>
+                    <p>Я выполняю работу в срок, с учётом всех пожеланий.</p>
+                </div>
+            </div>
+        </div>
     </section>
 
     <footer>
-        <p>&copy; 2025 Все права защищены. <a href="#">Политика конфиденциальности</a></p>
+        <p>&copy; 2025 Ваш сайт. Все права защищены.</p>
     </footer>
 
     <script>
         function toggleServices(serviceId) {
-            const serviceGrid = document.getElementById(serviceId);
-            const otherServiceGrids = document.querySelectorAll('.service-grid');
-            
-            otherServiceGrids.forEach(grid => {
-                if (grid !== serviceGrid) {
-                    grid.style.display = 'none';
-                }
-            });
-            
-            serviceGrid.style.display = serviceGrid.style.display === 'grid' ? 'none' : 'grid';
+            const serviceSection = document.getElementById(serviceId);
+            serviceSection.style.display = (serviceSection.style.display === 'grid') ? 'none' : 'grid';
         }
     </script>
 </body>
