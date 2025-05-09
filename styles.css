@@ -176,4 +176,22 @@ body {
     color: white;
     font-weight: bold;
     box-shadow: 0 0 10px #ff4c60;
+}.service-card {
+    background-color: #1f1f1f;
+    padding: 20px;
+    border-radius: 10px;
+    width: 100%;
+    max-width: 280px;
+    text-align: center;
+    height: 320px; /* Увеличиваем высоту карточки для лучшего размещения текста */
+    overflow: auto; /* Добавляем прокрутку, если текст не помещается */
+}
+
+.service-card p {
+    font-size: 1rem;
+    color: #bbb;
+    margin: 10px 0; /* Добавляем небольшой отступ для улучшения читаемости */
+    height: 120px; /* Устанавливаем максимальную высоту текста */
+    overflow: hidden; /* Скрываем текст, выходящий за пределы */
+    text-overflow: ellipsis; /* Добавляем многоточие, если текст не помещается */
 }
