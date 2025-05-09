@@ -1,12 +1,9 @@
-function toggleServices(serviceId, button) {
-  const serviceGrid = document.getElementById(serviceId);
-  const isVisible = serviceGrid.style.display === "grid";
+document.addEventListener('mousemove', (e) => {
+  const x = (e.clientX - window.innerWidth / 2) / 50;
+  const y = (e.clientY - window.innerHeight / 2) / 50;
 
-  document.querySelectorAll('.service-grid').forEach(grid => grid.style.display = 'none');
-  document.querySelectorAll('.toggle-button').forEach(btn => btn.classList.remove('active'));
-
-  if (!isVisible) {
-    serviceGrid.style.display = "grid";
-    button.classList.add('active');
-  }
-}
+  document.querySelectorAll('.float').forEach(el => {
+    const speed = parseFloat(el.getAttribute('data-speed')) || 2;
+    el.style.transform = `translate(${x * speed}px, ${y * speed}px)`;
+  });
+});
