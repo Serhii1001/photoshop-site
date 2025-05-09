@@ -1,419 +1,197 @@
-<!DOCTYPE html>
-<html lang="ru">
+/* Общие стили */
+body {
+  font-family: 'Roboto', sans-serif;
+  margin: 0;
+  padding: 0;
+  background-color: #121212; /* Темный фон */
+  color: #f0f0f0; /* Светлый текст для контраста */
+}
 
-<head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Photoshop и Web Услуги</title>
-    <link rel="stylesheet" href="styles.css" />
-    <style>
-        html {
-            scroll-behavior: smooth;
-        }
+/* Стиль для секции Hero */
+.hero {
+  background: url('https://via.placeholder.com/1920x1080') no-repeat center center/cover;
+  color: white;
+  padding: 100px 0;
+  text-align: center;
+  background-color: #111;
+  position: relative;
+}
 
-        body {
-            background-color: #121212;
-            color: white;
-            font-family: Arial, sans-serif;
-            margin: 0;
-            padding: 0;
-        }
+.hero .overlay {
+  background-color: rgba(0, 0, 0, 0.7); /* Полупрозрачный фон */
+  padding: 40px;
+}
 
-        .hero {
-            position: relative;
-            height: 40vh;
-            background: linear-gradient(45deg, #ff4c60, #00ffc8, #8a2be2, #ff6f61);
-            background-size: 400% 400%;
-            animation: gradientMove 15s ease infinite, lightningEffect 5s ease-out infinite;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            text-align: center;
-            overflow: hidden;
-        }
+.hero h1 {
+  font-size: 4rem;
+  margin-bottom: 20px;
+  color: #00ffcc; /* Ярко неоновый цвет */
+  text-shadow: 0 0 15px #00ffcc, 0 0 25px #00ffcc, 0 0 35px #00ffcc; /* Эффект свечения */
+}
 
-        @keyframes gradientMove {
-            0% { background-position: 0% 50%; }
-            50% { background-position: 100% 50%; }
-            100% { background-position: 0% 50%; }
-        }
+.hero p {
+  font-size: 1.2rem;
+  margin-bottom: 30px;
+  color: #dcdcdc;
+  text-shadow: 0 0 10px #ff1493, 0 0 20px #ff1493; /* Легкое свечение для текста */
+}
 
-        @keyframes lightningEffect {
-            0%, 100% { opacity: 0.5; transform: scale(1); }
-            25%, 75% { opacity: 1; transform: scale(1.05); }
-            50% { opacity: 0.8; }
-        }
+.hero .cta-button {
+  background-color: #ff6f61;
+  color: white;
+  padding: 10px 20px;
+  text-decoration: none;
+  border-radius: 5px;
+  font-size: 1.2rem;
+  transition: background-color 0.3s ease;
+}
 
-        .hero .overlay {
-            background: rgba(0, 0, 0, 0.5);
-            padding: 40px 20px;
-            border-radius: 10px;
-            animation: fadeIn 3s ease-out;
-            box-shadow: 0 0 15px rgba(255, 255, 255, 0.6);
-        }
+.hero .cta-button:hover {
+  background-color: #ff4c3b;
+}
 
-        .hero h1 {
-            font-size: 4rem;
-            margin: 0;
-            color: #ffffff;
-            text-shadow: 0 0 10px #ff00ff, 0 0 20px #00ffff, 0 0 30px #ff00ff;
-            animation: slideDown 3s ease-out;
-        }
+/* Стили для секции услуг */
+.service-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 20px;
+  margin: 50px auto;
+  padding: 0 20px;
+}
 
-        .hero p {
-            font-size: 1.8rem;
-            margin: 20px 0;
-            color: #fff;
-            text-shadow: 0 0 8px #ff00cc, 0 0 16px #ff00cc;
-            animation: slideUp 4s ease-out;
-        }
+.service-card {
+  background-color: #1e1e1e;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.5);
+  border-radius: 10px;
+  overflow: hidden;
+  text-align: center;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
 
-        .hero-buttons {
-            display: flex;
-            gap: 20px;
-            justify-content: center;
-            flex-wrap: wrap;
-        }
+.service-card:hover {
+  transform: translateY(-10px);
+  box-shadow: 0 4px 30px rgba(0, 255, 204, 0.7); /* Неоновый эффект при наведении */
+}
 
-        .cta-button {
-            background-color: #ff4c60;
-            color: white;
-            padding: 15px 30px;
-            font-size: 1.2rem;
-            border: none;
-            border-radius: 5px;
-            text-decoration: none;
-            transition: background-color 0.3s ease;
-            animation: fadeIn 5s ease-out;
-        }
+.service-card img {
+  width: 100%;
+  height: 180px;
+  object-fit: cover;
+}
 
-        .cta-button:hover {
-            background-color: #e6334f;
-        }
+.service-card h3 {
+  font-size: 1.5rem;
+  margin: 15px 0;
+  color: #00ffcc; /* Неоновый цвет для заголовков */
+  text-shadow: 0 0 10px #00ffcc, 0 0 20px #00ffcc; /* Свечение текста */
+}
 
-        .cta-button.contact { background-color: #007bff; }
-        .cta-button.contact:hover { background-color: #0056b3; }
-        .cta-button.telegram { background-color: #0088cc; }
-        .cta-button.telegram:hover { background-color: #007bb5; }
-        .cta-button.whatsapp { background-color: #25d366; }
-        .cta-button.whatsapp:hover { background-color: #128c7e; }
-        .cta-button.alt { background-color: #555; }
-        .cta-button.alt:hover { background-color: #444; }
+.service-card p {
+  font-size: 1rem;
+  color: #ccc;
+  margin-bottom: 20px;
+}
 
-        @keyframes fadeIn {
-            from { opacity: 0; }
-            to { opacity: 1; }
-        }
+/* Стили для секции "Как сделать заказ" */
+#how-to-order {
+  padding: 50px 20px;
+  background-color: #1c1c1c;
+}
 
-        @keyframes slideDown {
-            from { opacity: 0; transform: translateY(-30px); }
-            to { opacity: 1; transform: translateY(0); }
-        }
+.order-steps {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  gap: 20px;
+  margin-top: 30px;
+}
 
-        @keyframes slideUp {
-            from { opacity: 0; transform: translateY(30px); }
-            to { opacity: 1; transform: translateY(0); }
-        }
+.order-step {
+  flex: 0 0 30%;
+  background-color: #282828;
+  padding: 20px;
+  border-radius: 8px;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+  text-align: center;
+  transition: transform 0.3s ease;
+}
 
-        section {
-            padding: 60px 20px;
-            text-align: center;
-        }
+.order-step:hover {
+  transform: translateY(-10px);
+  background-color: #222222;
+  box-shadow: 0 0 10px rgba(0, 255, 204, 0.7); /* Неоновое свечение */
+}
 
-        h2 {
-            font-size: 2.5rem;
-            margin-bottom: 20px;
-        }
+.order-step .circle {
+  background-color: #00ffcc;
+  color: white;
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  display: inline-block;
+  line-height: 50px;
+  font-size: 1.5rem;
+  margin-bottom: 15px;
+}
 
-        .toggle-button {
-            margin-bottom: 30px;
-            background: #444;
-            color: white;
-            border: none;
-            padding: 10px 20px;
-            font-size: 1rem;
-            cursor: pointer;
-            border-radius: 5px;
-        }
+.order-step h3 {
+  font-size: 1.2rem;
+  color: #00ffcc;
+}
 
-        .service-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-            gap: 20px;
-            justify-items: center;
-            display: none;
-        }
+.order-step p {
+  font-size: 1rem;
+  color: #ccc;
+}
 
-        .service-card {
-            background-color: #1f1f1f;
-            padding: 20px;
-            border-radius: 10px;
-            width: 100%;
-            max-width: 280px;
-            text-align: center;
-        }
+@media screen and (max-width: 768px) {
+  .order-step {
+    flex: 0 0 48%;
+  }
+}
 
-        .service-card img {
-            width: 100%;
-            height: auto;
-            border-radius: 5px;
-        }
+@media screen and (max-width: 480px) {
+  .order-step {
+    flex: 0 0 100%;
+  }
+}
 
-        .service-card h3 {
-            font-size: 1.5rem;
-            margin: 15px 0;
-        }
+/* Стили для секции контактов */
+#contacts {
+  background-color: #222;
+  color: white;
+  padding: 50px 20px;
+  text-align: center;
+}
 
-        .service-card p {
-            font-size: 1rem;
-            color: #bbb;
-        }
+#contacts h2 {
+  font-size: 2rem;
+  margin-bottom: 20px;
+  color: #00ffcc;
+  text-shadow: 0 0 15px #00ffcc;
+}
 
-        .order-steps {
-            display: flex;
-            justify-content: center;
-            flex-wrap: wrap;
-            gap: 20px;
-        }
+.toggle-button.active {
+    background-color: #ff4c60;
+    color: white;
+    font-weight: bold;
+    box-shadow: 0 0 10px #ff4c60;
+}.service-card {
+    background-color: #1f1f1f;
+    padding: 20px;
+    border-radius: 10px;
+    width: 100%;
+    max-width: 280px;
+    text-align: center;
+    height: 320px; /* Увеличиваем высоту карточки для лучшего размещения текста */
+    overflow: auto; /* Добавляем прокрутку, если текст не помещается */
+}
 
-        .order-step {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            width: 200px;
-        }
-
-        .order-step .circle {
-            background-color: #ff4c60;
-            color: white;
-            width: 50px;
-            height: 50px;
-            border-radius: 50%;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            font-size: 1.8rem;
-            margin-bottom: 15px;
-        }
-
-        footer {
-            background-color: #1f1f1f;
-            text-align: center;
-            padding: 20px;
-            color: #bbb;
-        }
-
-        footer a {
-            color: #00ffc8;
-            text-decoration: none;
-        }
-
-        footer a:hover {
-            text-decoration: underline;
-        }
-    </style>
-</head>
-
-<body>
-    <div class="hero">
-        <div class="overlay">
-            <h1>Преобрази свои фото и сайт</h1>
-            <p>Photoshop и Web-дизайн на заказ</p>
-            <div class="hero-buttons">
-                <a href="#services" class="cta-button">Услуги</a>
-                <a href="#contacts" class="cta-button contact">Контакты</a>
-            </div>
-        </div>
-    </div>
-
-    <section id="services">
-        <h2>Что я делаю</h2>
-
-        <button class="toggle-button" onclick="toggleServices('photoshop-services')">Photoshop Услуги</button>
-        <div class="service-grid" id="photoshop-services">
-            <div class="service-card">
-                <img src="images/Blocki 1.png" alt="Ретушь" />
-                <h3>Ретушь</h3>
-                <p>Удаление дефектов, выравнивание кожи, цветокоррекция.</p>
-            </div>
-            <div class="service-card">
-                <img src="images/Blocki 2.png" alt="Фотомонтаж" />
-                <h3>Фотомонтаж</h3>
-                <p>Создание уникальных изображений, коллажи, фантазийные сцены.</p>
-            </div>
-            <div class="service-card">
-                <img src="images/Blocki 3.png" alt="Реставрация" />
-                <h3>Реставрация</h3>
-                <p>Восстановление старых и повреждённых фотографий.</p>
-            </div>
-            <div class="service-card">
-                <img src="images/Blocki 4.png" alt="Редактирование документов" />
-                <h3>Редактирование документов</h3>
-                <p>Корректировка текста, изменение формата и оформление документов.</p>
-            </div>
-            <div class="service-card">
-                <img src="images/Blocki 5.png" alt="Монтаж фотографии" />
-                <h3>Монтаж фотографии</h3>
-                <p>Создание композиции, комбинирование нескольких фото в одно.</p>
-            </div>
-            <div class="service-card">
-                <img src="images/Blocki 6.png" alt="Цветокоррекция" />
-                <h3>Цветокоррекция</h3>
-                <p>Подбор и корректировка цветовой гаммы, улучшение визуального восприятия.</p>
-            </div>
-            <div class="service-card">
-                <img src="images/Blocki 7.png" alt="Добавление объектов" />
-                <h3>Добавление объектов</h3>
-                <p>Вставка новых объектов или людей в изображения, улучшение фона.</p>
-            </div>
-            <div class="service-card">
-                <img src="images/Blocki 8.png" alt="Удаление объектов" />
-                <h3>Удаление объектов</h3>
-                <p>Удаление лишних элементов или объектов с фотографий, улучшение композиции.</p>
-            </div>
-            <div class="service-card">
-                <img src="images/Blocki 9.png" alt="Инфографика" />
-                <h3>Инфографика</h3>
-                <p>Создание визуальных представлений данных, диаграмм и графиков.</p>
-            </div>
-            <div class="service-card">
-                <img src="images/Blocki 10.png" alt="Дизайн визиток" />
-                <h3>Дизайн визиток</h3>
-                <p>Создание креативных и профессиональных визиток для бизнеса.</p>
-            </div>
-            <div class="service-card">
-                <img src="images/Blocki 11.png" alt="Дизайн логотипов" />
-                <h3>Дизайн логотипов</h3>
-                <p>Разработка уникальных логотипов для компаний и брендов.</p>
-            </div>
-            <div class="service-card">
-                <img src="images/Blocki 12.png" alt="Дизайн буклетов" />
-                <h3>Дизайн буклетов</h3>
-                <p>Создание визуально привлекательных буклетов для рекламы и маркетинга.</p>
-            </div>
-        </div>
-
-        <button class="toggle-button" onclick="toggleServices('web-services')">Услуги по созданию сайтов</button>
-        <div class="service-grid" id="web-services">
-            <div class="service-card">
-                <img src="images/web1.png" alt="Лендинг">
-                <h3>Создание одностраничных сайтов</h3>
-                <p>Разработка лендингов, направленных на продажи и привлечение клиентов.</p>
-            </div>
-            <div class="service-card">
-                <img src="images/web2.png" alt="Адаптивность">
-                <h3>Адаптация под мобильные</h3>
-                <p>Корректное отображение на всех устройствах и экранах.</p>
-            </div>
-            <div class="service-card">
-                <img src="images/web3.png" alt="Верстка">
-                <h3>Верстка по макету</h3>
-                <p>Перевод дизайна из Figma или PSD в HTML, CSS и JS.</p>
-            </div>
-            <div class="service-card">
-                <img src="images/web4.png" alt="Формы">
-                <h3>Интеграция форм</h3>
-                <p>Формы обратной связи, подписки, отправка заявок.</p>
-            </div>
-            <div class="service-card">
-                <img src="images/web5.png" alt="Редизайн">
-                <h3>Редизайн сайта</h3>
-                <p>Обновление внешнего вида и улучшение UX/UI.</p>
-            </div>
-            <div class="service-card">
-                <img src="images/web6.png" alt="Графика">
-                <h3>Графика и иконки</h3>
-                <p>Разработка уникальных иконок, баннеров и иллюстраций.</p>
-            </div>
-            <div class="service-card">
-                <img src="images/web7.png" alt="Анимации">
-                <h3>Анимации</h3>
-                <p>Микроанимации и интерактивные элементы для вовлечения пользователей.</p>
-            </div>
-        </div>
-    </section>
-
-    <section id="how-to-order">
-        <h2>Как сделать заказ</h2>
-        <div class="order-steps">
-            <div class="order-step">
-                <div class="circle">1</div>
-                <div class="step-text">
-                    <h3>Написать нам.</h3>
-                    <p>Выберите мессенджер, в котором вам удобно общаться, и напишите нам.</p>
-                </div>
-            </div>
-            <div class="order-step">
-                <div class="circle">2</div>
-                <div class="step-text">
-                    <h3>Описание задания.</h3>
-                    <p>В точности опишите ваше задание и прикрепите фотографии, которые нужно отредактировать.</p>
-                </div>
-            </div>
-            <div class="order-step">
-                <div class="circle">3</div>
-                <div class="step-text">
-                    <h3>Озвучивание стоимости и сроков.</h3>
-                    <p>Мы озвучиваем цену и договариваемся о сроках, в которые нам нужно уложиться.</p>
-                </div>
-            </div>
-        </div>
-
-        <div class="order-steps">
-            <div class="order-step">
-                <div class="circle">4</div>
-                <div class="step-text">
-                    <h3>Предоплата.</h3>
-                    <p>Работаем только по предоплате! 50% в начале и 50% в конце работы.</p>
-                </div>
-            </div>
-            <div class="order-step">
-                <div class="circle">5</div>
-                <div class="step-text">
-                    <h3>Финал.</h3>
-                    <p>Вы проверяете работу и говорите, всё ли вам понравилось.</p>
-                </div>
-            </div>
-            <div class="order-step">
-                <div class="circle">6</div>
-                <div class="step-text">
-                    <h3>Правки.</h3>
-                    <p>3 правки бесплатные, но в рамках технического задания.</p>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <section id="contacts">
-        <h2>Связаться со мной</h2>
-        <p>Напиши мне в мессенджер или на почту — отвечаю быстро!</p>
-        <div class="contact-buttons">
-            <a class="cta-button telegram" href="https://t.me/yourusername" target="_blank">Telegram</a>
-            <a class="cta-button whatsapp" href="https://wa.me/71234567890" target="_blank">WhatsApp</a>
-            <a class="cta-button alt" href="mailto:example@mail.ru?subject=Заказ%20Photoshop">Email</a>
-        </div>
-    </section>
-
-    <footer>
-        <p>&copy; 2025 Ваше имя. Все права защищены. <a href="#">Политика конфиденциальности</a></p>
-    </footer>
-</body>
-<script>
-    function toggleServices(serviceId) {
-        const serviceGrid = document.getElementById(serviceId);
-        const button = document.querySelector(`button[onclick="toggleServices('${serviceId}')"]`);
-        
-        const isVisible = serviceGrid.style.display === "grid";
-
-        // Скрыть все сервисы и удалить активность с кнопок
-        document.querySelectorAll('.service-grid').forEach(grid => grid.style.display = 'none');
-        document.querySelectorAll('.toggle-button').forEach(btn => btn.classList.remove('active'));
-
-        if (!isVisible) {
-            serviceGrid.style.display = "grid";
-            button.classList.add('active');
-        }
-    }
-</script>
-  
-</html>
+.service-card p {
+    font-size: 1rem;
+    color: #bbb;
+    margin: 10px 0; /* Добавляем небольшой отступ для улучшения читаемости */
+    height: 120px; /* Устанавливаем максимальную высоту текста */
+    overflow: hidden; /* Скрываем текст, выходящий за пределы */
+    text-overflow: ellipsis; /* Добавляем многоточие, если текст не помещается */
+}
