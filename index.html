@@ -200,7 +200,7 @@
 
         .service-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
             gap: 20px;
             justify-items: center;
             display: none;
@@ -208,10 +208,10 @@
 
         .service-card {
             background-color: #1f1f1f;
-            padding: 20px;
+            padding: 25px;
             border-radius: 10px;
             width: 100%;
-            max-width: 280px;
+            max-width: 420px;
             text-align: center;
         }
 
@@ -222,7 +222,7 @@
         }
 
         .service-card h3 {
-            font-size: 1.5rem;
+            font-size: 1.6rem;
             margin: 15px 0;
         }
 
@@ -289,8 +289,8 @@
             }
 
             .service-card {
-                padding: 15px;
-                max-width: 220px;
+                padding: 20px;
+                max-width: 380px;
             }
 
             .order-steps {
@@ -333,18 +333,9 @@
                 width: 140px;
             }
 
-            /* Обновленный стиль для отображения 3 блоков в ряду */
+            /* Обновление для 2 блоков в ряду */
             .service-grid {
-                grid-template-columns: repeat(3, 1fr); /* 3 колонки */
-            }
-
-            /* Уменьшение шрифта для текста карточек */
-            .service-card h3 {
-                font-size: 1.2rem;
-            }
-
-            .service-card p {
-                font-size: 0.8rem;
+                grid-template-columns: repeat(2, 1fr); /* 2 колонки */
             }
         }
     </style>
@@ -434,12 +425,12 @@
             <div class="service-card">
                 <img src="images/web1.png" alt="Лендинг">
                 <h3>Создание одностраничных сайтов</h3>
-                <p>Разработка лендингов, направленных на продажи и привлечение клиентов.</p>
+                <p>Разработка лендингов с фокусом на привлечение пользователей.</p>
             </div>
             <div class="service-card">
                 <img src="images/web2.png" alt="Адаптивный дизайн">
                 <h3>Адаптивный дизайн</h3>
-                <p>Оптимизация сайтов для корректного отображения на всех устройствах.</p>
+                <p>Сайт, который отлично выглядит на любом устройстве.</p>
             </div>
             <div class="service-card">
                 <img src="images/web3.png" alt="Верстка по макету">
