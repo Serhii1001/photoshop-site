@@ -177,3 +177,10 @@ body {
     font-weight: bold;
     box-shadow: 0 0 10px #ff4c60;
 }
+.contact-buttons {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 15px;
+    margin-top: 30px;
+}
