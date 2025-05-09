@@ -231,6 +231,7 @@
             .service-card {
                 max-width: 100%; /* Make cards fill available width */
                 padding: 15px;
+                height: 280px; /* Make the card height more consistent */
             }
 
             .cta-button {
@@ -249,11 +250,15 @@
             }
 
             .order-step .step-text h3 {
-                font-size: 1.1rem;
+                font-size: 1rem;
             }
 
             .order-step .step-text p {
                 font-size: 0.9rem;
+            }
+
+            .service-card h3 {
+                font-size: 1.2rem;
             }
         }
     </style>
@@ -326,88 +331,79 @@
                 <h3>Дизайн визиток</h3>
                 <p>Создание креативных и профессиональных визиток для бизнеса.</p>
             </div>
-            <div class="service-card">
-                <img src="images/Blocki 11.png" alt="Дизайн логотипов" />
-                <h3>Дизайн логотипов</h3>
-                <p>Разработка уникальных логотипов для компаний и брендов.</p>
-            </div>
-            <div class="service-card">
-                <img src="images/Blocki 12.png" alt="Дизайн буклетов" />
-                <h3>Дизайн буклетов</h3>
-                <p>Создание визуально привлекательных буклетов для рекламы и маркетинга.</p>
-            </div>
         </div>
 
-        <button class="toggle-button" onclick="toggleServices('web-services')">Услуги по созданию сайтов</button>
+        <button class="toggle-button" onclick="toggleServices('web-services')">Web Услуги</button>
         <div class="service-grid" id="web-services">
             <div class="service-card">
-                <img src="images/web1.png" alt="Лендинг">
-                <h3>Создание одностраничных сайтов</h3>
-                <p>Разработка лендингов, направленных на продажи и привлечение клиентов.</p>
+                <img src="images/Blocki 11.png" alt="Лендинг" />
+                <h3>Лендинг</h3>
+                <p>Разработка эффективных и красивых посадочных страниц для бизнеса.</p>
             </div>
             <div class="service-card">
-                <img src="images/web2.png" alt="Адаптивность">
+                <img src="images/Blocki 12.png" alt="Адаптивный дизайн" />
                 <h3>Адаптивный дизайн</h3>
-                <p>Ваш сайт будет красиво выглядеть на всех устройствах, от ПК до смартфонов.</p>
+                <p>Создание сайтов, которые отлично смотрятся на любом устройстве.</p>
             </div>
             <div class="service-card">
-                <img src="images/web3.png" alt="Верстка">
+                <img src="images/Blocki 13.png" alt="Верстка по макету" />
                 <h3>Верстка по макету</h3>
-                <p>Точная вёрстка сайта по предоставленному дизайну.</p>
+                <p>Точная верстка сайтов по предоставленным макетам.</p>
             </div>
             <div class="service-card">
-                <img src="images/web4.png" alt="Интеграция форм">
+                <img src="images/Blocki 14.png" alt="Интеграция форм" />
                 <h3>Интеграция форм</h3>
-                <p>Создание и интеграция форм для сбора данных, контактов и подписок.</p>
+                <p>Интеграция форм для сбора данных и обратной связи с пользователями.</p>
             </div>
             <div class="service-card">
-                <img src="images/web5.png" alt="Редизайн">
-                <h3>Редизайн сайта</h3>
-                <p>Обновление старых сайтов с учётом современных тенденций и требований.</p>
+                <img src="images/Blocki 15.png" alt="Редизайн сайтов" />
+                <h3>Редизайн сайтов</h3>
+                <p>Обновление дизайна существующих сайтов для улучшения пользовательского опыта.</p>
             </div>
             <div class="service-card">
-                <img src="images/web6.png" alt="Графика и анимации">
+                <img src="images/Blocki 16.png" alt="Графика и анимации" />
                 <h3>Графика и анимации</h3>
-                <p>Создание красивых графических элементов и анимаций для улучшения интерфейса.</p>
+                <p>Создание уникальных графических элементов и анимаций для сайтов.</p>
             </div>
         </div>
     </section>
 
-    <section id="contacts">
-        <h2>Контакты</h2>
+    <section id="order">
+        <h2>Как заказать</h2>
         <div class="order-steps">
             <div class="order-step">
                 <div class="circle">1</div>
                 <div class="step-text">
-                    <h3>Запрос</h3>
-                    <p>Оставьте заявку и опишите проект.</p>
+                    <h3>Свяжитесь со мной</h3>
+                    <p>Напишите через форму или мессенджеры.</p>
                 </div>
             </div>
             <div class="order-step">
                 <div class="circle">2</div>
                 <div class="step-text">
-                    <h3>Обсуждение</h3>
-                    <p>Мы обсудим детали проекта и условия выполнения.</p>
+                    <h3>Обсуждение задачи</h3>
+                    <p>Мы уточняем все детали и ваши пожелания.</p>
                 </div>
             </div>
             <div class="order-step">
                 <div class="circle">3</div>
                 <div class="step-text">
-                    <h3>Выполнение</h3>
-                    <p>Я выполняю работу в срок, с учётом всех пожеланий.</p>
+                    <h3>Получите результат</h3>
+                    <p>В течение обговорённого времени получите готовую работу.</p>
                 </div>
             </div>
         </div>
     </section>
 
     <footer>
-        <p>&copy; 2025 Ваш сайт. Все права защищены.</p>
+        <p>&copy; 2025 Все права защищены</p>
+        <p>Контакт: <a href="mailto:info@website.com">info@website.com</a></p>
     </footer>
 
     <script>
         function toggleServices(serviceId) {
-            const serviceSection = document.getElementById(serviceId);
-            serviceSection.style.display = (serviceSection.style.display === 'grid') ? 'none' : 'grid';
+            const serviceElement = document.getElementById(serviceId);
+            serviceElement.style.display = serviceElement.style.display === 'grid' ? 'none' : 'grid';
         }
     </script>
 </body>
