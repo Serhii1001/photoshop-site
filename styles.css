@@ -90,13 +90,6 @@ body {
   font-size: 1rem;
   color: #ccc;
   margin-bottom: 20px;
-  word-wrap: break-word; /* Это свойство позволяет тексту переноситься на новую строку */
-}
-
-@media (max-width: 767px) {
-  .service-card p {
-    font-size: 0.9rem; /* Уменьшаем размер шрифта на мобильных устройствах */
-  }
 }
 
 /* Стили для секции "Как сделать заказ" */
