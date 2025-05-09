@@ -337,6 +337,15 @@
             .service-grid {
                 grid-template-columns: repeat(3, 1fr); /* 3 колонки */
             }
+
+            /* Уменьшение шрифта для текста карточек */
+            .service-card h3 {
+                font-size: 1.2rem;
+            }
+
+            .service-card p {
+                font-size: 0.8rem;
+            }
         }
     </style>
 </head>
@@ -432,61 +441,3 @@
                 <h3>Адаптивный дизайн</h3>
                 <p>Оптимизация сайтов для корректного отображения на всех устройствах.</p>
             </div>
-            <div class="service-card">
-                <img src="images/web3.png" alt="Верстка по макету">
-                <h3>Верстка по макету</h3>
-                <p>Превращаем дизайнерские макеты в рабочие сайты.</p>
-            </div>
-            <div class="service-card">
-                <img src="images/web4.png" alt="Интеграция форм">
-                <h3>Интеграция форм</h3>
-                <p>Добавление контактных и других форм для сбора данных.</p>
-            </div>
-            <div class="service-card">
-                <img src="images/web5.png" alt="Редизайн сайтов">
-                <h3>Редизайн сайтов</h3>
-                <p>Обновление и улучшение внешнего вида и функционала сайтов.</p>
-            </div>
-            <div class="service-card">
-                <img src="images/web6.png" alt="Графика и анимации">
-                <h3>Графика и анимации</h3>
-                <p>Создание привлекательной графики и анимаций для сайтов.</p>
-            </div>
-        </div>
-    </section>
-
-    <section>
-        <h2>Как заказать</h2>
-        <div class="order-steps">
-            <div class="order-step">
-                <div class="circle">1</div>
-                <p>Заполнение формы</p>
-            </div>
-            <div class="order-step">
-                <div class="circle">2</div>
-                <p>Обсуждение проекта</p>
-            </div>
-            <div class="order-step">
-                <div class="circle">3</div>
-                <p>Начало работы</p>
-            </div>
-        </div>
-    </section>
-
-    <footer>
-        <p>Контакты: <a href="mailto:info@yourdomain.com">info@yourdomain.com</a></p>
-    </footer>
-
-    <script>
-        function toggleServices(id) {
-            var element = document.getElementById(id);
-            if (element.style.display === "none" || element.style.display === "") {
-                element.style.display = "grid";
-            } else {
-                element.style.display = "none";
-            }
-        }
-    </script>
-</body>
-
-</html>
