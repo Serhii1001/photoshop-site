@@ -290,7 +290,7 @@
 
             .service-card {
                 padding: 20px;
-                max-width: 380px;
+                max-width: 480px; /* увеличено для мобильных */
             }
 
             .order-steps {
@@ -336,6 +336,7 @@
             /* Обновление для 2 блоков в ряду */
             .service-grid {
                 grid-template-columns: repeat(2, 1fr); /* 2 колонки */
+                gap: 30px; /* увеличен интервал между блоками */
             }
         }
     </style>
@@ -423,9 +424,9 @@
         <button class="toggle-button" onclick="toggleServices('web-services')">Услуги по созданию сайтов</button>
         <div class="service-grid" id="web-services">
             <div class="service-card">
-                <img src="images/web1.png" alt="Лендинг">
-                <h3>Создание одностраничных сайтов</h3>
-                <p>Разработка лендингов с фокусом на привлечение пользователей.</p>
+                <img src="images/web1.png" alt="SEO оптимизация" />
+                <h3>SEO оптимизация</h3>
+                <p>Оптимизация сайта для поисковых систем с фокусом на привлечение пользователей.</p>
             </div>
             <div class="service-card">
                 <img src="images/web2.png" alt="Адаптивный дизайн">
