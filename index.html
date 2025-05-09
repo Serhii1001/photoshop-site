@@ -431,10 +431,10 @@
     <p>&copy; 2025 Ваше имя. Все права защищены. <a href="#">Политика конфиденциальности</a></p>
   </footer>
 
-  <script>
+<script>
+  document.addEventListener('DOMContentLoaded', function () {
     function toggleServices(serviceId) {
       const serviceGrid = document.getElementById(serviceId);
-      const button = document.querySelector(`button[onclick="toggleServices('${serviceId}')"]`);
       const isVisible = serviceGrid.style.display === "grid";
 
       document.querySelectorAll('.service-grid').forEach(grid => grid.style.display = 'none');
@@ -442,10 +442,19 @@
 
       if (!isVisible) {
         serviceGrid.style.display = "grid";
-        button.classList.add('active');
+        const button = document.querySelector(`[data-service-id="${serviceId}"]`);
+        if (button) button.classList.add('active');
       }
     }
-  </script>
-  <script src="script.js"></script>
+
+    // Навешиваем обработчики кнопкам
+    document.querySelectorAll('.toggle-button').forEach(button => {
+      button.addEventListener('click', function () {
+        const serviceId = this.getAttribute('data-service-id');
+        toggleServices(serviceId);
+      });
+    });
+  });
+</script>
 </body>
 </html>
