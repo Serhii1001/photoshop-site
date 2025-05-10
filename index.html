@@ -19,19 +19,28 @@
             padding: 0;
         }
 
-        .hero {
-            position: relative;
-            height: 40vh;
-            background: linear-gradient(45deg, #ff4c60, #00ffc8, #8a2be2, #ff6f61);
-            background-size: 400% 400%;
-            animation: gradientMove 15s ease infinite, lightningEffect 5s ease-out infinite;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            text-align: center;
-            overflow: hidden;
-        }
+    .hero {
+      position: relative;
+      height: 100vh;
+      background: radial-gradient(ellipse at center, #1b1b2f 0%, #0f0f1c 100%);
+      overflow: hidden;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+    }
+    .logo-container {
+      position: absolute;
+      top: 20px;
+      left: 30px;
+      z-index: 10;
+    }
 
+    .logo-container img {
+      height: 50px;
+      width: auto;
+      filter: drop-shadow(0 0 10px #00ffff) drop-shadow(0 0 5px #ff00ff);
+    }
         @keyframes gradientMove {
             0% { background-position: 0% 50%; }
             50% { background-position: 100% 50%; }
@@ -258,16 +267,22 @@
 </head>
 
 <body>
-    <div class="hero">
-        <div class="overlay">
-            <h1>Преобрази свои фото и сайт</h1>
-            <p>Photoshop и Web-дизайн на заказ</p>
-            <div class="hero-buttons">
-                <a href="#services" class="cta-button">Услуги</a>
-                <a href="#contacts" class="cta-button contact">Контакты</a>
-            </div>
-        </div>
+<div class="hero">
+  <div class="logo-container">
+    <img src="your-logo.png" alt="Логотип" />
+  </div>
+  <div class="neon-lines">
+    <span></span><span></span><span></span><span></span><span></span>
+  </div>
+  <div class="overlay">
+    <h1>Космическое преображение дизайна</h1>
+    <p>Hi-tech Photoshop и Web-решения для будущего</p>
+    <div class="hero-buttons">
+      <a href="#services" class="cta-button">Услуги</a>
+      <a href="#contacts" class="cta-button">Контакты</a>
     </div>
+  </div>
+</div>
 
     <section id="services">
         <h2>Что я делаю</h2>
@@ -280,12 +295,10 @@
         <div class="service-grid" id="photoshop-services">
             <!-- Все 12 карточек Photoshop -->
             <!-- ... карточки из вашего кода ... -->
-            <div class="service-card">
-            <a href="retouch.html">
+          <div class="service-card">
                 <img src="images/Blocki 1.png" alt="Ретушь" />
                 <h3>Ретушь</h3>
                 <p>Удаление дефектов, выравнивание кожи, цветокоррекция.</p>
-            </a>
             </div>
             <div class="service-card">
                 <img src="images/Blocki 2.png" alt="Фотомонтаж" />
