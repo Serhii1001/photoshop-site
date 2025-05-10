@@ -5,7 +5,6 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Ретушь — Photoshop Услуги</title>
-    <link rel="stylesheet" href="styles.css" />
     <style>
         html {
             scroll-behavior: smooth;
@@ -35,33 +34,23 @@
             gap: 20px;
             justify-items: center;
             margin-top: 30px;
-            margin-bottom: 30px; /* Добавляем отступ снизу */
+            margin-bottom: 30px;
         }
 
         .service-card {
             background-color: #1f1f1f;
-            padding: 20px;
             border-radius: 10px;
             width: 100%;
             max-width: 280px;
-            text-align: center;
+            overflow: hidden;
         }
 
         .service-card img {
+            display: block;
             width: 100%;
             height: auto;
-            border-radius: 5px;
+            border-radius: 10px;
             cursor: pointer;
-        }
-
-        .service-card h3 {
-            font-size: 1.5rem;
-            margin: 15px 0;
-        }
-
-        .service-card p {
-            font-size: 1rem;
-            color: #bbb;
         }
 
         .cta-button {
@@ -72,7 +61,7 @@
             border: none;
             border-radius: 5px;
             text-decoration: none;
-            margin-top: 30px; /* Добавляем отступ сверху для кнопки */
+            margin-top: 30px;
             transition: background-color 0.3s ease;
         }
 
@@ -96,16 +85,14 @@
             text-decoration: underline;
         }
 
-        /* Модальное окно */
         .modal {
             display: none;
             position: fixed;
-            z-index: 1;
+            z-index: 1000;
             left: 0;
             top: 0;
             width: 100%;
             height: 100%;
-            overflow: auto;
             background-color: rgba(0, 0, 0, 0.7);
             justify-content: center;
             align-items: center;
@@ -114,15 +101,24 @@
         .modal-content {
             max-width: 80%;
             max-height: 80%;
-            margin: auto;
         }
 
         .modal-content img {
             width: 100%;
             height: auto;
+            border-radius: 10px;
         }
 
-        /* Мобильная адаптация */
+        .close {
+            position: absolute;
+            top: 20px;
+            right: 30px;
+            font-size: 40px;
+            color: white;
+            cursor: pointer;
+            z-index: 1001;
+        }
+
         @media (max-width: 768px) {
             h2 {
                 font-size: 2rem;
@@ -134,22 +130,12 @@
             }
 
             .service-gallery {
-                grid-template-columns: repeat(2, 1fr); /* Две карточки в ряд на мобильных */
+                grid-template-columns: repeat(2, 1fr);
                 gap: 15px;
             }
 
-            .service-card h3 {
-                font-size: 1.2rem;
-            }
-
-            .service-card p {
-                font-size: 0.9rem;
-            }
-
-            /* Убедимся, что карточки не выходят за пределы экрана */
             .service-card {
                 max-width: 100%;
-                box-sizing: border-box;
             }
         }
     </style>
@@ -162,28 +148,20 @@
         <p>Просмотрите работы по ретуши. Удаление дефектов, выравнивание кожи и многое другое.</p>
 
         <div class="service-gallery">
-            <!-- Пример работ по ретуши -->
             <div class="service-card">
                 <img src="images/retouch/ret1.png" alt="Ретушь 1" onclick="openModal(this)" />
-                <h3>Ретушь лица</h3>
-                <p>Удаление дефектов кожи, улучшение текстуры.</p>
             </div>
             <div class="service-card">
                 <img src="images/retouch/ret2.png" alt="Ретушь 2" onclick="openModal(this)" />
-                <h3>Цветокоррекция</h3>
-                <p>Согласование цветов для достижения наилучшего эффекта.</p>
             </div>
             <div class="service-card">
                 <img src="images/retouch/ret3.png" alt="Ретушь 3" onclick="openModal(this)" />
-                <h3>Удаление фона</h3>
-                <p>Чистка изображения, удаление ненужных элементов.</p>
             </div>
             <div class="service-card">
                 <img src="images/retouch/ret4.png" alt="Ретушь 4" onclick="openModal(this)" />
             </div>
         </div>
 
-        <!-- Кнопка возврата на главную теперь размещена ниже карточек с отступом -->
         <a href="index.html" class="cta-button">Вернуться на главную страницу</a>
     </section>
 
@@ -209,30 +187,26 @@
         <p>&copy; 2025 Ваше имя. Все права защищены. <a href="#">Политика конфиденциальности</a></p>
     </footer>
 
-<script>
-    // Открытие модального окна
-    function openModal(imgElement) {
-        const modal = document.getElementById('myModal');
-        const modalImg = document.getElementById('modalImage');
-        modal.style.display = "flex";
-        modalImg.src = imgElement.src;
-    }
-
-    // Закрытие модального окна
-    function closeModal() {
-        const modal = document.getElementById('myModal');
-        modal.style.display = "none";
-    }
-
-    // Закрытие при клике на фон или на изображение
-    document.getElementById('myModal').addEventListener('click', function (event) {
-        // Закрываем, только если клик был не по внутреннему блоку .modal-content
-        if (!event.target.closest('.modal-content')) {
-            closeModal();
+    <script>
+        function openModal(imgElement) {
+            const modal = document.getElementById('myModal');
+            const modalImg = document.getElementById('modalImage');
+            modal.style.display = "flex";
+            modalImg.src = imgElement.src;
         }
-    });
-</script>
 
+        function closeModal() {
+            const modal = document.getElementById('myModal');
+            modal.style.display = "none";
+        }
+
+        // Закрытие по клику вне изображения
+        document.getElementById('myModal').addEventListener('click', function (event) {
+            if (!event.target.closest('.modal-content')) {
+                closeModal();
+            }
+        });
+    </script>
 
 </body>
 
