@@ -60,13 +60,26 @@ body {
 }
 
 .service-card {
-  background-color: #1e1e1e;
+  background-color: #1f1f1f; /* Оставляем только один background-color */
   box-shadow: 0 4px 20px rgba(0, 0, 0, 0.5);
   border-radius: 10px;
   overflow: hidden;
   text-align: center;
   transition: transform 0.3s ease, box-shadow 0.3s ease;
+  padding: 20px;
+  width: 100%;
+  max-width: 280px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between; /* Распределяет пространство между содержимым карточки */
+  height: 350px; /* Можно подкорректировать высоту по своему усмотрению */
 }
+
+.card-footer {
+  margin-top: auto; /* Сдвигает footer вниз */
+  text-align: center;
+}
+
 
 .service-card:hover {
   transform: translateY(-10px);
