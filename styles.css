@@ -204,7 +204,7 @@ body {
   height: 200%;
   background: url('https://www.transparenttextures.com/patterns/stardust.png') repeat;
   animation: starsMove 60s linear infinite;
-  opacity: 0.1;
+  opacity: 0.5;
 }
 
 .hero::after {
