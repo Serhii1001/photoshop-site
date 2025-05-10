@@ -11,10 +11,11 @@ body {
 .hero {
   background: url('https://via.placeholder.com/1920x1080') no-repeat center center/cover;
   color: white;
-  padding: 100px 0;
+  padding: 50px 0;
   text-align: center;
   background-color: #111;
   position: relative;
+  height: 50vh;  /* Измененная высота */
 }
 
 .hero .overlay {
@@ -183,16 +184,6 @@ body {
     flex-wrap: wrap;
     gap: 15px;
     margin-top: 30px;
-}
-.hero {
-  position: relative;
-  height: 70vh;
-  background: radial-gradient(ellipse at center, #1b1b2f 0%, #0f0f1c 100%);
-  overflow: hidden;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  text-align: center;
 }
 
 .hero::before {
