@@ -186,7 +186,7 @@ body {
 }
 .hero {
   position: relative;
-  height: 100vh;
+  height: 70vh;
   background: radial-gradient(ellipse at center, #1b1b2f 0%, #0f0f1c 100%);
   overflow: hidden;
   display: flex;
