@@ -104,7 +104,12 @@ body {
   color: #ccc;
   margin-bottom: 20px;
 }
-
+/* Медиазапросы для увеличения высоты карточек на ПК */
+@media screen and (min-width: 769px) {
+  .service-card {
+    height: 400px; /* Увеличенная высота для ПК */
+  }
+}
 /* Стили для секции "Как сделать заказ" */
 #how-to-order {
   padding: 50px 20px;
