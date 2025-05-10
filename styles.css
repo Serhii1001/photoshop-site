@@ -49,7 +49,11 @@ body {
 .hero .cta-button:hover {
   background-color: #ff4c3b;
 }
-
+/* Медиазапросы для ПК (6 карточек в ряд) */
+@media screen and (min-width: 769px) {
+  .service-grid {
+    grid-template-columns: repeat(6, 1fr); /* Для ПК */
+  }
 /* Стили для секции услуг */
 .service-grid {
   display: grid;
