@@ -211,21 +211,30 @@
         <p>&copy; 2025 Ваше имя. Все права защищены. <a href="#">Политика конфиденциальности</a></p>
     </footer>
 
-    <script>
-        // Открытие модального окна
-        function openModal(imgElement) {
-            const modal = document.getElementById('myModal');
-            const modalImg = document.getElementById('modalImage');
-            modal.style.display = "flex";
-            modalImg.src = imgElement.src;
-        }
+<script>
+    // Открытие модального окна
+    function openModal(imgElement) {
+        const modal = document.getElementById('myModal');
+        const modalImg = document.getElementById('modalImage');
+        modal.style.display = "flex";
+        modalImg.src = imgElement.src;
+    }
 
-        // Закрытие модального окна
-        function closeModal() {
-            const modal = document.getElementById('myModal');
-            modal.style.display = "none";
+    // Закрытие модального окна
+    function closeModal() {
+        const modal = document.getElementById('myModal');
+        modal.style.display = "none";
+    }
+
+    // Закрытие при клике на фон или на изображение
+    document.getElementById('myModal').addEventListener('click', function (event) {
+        // Закрываем, только если клик был не по внутреннему блоку .modal-content
+        if (!event.target.closest('.modal-content')) {
+            closeModal();
         }
-    </script>
+    });
+</script>
+
 
 </body>
 
