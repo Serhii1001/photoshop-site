@@ -232,7 +232,7 @@ body {
   height: 200%;
   background: url('images/design/stardust.png') repeat;
   animation: starsMove 60s linear infinite;
-  opacity: 0.5;
+  opacity: 1;
 }
 
 .hero::after {
