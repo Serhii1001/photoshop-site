@@ -5,6 +5,10 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Ретушь — Photoshop Услуги</title>
+
+  <!-- Подключение общего файла стилей -->
+  <link rel="stylesheet" href="styles.css" />
+
   <style>
     html {
       scroll-behavior: smooth;
@@ -78,7 +82,6 @@
       background-color: #e6334f;
     }
 
-    /* Модальное окно */
     .modal {
       display: none;
       position: fixed;
@@ -124,7 +127,6 @@
       }
     }
 
-    /* Контакты */
     .contact-buttons {
       margin-top: 20px;
       display: flex;
@@ -133,7 +135,6 @@
       justify-content: center;
     }
 
-    /* Подвал */
     footer {
       background-color: #111;
       text-align: center;
@@ -150,7 +151,6 @@
       text-decoration: underline;
     }
 
-    /* Мобильная адаптация */
     @media (max-width: 768px) {
       h2 {
         font-size: 2rem;
@@ -193,7 +193,6 @@
     <a href="index.html" class="cta-button">Вернуться на главную страницу</a>
   </section>
 
-  <!-- Модальное окно -->
   <div id="myModal" class="modal" onclick="closeModal(event)">
     <img id="modalImage" src="" alt="Увеличенное изображение" />
   </div>
