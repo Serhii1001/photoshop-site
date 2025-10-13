@@ -1,0 +1,281 @@
+diff --git a/restoration.html b/restoration.html
+new file mode 100644
+index 0000000000000000000000000000000000000000..1c6d6ea865561d6d8915ff9691e33cc9b1103425
+--- /dev/null
++++ b/restoration.html
+@@ -0,0 +1,275 @@
++<!DOCTYPE html>
++<html lang="ru">
++
++<head>
++  <meta charset="UTF-8" />
++  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
++  <title>Реставрация — Photoshop Услуги</title>
++
++  <link rel="stylesheet" href="styles.css" />
++
++  <style>
++
++html {
++  scroll-behavior: smooth;
++}
++
++body {
++  margin: 0;
++  font-family: Arial, sans-serif;
++  background: radial-gradient(ellipse at center, #0f0f2b 0%, #000000 100%);
++  color: white;
++}
++
++section {
++  padding: 60px 20px;
++  text-align: center;
++}
++
++h2 {
++  font-size: 2.5rem;
++  margin-bottom: 20px;
++}
++
++p {
++  color: #ccc;
++  line-height: 1.6;
++  max-width: 900px;
++  margin: 0 auto;
++}
++
++.service-gallery {
++  display: grid;
++  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
++  gap: 20px;
++  justify-items: center;
++  margin: 40px auto 30px;
++  width: min(1100px, 100%);
++}
++
++.service-card {
++  background: linear-gradient(145deg, #1e1e2f, #12121f);
++  padding: 12px;
++  border-radius: 15px;
++  box-shadow: 0 0 15px rgba(0, 255, 255, 0.25);
++  transition: transform 0.3s ease, box-shadow 0.3s ease;
++  width: 100%;
++  max-width: 340px;
++}
++
++.service-card:hover {
++  transform: scale(1.03);
++  box-shadow: 0 0 20px rgba(0, 255, 255, 0.5);
++}
++
++.service-card img {
++  width: 100%;
++  height: auto;
++  border-radius: 10px;
++  cursor: pointer;
++  transition: transform 0.3s ease;
++}
++
++.service-card img:hover {
++  transform: scale(1.02);
++}
++
++.cta-button {
++  background-color: #ff4c60;
++  color: white;
++  padding: 15px 30px;
++  font-size: 1.2rem;
++  border: none;
++  border-radius: 8px;
++  text-decoration: none;
++  margin-top: 30px;
++  transition: background-color 0.3s ease;
++  display: inline-block;
++}
++
++.cta-button:hover {
++  background-color: #e6334f;
++}
++
++.cta-button.telegram {
++  background-color: #0088cc;
++}
++
++.cta-button.telegram:hover {
++  background-color: #007bb5;
++}
++
++.cta-button.whatsapp {
++  background-color: #25d366;
++}
++
++.cta-button.whatsapp:hover {
++  background-color: #1da851;
++}
++
++.cta-button.alt {
++  background-color: #555;
++}
++
++.cta-button.alt:hover {
++  background-color: #444;
++}
++
++.modal {
++  display: none;
++  position: fixed;
++  z-index: 1000;
++  left: 0;
++  top: 0;
++  width: 100%;
++  height: 100%;
++  background-color: rgba(10, 10, 30, 0.9);
++  justify-content: center;
++  align-items: center;
++  backdrop-filter: blur(8px);
++  animation: fadeIn 0.4s ease;
++  padding: 20px;
++}
++
++.modal img {
++  max-width: 90vw;
++  max-height: 90vh;
++  border-radius: 10px;
++  box-shadow: 0 0 50px rgba(0, 255, 255, 0.4);
++  animation: zoomIn 0.3s ease;
++  background: radial-gradient(circle at center, rgba(0, 0, 0, 0.2), transparent 70%);
++}
++
++@keyframes zoomIn {
++  from {
++    transform: scale(0.6);
++    opacity: 0;
++  }
++
++  to {
++    transform: scale(1);
++    opacity: 1;
++  }
++}
++
++@keyframes fadeIn {
++  from {
++    opacity: 0;
++  }
++
++  to {
++    opacity: 1;
++  }
++}
++
++.contact-buttons {
++  margin-top: 20px;
++  display: flex;
++  flex-wrap: wrap;
++  gap: 10px;
++  justify-content: center;
++}
++
++footer {
++  background-color: #111;
++  text-align: center;
++  padding: 20px;
++  color: #bbb;
++}
++
++footer a {
++  color: #00ffc8;
++  text-decoration: none;
++}
++
++footer a:hover {
++  text-decoration: underline;
++}
++
++@media (max-width: 768px) {
++  h2 {
++    font-size: 2rem;
++  }
++
++  .cta-button {
++    font-size: 1rem;
++    padding: 12px 24px;
++  }
++
++  .service-gallery {
++    gap: 16px;
++  }
++}
++
++  </style>
++</head>
++
++<body>
++
++  <section>
++    <h2>Реставрация фотографий — спасаем ценные воспоминания.</h2>
++    <p>Устраняем заломы, пятна, выцветание и другие дефекты, чтобы ваши семейные реликвии снова радовали глаз. Мы бережно работаем с каждой деталью, восстанавливая текстуры, цвета и контраст, сохраняя при этом оригинальный характер снимка.</p>
++
++    <div class="service-gallery">
++      <div class="service-card">
++        <img src="images/services/restoration/sample-1.svg" alt="Реставрация — пример 1" onclick="openModal(this)" />
++      </div>
++      <div class="service-card">
++        <img src="images/services/restoration/sample-2.svg" alt="Реставрация — пример 2" onclick="openModal(this)" />
++      </div>
++      <div class="service-card">
++        <img src="images/services/restoration/sample-3.svg" alt="Реставрация — пример 3" onclick="openModal(this)" />
++      </div>
++    </div>
++
++    <a href="index.html" class="cta-button">Вернуться на главную страницу</a>
++  </section>
++
++  <div id="myModal" class="modal" onclick="closeModal(event)">
++    <img id="modalImage" src="" alt="Увеличенное изображение" />
++  </div>
++
++  <section id="contacts">
++    <h2>Связаться со мной</h2>
++    <p>Напиши мне в мессенджер или на почту — отвечаю быстро!</p>
++    <div class="contact-buttons">
++      <a class="cta-button telegram" href="https://t.me/yourusername" target="_blank">Telegram</a>
++      <a class="cta-button whatsapp" href="https://wa.me/71234567890" target="_blank">WhatsApp</a>
++      <a class="cta-button alt" href="mailto:example@mail.ru?subject=Заказ%20Photoshop">Email</a>
++    </div>
++  </section>
++
++  <footer>
++    <p>&copy; 2025 Ваше имя. Все права защищены. <a href="privacy-policy.html">Политика конфиденциальности</a></p>
++  </footer>
++
++
++<script>
++  function openModal(imgElement) {
++    const modal = document.getElementById('myModal');
++    const modalImg = document.getElementById('modalImage');
++    modal.style.display = 'flex';
++    modalImg.src = imgElement.src;
++    modalImg.alt = imgElement.alt;
++  }
++
++  function closeModal(event) {
++    const modal = document.getElementById('myModal');
++    if (event.target === modal) {
++      modal.style.display = 'none';
++    }
++  }
++
++  document.addEventListener('keydown', (event) => {
++    if (event.key === 'Escape') {
++      const modal = document.getElementById('myModal');
++      if (modal.style.display === 'flex') {
++        modal.style.display = 'none';
++      }
++    }
++  });
++</script>
++
++</body>
++
++</html>
