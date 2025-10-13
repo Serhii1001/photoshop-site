@@ -335,6 +335,12 @@ body {
   box-shadow: 0 0 20px rgba(255, 0, 255, 0.3);
 }
 
+.cta-button.small {
+  padding: 10px 20px;
+  font-size: 1rem;
+  border-radius: 20px;
+}
+
 .cta-button:hover {
   transform: scale(1.05);
   box-shadow: 0 0 25px rgba(0, 255, 255, 0.6);
