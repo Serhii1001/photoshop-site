@@ -3,266 +3,153 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Создание одностраничных сайтов (лендинги) — демо блоков</title>
+  <title>Создание лендингов — одностраничные сайты под цель</title>
   <link rel="stylesheet" href="../assets/css/styles.css"/>
   <style>
-    /* ==== Cross‑browser reset for consistent form rendering ==== */
+    :root{ --fx1:#ff4ec7; --fx2:#00ffd5; --panel:#12122a }
+
+    /* БАЗА */
     *,*::before,*::after{ box-sizing:border-box }
     html{ -webkit-text-size-adjust:100% }
-    body{ -webkit-font-smoothing:antialiased; -moz-osx-font-smoothing:grayscale }
-    input,button,textarea,select{ font:inherit }
-    /* Remove Chrome extra inner paddings on inputs */
-    input::-webkit-contacts-auto-fill-button, input::-webkit-credentials-auto-fill-button{ visibility:hidden; display:none !important }
-    /* End reset */
+    body{ margin:0; color:#fff; background: radial-gradient(1400px 900px at 50% -10%, #14143b 0%, transparent 55%) no-repeat, #0b0b1e; -webkit-font-smoothing:antialiased; -moz-osx-font-smoothing:grayscale }
+    a{ color:inherit }
 
-    :root {
-      --fx1:#ff4ec7; /* фуксия */
-      --fx2:#00ffd5; /* бирюза */
-      --fx3:#9a6bff; /* лиловый */
-      --panel:#12122a;
-    }
-    body{
-      background:
-        radial-gradient(1400px 900px at 50% -10%, #151545 0%, transparent 55%) no-repeat,
-        #0b0b1e;
-      color:#fff;
-    }
-    /* ===== HERO ===== */
-    .lp-hero{ max-width:1100px; margin:60px auto 24px; padding:0 20px; text-align:center; }
-    .lp-hero h1{ font-size:2.1rem; margin:0 0 10px; text-shadow:0 0 22px rgba(154,107,255,.35) }
-    .lp-hero p{ max-width:880px; margin:0 auto; color:#cfd7ff }
-    .lp-hero .sub{ margin-top:10px; color:#aeb7ff; opacity:.9 }
+    .wrap{ max-width:1100px; margin:0 auto; padding:0 20px }
 
-    /* ===== HERO DEMO ===== */
-    .lp-hero-demo{
-      margin:26px auto 0; max-width:1100px; padding:24px; border-radius:22px;
-      background:
-        radial-gradient(260px 180px at 20% 10%, rgba(0,255,213,.18), transparent 60%),
-        radial-gradient(260px 180px at 80% 90%, rgba(255,78,199,.16), transparent 60%),
-        linear-gradient(145deg,#1b1b39,#0b0b1e);
-      border:1px solid rgba(255,255,255,.08);
-      box-shadow:0 0 36px rgba(0,255,213,.10), inset 0 0 36px rgba(255,78,199,.06);
-      overflow:hidden;
-    }
-    .lp-shimmer{ height:44px; border-radius:12px; margin:0 auto 14px; max-width:720px;
-      background:linear-gradient(90deg,rgba(255,255,255,.08),rgba(255,255,255,.22),rgba(255,255,255,.08));
-      background-size:200% 100%; animation:sh 2.4s linear infinite; filter: blur(.2px); }
-    .lp-line{ height:12px; border-radius:8px; margin:10px auto; max-width:520px; background:rgba(255,255,255,.12) }
-    .lp-cta-row{ display:flex; gap:12px; justify-content:center; margin-top:18px; flex-wrap:wrap }
-    .lp-cta{
-      -webkit-tap-highlight-color: transparent; outline:none; touch-action:manipulation;
-      border-radius:999px; padding:14px 24px; border:1px solid rgba(255,255,255,.15);
-      color:#fff; font-weight:700; text-transform:uppercase; letter-spacing:.5px; cursor:pointer;
-      background:linear-gradient(180deg, rgba(154,107,255,.18), rgba(0,0,0,.2));
-      box-shadow:0 0 18px rgba(154,107,255,.22), inset 0 0 14px rgba(0,0,0,.25);
-      position:relative; overflow:hidden; transition:transform .15s ease;
-    }
-    .lp-cta:hover{ transform:translateY(-1px) scale(1.01) }
-    .lp-cta::after{ content:""; position:absolute; inset:0; border-radius:inherit; opacity:0;
-      background:radial-gradient(220px 220px at var(--x,50%) var(--y,50%), rgba(255,255,255,.28), transparent 60%);
-      transition:opacity .25s ease; }
-    .lp-cta.flash::after{ opacity:1 }
+    /* HERO */
+    .hero{ text-align:center; padding:60px 0 24px }
+    .hero .badge{ display:inline-block; padding:6px 10px; border:1px solid rgba(255,255,255,.14); border-radius:999px; background:rgba(255,255,255,.05); color:#cfd7ff; margin-bottom:12px }
+    .hero h1{ font-size:2.1rem; margin:0 0 10px; text-shadow:0 0 22px rgba(154,107,255,.35) }
+    .hero p{ color:#cfd7ff; max-width:880px; margin:0 auto }
 
-    /* ===== HERO COPY (вместо мигающих полос) ===== */
-    .lp-hero-copy{ max-width:820px; margin:0 auto; text-align:center; }
-    .lp-hero-copy .badge{ display:inline-block; padding:8px 12px; border-radius:999px; border:1px solid rgba(255,255,255,.14);
-      background:rgba(255,255,255,.04); color:#cfd7ff; font-size:.85rem; margin-bottom:12px; box-shadow:0 0 14px rgba(0,255,213,.12) }
-    .lp-hero-copy h2{ font-size:1.6rem; margin:0 0 8px; color:#eaf2ff; text-shadow:0 0 18px rgba(154,107,255,.25) }
-    .lp-hero-copy p{ margin:0 auto; max-width:680px; color:#bfc8ff }
-    @media(max-width:768px){ .lp-hero-copy h2{ font-size:1.28rem } }
+    .hero-demo{ margin:26px 0 0; border:1px solid rgba(255,255,255,.08); border-radius:22px; overflow:hidden; box-shadow:0 0 36px rgba(0,255,213,.10), inset 0 0 36px rgba(255,78,199,.06);
+      background: linear-gradient(145deg,#1b1b39,#0b0b1e); padding:24px }
+    .hero h2{ font-size:1.6rem; margin:0 0 8px }
+    .cta-row{ display:flex; gap:12px; justify-content:center; flex-wrap:wrap; margin-top:18px }
+    .btn{ -webkit-tap-highlight-color:transparent; border:1px solid rgba(255,255,255,.15); border-radius:999px; padding:14px 22px; font-weight:700; text-transform:uppercase; cursor:pointer; color:#fff; background:linear-gradient(180deg, rgba(154,107,255,.18), rgba(0,0,0,.2)); box-shadow:0 0 18px rgba(154,107,255,.22), inset 0 0 14px rgba(0,0,0,.25); position:relative; overflow:hidden; transition:transform .15s ease }
+    .btn:hover{ transform:translateY(-1px) scale(1.01) }
+    .btn::after{ content:""; position:absolute; inset:0; border-radius:inherit; opacity:0; background:radial-gradient(220px 220px at var(--x,50%) var(--y,50%), rgba(255,255,255,.28), transparent 60%); transition:opacity .25s ease }
+    .btn.flash::after{ opacity:1 }
 
-    @keyframes sh{ to{ background-position:200% 0 } }
+    /* СЕТКА БЛОКОВ */
+    .grid{ display:grid; gap:22px; grid-template-columns: repeat(auto-fit,minmax(260px,1fr)); margin:30px 0 }
+    .card{ background: linear-gradient(145deg, var(--panel), #0f0f23); border:1px solid rgba(255,255,255,.06); border-radius:18px; padding:18px; box-shadow:0 0 24px rgba(0,255,213,.06), inset 0 0 24px rgba(255,78,199,.04) }
+    .card h3{ font-size:1rem; margin:0 0 10px }
+    .note{ font-size:.9rem; color:#a9b }
 
-    /* ===== GRID ===== */
-    .lp-grid{ max-width:1100px; margin:30px auto; padding:0 20px; display:grid; gap:22px; grid-template-columns:repeat(auto-fit,minmax(240px,1fr)) }
-    .lp-card{
-      background:linear-gradient(145deg,var(--panel),#0f0f23);
-      border:1px solid rgba(255,255,255,.06);
-      border-radius:18px; padding:18px; position:relative; overflow:hidden;
-      box-shadow:0 0 24px rgba(0,255,213,.06), inset 0 0 24px rgba(255,78,199,.04);
-    }
-    .lp-card h3{ font-size:1rem; margin:0 0 12px }
-    .lp-note{ font-size:.85rem; color:#a9b; margin-top:8px }
+    /* ПРОЦЕСС */
+    .steps{ display:grid; grid-template-columns:1fr; gap:12px }
+    .step{ display:flex; gap:12px; align-items:flex-start; padding:12px; border:1px solid rgba(255,255,255,.08); border-radius:12px; background:rgba(255,255,255,.02) }
+    .dot{ width:10px; height:10px; border-radius:50%; background:linear-gradient(180deg,var(--fx1),var(--fx2)); box-shadow:0 0 12px rgba(0,255,213,.5); flex:0 0 10px; margin-top:6px }
 
-    /* ===== FEATURES ===== */
-    .feat{ display:grid; grid-template-rows:120px auto; gap:12px; border-radius:14px;
-      background:linear-gradient(145deg,#1b1b39,#0b0b1e);
-      border:1px solid rgba(255,255,255,.08);
-      box-shadow:inset 0 0 22px rgba(255,78,199,.08), 0 0 22px rgba(0,255,213,.12);
-      transition:transform .15s ease }
-    .feat:hover{ transform:translateY(-2px) }
-    .feat .tile{ border-radius:12px;
-      background:
-        radial-gradient(180px 120px at 30% 20%, rgba(0,255,213,.18), transparent 60%),
-        radial-gradient(160px 120px at 80% 80%, rgba(255,78,199,.14), transparent 60%),
-        linear-gradient(145deg,#1a1a32,#0b0b1e); }
+    /* ПРАЙС */
+    .price{ display:grid; gap:12px; grid-template-columns:1fr 1fr }
+    .pcol{ border-radius:14px; padding:16px; background:linear-gradient(145deg,#1b1b39,#0b0b1e); border:1px solid rgba(255,255,255,.08) }
+    .pcol.active{ box-shadow:0 0 18px rgba(0,255,213,.25), inset 0 0 18px rgba(0,255,213,.18) }
+    .pbullet{ height:10px; border-radius:999px; background:rgba(255,255,255,.12); margin:10px 0 }
 
-    /* ===== PRICE ===== */
-    .price{ border-radius:16px; padding:14px; background:linear-gradient(145deg,#1b1b39,#0b0b1e);
-      border:1px solid rgba(255,255,255,.08); box-shadow:inset 0 0 22px rgba(0,0,0,.5) }
-    .p-row{ display:flex; gap:12px }
-    .p-col{ flex:1; border-radius:12px; padding:14px; border:1px solid rgba(255,255,255,.08); background:rgba(255,255,255,.02) }
-    .p-col.active{ box-shadow:0 0 18px rgba(0,255,213,.25), inset 0 0 18px rgba(0,255,213,.18) }
-    .p-bullet{ height:10px; border-radius:999px; background:rgba(255,255,255,.12); margin:8px 0 }
-    .p-toggle{ --w:68px; --h:34px; margin:8px 0 14px auto; border-radius:999px; width:var(--w); height:var(--h);
-      background:#0d0d1f; border:1px solid rgba(255,255,255,.12); position:relative; cursor:pointer;
-      box-shadow:inset 0 0 18px rgba(0,255,213,.06) }
-    .p-toggle::before{ content:""; position:absolute; top:3px; left:3px; width:calc(var(--h) - 6px); height:calc(var(--h) - 6px);
-      border-radius:50%; background:linear-gradient(180deg,#1b1b39,#0b0b1e); box-shadow:0 0 10px rgba(154,107,255,.25), inset 0 0 12px rgba(0,0,0,.55);
-      transition:transform .25s ease }
-    .p-toggle.on{ border-color:rgba(0,255,213,.4); box-shadow:0 0 18px rgba(0,255,213,.28), inset 0 0 28px rgba(0,255,213,.18) }
-    .p-toggle.on::before{ transform:translateX(calc(var(--w) - var(--h))) }
-
-    /* ===== FAQ ===== */
-    .faq-item{ border:1px solid rgba(255,255,255,.08); border-radius:12px; background:rgba(255,255,255,.02); overflow:hidden }
-    .faq-q{ padding:12px; display:flex; justify-content:space-between; align-items:center; cursor:pointer }
-    .faq-a{ max-height:0; overflow:hidden; transition:max-height .25s ease }
-    .faq-item.open .faq-a{ max-height:160px }
-    .faq-a div{ padding:0 12px 12px; color:#cfd7ff }
-    .faq-dot{ width:8px; height:8px; border-radius:50%; background:linear-gradient(180deg,var(--fx1),var(--fx2)); box-shadow:0 0 12px rgba(0,255,213,.5) }
-
-    /* ===== FORM ===== */
+    /* ФОРМА (заглушка) */
     .form{ display:grid; gap:14px }
-    /* единая визуальная сетка */
-    .f-row{ display:flex; gap:12px }
-    .f-row .f-input{ flex:1; min-width:0 }
+    .row{ display:flex; gap:12px }
+    .input{ flex:1; min-width:0; height:48px; line-height:48px; padding:0 14px; border-radius:12px; color:#eaf2ff; background:linear-gradient(180deg,#1b1b39,#0b0b1e); border:1px solid rgba(255,255,255,.12); outline:none; -webkit-appearance:none; appearance:none }
+    .input::placeholder{ color:#9aa3d6 }
+    textarea.input{ height:auto; min-height:96px; line-height:1.45; padding:12px 14px; resize:vertical }
+    .send{ height:48px; line-height:48px; padding:0 22px; border-radius:999px; border:1px solid rgba(255,255,255,.15); color:#fff; font-weight:700; text-transform:uppercase; cursor:pointer; background:linear-gradient(90deg,var(--fx1),var(--fx2)); box-shadow:0 0 18px rgba(0,255,213,.25) }
 
-    /* ровные поля: одинаковая высота, без "вспуханий" в Chrome/Windows */
-    .f-input{ height:48px; line-height:48px; padding:0 14px; border-radius:12px;
-      background:linear-gradient(180deg,#1b1b39,#0b0b1e); border:1px solid rgba(255,255,255,.12);
-      color:#eaf2ff; outline:none; box-shadow:inset 0 0 14px rgba(0,0,0,.45); -webkit-appearance:none; appearance:none }
-    .f-input::placeholder{ color:#9aa3d6 }
+    /* BACK + FOOTER */
+    .back{ text-align:center; margin:12px 0 30px }
+    footer{ background:#111; text-align:center; padding:20px; color:#bbb }
+    footer a{ color:#00ffc8; text-decoration:none }
+    footer a:hover{ text-decoration:underline }
 
-    /* textarea — отдельные правила, чтобы не "перекособочивало" строку базовой высоты */
-    textarea.f-input{ height:auto; min-height:96px; line-height:1.45; padding:12px 14px; resize:vertical }
-
-    /* кнопка такая же по высоте, как инпуты */
-    .f-send{ height:48px; line-height:48px; padding:0 22px; border-radius:999px;
-      -webkit-tap-highlight-color:transparent; outline:none; touch-action:manipulation;
-      border:1px solid rgba(255,255,255,.15); color:#fff; font-weight:700; text-transform:uppercase; cursor:pointer;
-      background:linear-gradient(90deg,var(--fx1),var(--fx2)); box-shadow:0 0 18px rgba(0,255,213,.25) }
-    .f-send.jelly{ animation:jelly .5s ease }
-
-    /* чтобы на ПК форма точно не обрезалась */
-    .lp-card.form-card{ overflow:visible }
-
-    @media(max-width:900px){ .f-send{ width:100% } }
-
-    /* На узких экранах — столбиком и кнопка на всю ширину */
-    @media(max-width:900px){
-      .f-row{ grid-template-columns:1fr }
-      .f-send{ width:100% }
-    }
-
-    /* ===== NAV BACK ===== */
-    .back-wrap{ text-align:center; margin:12px 0 30px }
-
-    /* ===== A11y: focus ===== */
+    /* АДАПТИВ */
+    @media (max-width:900px){ .price{ grid-template-columns:1fr } .send{ width:100% } }
+    @media (prefers-reduced-motion: reduce){ *{ animation:none!important; transition:none!important } }
     :focus-visible{ outline:2px solid var(--fx2); outline-offset:2px }
-
-    /* ===== Reduced motion ===== */
-    @media (prefers-reduced-motion: reduce){
-      *{ animation:none !important; transition:none !important }
-    }
-
-    @media(max-width:768px){
-      .lp-hero h1{ font-size:1.7rem }
-      .f-row{ grid-template-columns:1fr }
-    }
   </style>
 </head>
 <body>
-  <!-- HERO -->
-  <section class="lp-hero">
-    <h1>Лендинги под цель: быстрые, яркие и понятные</h1>
-    <p>Ниже — интерактивные заглушки типовых блоков лендинга: панель с CTA, карточки преимуществ, прайс, FAQ и мини‑форма. Всё кликается и мигает, но без реальных отправок — это витрина моих возможностей в твоём стиле.</p>
-    <p class="sub">Любой блок адаптирую под фирменный стиль и конкретную задачу: заявки, прогрев, предзаказ и т.д.</p>
-  </section>
-
-  <!-- HERO DEMO -->
-  <div class="lp-hero-demo" aria-label="Демо геро-секции">
-    <div class="lp-hero-copy">
-      <span class="badge">Пример блока</span>
+  <header class="hero wrap">
+    <span class="badge">Услуга</span>
+    <h1>Лендинг под задачу: заявки, лиды, предзаказ</h1>
+    <p>Собираю одностраничники в вашем стиле: дизайн → адаптив → интеграция форм/аналитики. Ниже — интерактивные заглушки блоков. Всё кликается, но ничего не отправляет — это демо возможностей.</p>
+    <div class="hero-demo">
       <h2>Заголовок лендинга</h2>
       <p>Короткий оффер в 1–2 строки: что получит клиент и в какой срок.</p>
+      <div class="cta-row">
+        <button class="btn" id="cta1">Заказать</button>
+        <button class="btn" id="cta2" style="background:linear-gradient(180deg, rgba(0,255,213,.18), rgba(0,0,0,.25));box-shadow:0 0 18px rgba(0,255,213,.22), inset 0 0 14px rgba(0,0,0,.25)">Консультация</button>
+      </div>
     </div>
-    <div class="lp-cta-row">
-      <button type="button" class="lp-cta" id="cta1">Заказать</button>
-      <button type="button" class="lp-cta" id="cta2" style="background:linear-gradient(180deg, rgba(0,255,213,.18), rgba(0,0,0,.25));box-shadow:0 0 18px rgba(0,255,213,.22), inset 0 0 14px rgba(0,0,0,.25)">Консультация</button>
-    </div>
-  </div>
+  </header>
 
-  <!-- GRID -->
-  <section class="lp-grid">
-    <!-- Преимущества -->
-    <div class="lp-card">
-      <h3>Преимущества</h3>
-      <div class="feat" role="img" aria-label="Карточка преимущества с неоновой подсветкой">
-        <div class="tile"></div>
-        <div>
-          <div class="lp-line" style="max-width:80%"></div>
-          <div class="lp-line" style="max-width:60%"></div>
+  <main class="wrap">
+    <section class="grid">
+      <article class="card">
+        <h3>Преимущества</h3>
+        <div class="steps">
+          <div class="step"><span class="dot"></span><div>Фокус на цели: каждая секция подталкивает к действию.</div></div>
+          <div class="step"><span class="dot"></span><div>Быстрая загрузка: чистая верстка, оптимизация графики.</div></div>
+          <div class="step"><span class="dot"></span><div>Адаптив под все экраны, корректно на Windows/Chrome.</div></div>
         </div>
-      </div>
-      <div class="lp-note">Ховер — мягкий подъём и подсветка, без перегруза.</div>
-    </div>
+      </article>
 
-    <!-- Пакеты -->
-    <div class="lp-card">
-      <h3>Пакеты</h3>
-      <div class="price" aria-label="Демо прайс-блок">
-        <button type="button" class="p-toggle" id="ptoggle" title="Переключить пакет" aria-pressed="false" aria-label="Переключить пакеты"></button>
-        <div class="p-row" role="list">
-          <div class="p-col" id="p1" role="listitem" aria-label="Пакет 1"></div>
-          <div class="p-col active" id="p2" role="listitem" aria-label="Пакет 2 (активный)"></div>
+      <article class="card">
+        <h3>Процесс</h3>
+        <div class="steps">
+          <div class="step"><span class="dot"></span><div>Бриф и оффер: формулируем выгоды, структуру.</div></div>
+          <div class="step"><span class="dot"></span><div>Дизайн и прототип: согласование, правки.</div></div>
+          <div class="step"><span class="dot"></span><div>Верстка, интеграции, тестирование, публикация.</div></div>
         </div>
-      </div>
-      <div class="lp-note">Тумблер «поджигает» выбранный пакет.</div>
-    </div>
+      </article>
 
-    <!-- FAQ -->
-    <div class="lp-card">
-      <h3>FAQ</h3>
-      <div class="faq-item">
-        <button type="button" class="faq-q" aria-expanded="false"><span>Как проходит работа?</span><i class="faq-dot" aria-hidden="true"></i></button>
-        <div class="faq-a" hidden><div>Демо контент аккордеона: этапы, сроки, согласование макета/верстки.</div></div>
-      </div>
-      <div class="faq-item" style="margin-top:10px">
-        <button type="button" class="faq-q" aria-expanded="false"><span>Сроки и правки?</span><i class="faq-dot" aria-hidden="true"></i></button>
-        <div class="faq-a" hidden><div>Раскрытие по клику: без реальной логики отправки.</div></div>
-      </div>
-      <div class="lp-note">Клик по вопросу — открыть/закрыть.</div>
-    </div>
-
-    <!-- Мини‑форма (заглушка) -->
-    <div class="lp-card form-card">
-      <h3>Мини‑форма</h3>
-      <form class="form" id="demoform" aria-label="Демо мини-формы" onsubmit="return false;">
-        <div class="f-row">
-          <input class="f-input" type="text" placeholder="Имя" aria-label="Имя">
-          <input class="f-input" type="text" placeholder="Проект/ниша" aria-label="Проект или ниша">
+      <article class="card">
+        <h3>Пакеты</h3>
+        <div class="price">
+          <div class="pcol" aria-label="Базовый">
+            <strong>Старт</strong>
+            <div class="pbullet"></div>
+            <div class="note">Прототип, дизайн, адаптив.</div>
+          </div>
+          <div class="pcol active" aria-label="С интеграциями">
+            <strong>Про</strong>
+            <div class="pbullet"></div>
+            <div class="note">+ формы, события аналитики, пиксели.</div>
+          </div>
         </div>
-        <input class="f-input" type="email" placeholder="Email" aria-label="Email">
-        <textarea class="f-input" rows="3" placeholder="Комментарий" aria-label="Комментарий"></textarea>
-        <button type="button" class="f-send" id="sendBtn">Отправить</button>
-      </form>
-      <div class="lp-note">Кнопка «пружинит», форма ничего не отправляет — это демонстрация.</div>
-    </div>
-  </section>
+      </article>
 
-  <!-- back -->
-  <div class="back-wrap">
-    <a href="../index.html" class="cta-button">Вернуться на главную</a>
-  </div>
+      <article class="card">
+        <h3>FAQ</h3>
+        <details class="step"><summary>Сроки?</summary><div class="note">В среднем 5–10 дней, зависит от объёма.</div></details>
+        <details class="step"><summary>Правки?</summary><div class="note">2 итерации включены, дальше по времени.</div></details>
+      </article>
 
-  <!-- контакты -->
-  <section id="contacts">
-    <h2>Связаться со мной</h2>
-    <p>Напиши в мессенджер или на почту — отвечаю быстро.</p>
-    <div class="contact-buttons">
-      <a class="cta-button telegram" href="https://t.me/yourusername" target="_blank" rel="noopener">Telegram</a>
-      <a class="cta-button whatsapp" href="https://wa.me/71234567890" target="_blank" rel="noopener">WhatsApp</a>
-      <a class="cta-button alt" href="mailto:example@mail.ru?subject=Лендинг" target="_blank" rel="noopener">Email</a>
+      <article class="card">
+        <h3>Мини‑форма (демо)</h3>
+        <form class="form" onsubmit="return false">
+          <div class="row">
+            <input class="input" type="text" placeholder="Имя" aria-label="Имя">
+            <input class="input" type="text" placeholder="Проект/ниша" aria-label="Проект или ниша">
+          </div>
+          <input class="input" type="email" placeholder="Email" aria-label="Email">
+          <textarea class="input" rows="3" placeholder="Комментарий" aria-label="Комментарий"></textarea>
+          <button type="button" class="send" id="sendBtn">Отправить</button>
+          <div class="note">Кнопка пружинит, ничего не отправляется — демонстрация.</div>
+        </form>
+      </article>
+    </section>
+
+    <div class="back"><a href="../index.html" class="btn">Вернуться на главную</a></div>
+  </main>
+
+  <section id="contacts" class="wrap" style="text-align:center; padding-bottom:40px">
+    <h2 style="font-size:1.6rem; margin:0 0 10px">Связаться со мной</h2>
+    <p class="note">Напиши в мессенджер или на почту — отвечаю быстро.</p>
+    <div class="cta-row">
+      <a class="btn" href="https://t.me/yourusername" target="_blank" rel="noopener">Telegram</a>
+      <a class="btn" href="https://wa.me/71234567890" target="_blank" rel="noopener">WhatsApp</a>
+      <a class="btn" href="mailto:example@mail.ru?subject=Лендинг" target="_blank" rel="noopener">Email</a>
     </div>
   </section>
 
@@ -270,50 +157,17 @@
     <p>&copy; 2025 Ваше имя. Все права защищены. <a href="../privacy-policy.html">Политика конфиденциальности</a></p>
   </footer>
 
-  <script src="../assets/js/script.js"></script>
   <script>
-    // CTA вспышка
+    // вспышка на CTA
     function attachFlash(btn){
-      btn.addEventListener('pointermove', e=>{
-        const r=btn.getBoundingClientRect();
-        btn.style.setProperty('--x',(e.clientX - r.left)+'px');
-        btn.style.setProperty('--y',(e.clientY - r.top)+'px');
-      });
-      btn.addEventListener('click',()=>{
-        btn.classList.add('flash'); setTimeout(()=>btn.classList.remove('flash'),220);
-      });
+      btn.addEventListener('pointermove', e=>{ const r=btn.getBoundingClientRect(); btn.style.setProperty('--x',(e.clientX-r.left)+'px'); btn.style.setProperty('--y',(e.clientY-r.top)+'px'); });
+      btn.addEventListener('click', ()=>{ btn.classList.add('flash'); setTimeout(()=>btn.classList.remove('flash'),220); });
     }
     attachFlash(document.getElementById('cta1'));
     attachFlash(document.getElementById('cta2'));
-
-    // Пакеты: тумблер
-    const pt = document.getElementById('ptoggle');
-    const p1 = document.getElementById('p1');
-    const p2 = document.getElementById('p2');
-    pt.addEventListener('click',()=>{
-      const on = pt.classList.toggle('on');
-      pt.setAttribute('aria-pressed', on ? 'true' : 'false');
-      p1.classList.toggle('active');
-      p2.classList.toggle('active');
-    });
-
-    // FAQ a11y
-    document.querySelectorAll('.faq-item').forEach(item=>{
-      const q = item.querySelector('.faq-q');
-      const a = item.querySelector('.faq-a');
-      q.addEventListener('click',()=>{
-        const open = item.classList.toggle('open');
-        q.setAttribute('aria-expanded', open ? 'true':'false');
-        a.toggleAttribute('hidden', !open);
-      });
-    });
-
-    // Кнопка формы — «желе»
-    const sendBtn = document.getElementById('sendBtn');
-    sendBtn.addEventListener('click', ()=>{
-      sendBtn.classList.remove('jelly'); void sendBtn.offsetWidth; sendBtn.classList.add('jelly');
-    });
+    // жели-эффект на кнопке отправки (визуально)
+    const sendBtn=document.getElementById('sendBtn');
+    sendBtn.addEventListener('click',()=>{ sendBtn.style.transform='scale(0.98)'; setTimeout(()=>sendBtn.style.transform='scale(1)',120); });
   </script>
 </body>
 </html>
-
