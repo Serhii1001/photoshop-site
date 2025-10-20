@@ -3,34 +3,30 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Создание одностраничных сайтов — демо блоков лендинга</title>
-
-  <!-- общий стиль проекта -->
+  <title>Создание одностраничных сайтов (лендинги) — демо блоков</title>
   <link rel="stylesheet" href="../assets/css/styles.css"/>
-
   <style>
     :root {
-      --fx1:#ff4ec7;   /* фуксия */
-      --fx2:#00ffd5;   /* бирюза */
-      --fx3:#9a6bff;   /* лиловый */
+      --fx1:#ff4ec7; /* фуксия */
+      --fx2:#00ffd5; /* бирюза */
+      --fx3:#9a6bff; /* лиловый */
       --panel:#12122a;
     }
-
     body{
       background:
         radial-gradient(1400px 900px at 50% -10%, #151545 0%, transparent 55%) no-repeat,
         #0b0b1e;
       color:#fff;
     }
+    /* ===== HERO ===== */
+    .lp-hero{ max-width:1100px; margin:60px auto 24px; padding:0 20px; text-align:center; }
+    .lp-hero h1{ font-size:2.1rem; margin:0 0 10px; text-shadow:0 0 22px rgba(154,107,255,.35) }
+    .lp-hero p{ max-width:880px; margin:0 auto; color:#cfd7ff }
+    .lp-hero .sub{ margin-top:10px; color:#aeb7ff; opacity:.9 }
 
-    /* герой */
-    .lp-hero{
-      max-width:1100px;margin:60px auto 24px;padding:0 20px;text-align:center;
-    }
-    .lp-hero h2{font-size:2rem;margin:0 0 10px;text-shadow:0 0 22px rgba(154,107,255,.35)}
-    .lp-hero p{max-width:880px;margin:0 auto;color:#cfd7ff}
+    /* ===== HERO DEMO ===== */
     .lp-hero-demo{
-      margin:26px auto 0;max-width:1100px;padding:24px;border-radius:22px;
+      margin:26px auto 0; max-width:1100px; padding:24px; border-radius:22px;
       background:
         radial-gradient(260px 180px at 20% 10%, rgba(0,255,213,.18), transparent 60%),
         radial-gradient(260px 180px at 80% 90%, rgba(255,78,199,.16), transparent 60%),
@@ -39,219 +35,195 @@
       box-shadow:0 0 36px rgba(0,255,213,.10), inset 0 0 36px rgba(255,78,199,.06);
       overflow:hidden;
     }
-    .lp-shimmer{
-      height:44px;border-radius:12px;margin:0 auto 14px;max-width:720px;
+    .lp-shimmer{ height:44px; border-radius:12px; margin:0 auto 14px; max-width:720px;
       background:linear-gradient(90deg,rgba(255,255,255,.08),rgba(255,255,255,.22),rgba(255,255,255,.08));
-      background-size:200% 100%;animation:sh 2.4s linear infinite;
-      filter: blur(.2px);
-    }
-    .lp-line{height:12px;border-radius:8px;margin:10px auto;max-width:520px;background:rgba(255,255,255,.12)}
-    .lp-cta-row{display:flex;gap:12px;justify-content:center;margin-top:18px;flex-wrap:wrap}
+      background-size:200% 100%; animation:sh 2.4s linear infinite; filter: blur(.2px); }
+    .lp-line{ height:12px; border-radius:8px; margin:10px auto; max-width:520px; background:rgba(255,255,255,.12) }
+    .lp-cta-row{ display:flex; gap:12px; justify-content:center; margin-top:18px; flex-wrap:wrap }
     .lp-cta{
       -webkit-tap-highlight-color: transparent; outline:none; touch-action:manipulation;
-      border-radius:999px;padding:14px 24px;border:1px solid rgba(255,255,255,.15);
-      color:#fff;font-weight:700;text-transform:uppercase;letter-spacing:.5px;cursor:pointer;
+      border-radius:999px; padding:14px 24px; border:1px solid rgba(255,255,255,.15);
+      color:#fff; font-weight:700; text-transform:uppercase; letter-spacing:.5px; cursor:pointer;
       background:linear-gradient(180deg, rgba(154,107,255,.18), rgba(0,0,0,.2));
       box-shadow:0 0 18px rgba(154,107,255,.22), inset 0 0 14px rgba(0,0,0,.25);
-      position:relative;overflow:hidden;transition:transform .15s ease;
+      position:relative; overflow:hidden; transition:transform .15s ease;
     }
-    .lp-cta:hover{transform:translateY(-1px) scale(1.01)}
-    .lp-cta::after{
-      content:"";position:absolute;inset:0;border-radius:inherit;opacity:0;
+    .lp-cta:hover{ transform:translateY(-1px) scale(1.01) }
+    .lp-cta::after{ content:""; position:absolute; inset:0; border-radius:inherit; opacity:0;
       background:radial-gradient(220px 220px at var(--x,50%) var(--y,50%), rgba(255,255,255,.28), transparent 60%);
-      transition:opacity .25s ease;
-    }
-    .lp-cta.flash::after{opacity:1}
+      transition:opacity .25s ease; }
+    .lp-cta.flash::after{ opacity:1 }
 
-    @keyframes sh{to{background-position:200% 0}}
+    @keyframes sh{ to{ background-position:200% 0 } }
 
-    /* секции демо */
-    .lp-grid{max-width:1100px;margin:30px auto;padding:0 20px;display:grid;gap:22px;grid-template-columns:repeat(auto-fit,minmax(240px,1fr))}
+    /* ===== GRID ===== */
+    .lp-grid{ max-width:1100px; margin:30px auto; padding:0 20px; display:grid; gap:22px; grid-template-columns:repeat(auto-fit,minmax(240px,1fr)) }
     .lp-card{
       background:linear-gradient(145deg,var(--panel),#0f0f23);
       border:1px solid rgba(255,255,255,.06);
-      border-radius:18px;padding:18px;position:relative;overflow:hidden;
+      border-radius:18px; padding:18px; position:relative; overflow:hidden;
       box-shadow:0 0 24px rgba(0,255,213,.06), inset 0 0 24px rgba(255,78,199,.04);
     }
-    .lp-card h3{font-size:1rem;margin:0 0 12px}
-    .lp-note{font-size:.85rem;color:#a9b;margin-top:8px}
+    .lp-card h3{ font-size:1rem; margin:0 0 12px }
+    .lp-note{ font-size:.85rem; color:#a9b; margin-top:8px }
 
-    /* фичи-карточки */
-    .feat{
-      display:grid;grid-template-rows:120px auto;gap:12px;border-radius:14px;
+    /* ===== FEATURES ===== */
+    .feat{ display:grid; grid-template-rows:120px auto; gap:12px; border-radius:14px;
       background:linear-gradient(145deg,#1b1b39,#0b0b1e);
       border:1px solid rgba(255,255,255,.08);
       box-shadow:inset 0 0 22px rgba(255,78,199,.08), 0 0 22px rgba(0,255,213,.12);
-      transition:transform .15s ease
-    }
-    .feat:hover{transform:translateY(-2px)}
-    .feat .tile{
-      border-radius:12px;
+      transition:transform .15s ease }
+    .feat:hover{ transform:translateY(-2px) }
+    .feat .tile{ border-radius:12px;
       background:
         radial-gradient(180px 120px at 30% 20%, rgba(0,255,213,.18), transparent 60%),
         radial-gradient(160px 120px at 80% 80%, rgba(255,78,199,.14), transparent 60%),
-        linear-gradient(145deg,#1a1a32,#0b0b1e);
-    }
+        linear-gradient(145deg,#1a1a32,#0b0b1e); }
 
-    /* прайс */
-    .price{
-      border-radius:16px;padding:14px;background:linear-gradient(145deg,#1b1b39,#0b0b1e);
-      border:1px solid rgba(255,255,255,.08);box-shadow:inset 0 0 22px rgba(0,0,0,.5)
-    }
-    .p-row{display:flex;gap:12px}
-    .p-col{flex:1;border-radius:12px;padding:14px;border:1px solid rgba(255,255,255,.08);background:rgba(255,255,255,.02)}
-    .p-col.active{box-shadow:0 0 18px rgba(0,255,213,.25), inset 0 0 18px rgba(0,255,213,.18)}
-    .p-bullet{height:10px;border-radius:999px;background:rgba(255,255,255,.12);margin:8px 0}
-    .p-toggle{
-      --w:68px;--h:34px;margin:8px 0 14px auto;border-radius:999px;width:var(--w);height:var(--h);
-      background:#0d0d1f;border:1px solid rgba(255,255,255,.12);position:relative;cursor:pointer;
-      box-shadow:inset 0 0 18px rgba(0,255,213,.06)
-    }
-    .p-toggle::before{
-      content:"";position:absolute;top:3px;left:3px;width:calc(var(--h) - 6px);height:calc(var(--h) - 6px);
-      border-radius:50%;background:linear-gradient(180deg,#1b1b39,#0b0b1e);box-shadow:0 0 10px rgba(154,107,255,.25), inset 0 0 12px rgba(0,0,0,.55);
-      transition:transform .25s ease
-    }
-    .p-toggle.on{border-color:rgba(0,255,213,.4);box-shadow:0 0 18px rgba(0,255,213,.28), inset 0 0 28px rgba(0,255,213,.18)}
-    .p-toggle.on::before{transform:translateX(calc(var(--w) - var(--h)))}
+    /* ===== PRICE ===== */
+    .price{ border-radius:16px; padding:14px; background:linear-gradient(145deg,#1b1b39,#0b0b1e);
+      border:1px solid rgba(255,255,255,.08); box-shadow:inset 0 0 22px rgba(0,0,0,.5) }
+    .p-row{ display:flex; gap:12px }
+    .p-col{ flex:1; border-radius:12px; padding:14px; border:1px solid rgba(255,255,255,.08); background:rgba(255,255,255,.02) }
+    .p-col.active{ box-shadow:0 0 18px rgba(0,255,213,.25), inset 0 0 18px rgba(0,255,213,.18) }
+    .p-bullet{ height:10px; border-radius:999px; background:rgba(255,255,255,.12); margin:8px 0 }
+    .p-toggle{ --w:68px; --h:34px; margin:8px 0 14px auto; border-radius:999px; width:var(--w); height:var(--h);
+      background:#0d0d1f; border:1px solid rgba(255,255,255,.12); position:relative; cursor:pointer;
+      box-shadow:inset 0 0 18px rgba(0,255,213,.06) }
+    .p-toggle::before{ content:""; position:absolute; top:3px; left:3px; width:calc(var(--h) - 6px); height:calc(var(--h) - 6px);
+      border-radius:50%; background:linear-gradient(180deg,#1b1b39,#0b0b1e); box-shadow:0 0 10px rgba(154,107,255,.25), inset 0 0 12px rgba(0,0,0,.55);
+      transition:transform .25s ease }
+    .p-toggle.on{ border-color:rgba(0,255,213,.4); box-shadow:0 0 18px rgba(0,255,213,.28), inset 0 0 28px rgba(0,255,213,.18) }
+    .p-toggle.on::before{ transform:translateX(calc(var(--w) - var(--h))) }
 
-    /* FAQ */
-    .faq-item{border:1px solid rgba(255,255,255,.08);border-radius:12px;background:rgba(255,255,255,.02);overflow:hidden}
-    .faq-q{padding:12px;display:flex;justify-content:space-between;align-items:center;cursor:pointer}
-    .faq-a{max-height:0;overflow:hidden;transition:max-height .25s ease}
-    .faq-item.open .faq-a{max-height:120px}
-    .faq-a div{padding:0 12px 12px;color:#cfd7ff}
-    .faq-dot{width:8px;height:8px;border-radius:50%;background:linear-gradient(180deg,var(--fx1),var(--fx2));box-shadow:0 0 12px rgba(0,255,213,.5)}
+    /* ===== FAQ ===== */
+    .faq-item{ border:1px solid rgba(255,255,255,.08); border-radius:12px; background:rgba(255,255,255,.02); overflow:hidden }
+    .faq-q{ padding:12px; display:flex; justify-content:space-between; align-items:center; cursor:pointer }
+    .faq-a{ max-height:0; overflow:hidden; transition:max-height .25s ease }
+    .faq-item.open .faq-a{ max-height:160px }
+    .faq-a div{ padding:0 12px 12px; color:#cfd7ff }
+    .faq-dot{ width:8px; height:8px; border-radius:50%; background:linear-gradient(180deg,var(--fx1),var(--fx2)); box-shadow:0 0 12px rgba(0,255,213,.5) }
 
-    /* форма */
-    .form{
-      display:grid;gap:10px
-    }
-    .f-input{
-      background:linear-gradient(180deg,#1b1b39,#0b0b1e);border:1px solid rgba(255,255,255,.12);
-      border-radius:12px;padding:12px 14px;color:#eaf2ff;outline:none;
-      box-shadow:inset 0 0 14px rgba(0,0,0,.45)
-    }
-    .f-input:focus{border-color:rgba(0,255,213,.45);box-shadow:0 0 16px rgba(0,255,213,.25), inset 0 0 14px rgba(0,0,0,.45)}
-    .f-row{display:grid;gap:10px;grid-template-columns:1fr 1fr}
-    .f-send{
-      -webkit-tap-highlight-color: transparent; outline:none; touch-action:manipulation;
-      border-radius:999px;padding:12px 20px;border:1px solid rgba(255,255,255,.15);
-      color:#fff;font-weight:700;text-transform:uppercase;cursor:pointer;
-      background:linear-gradient(90deg,var(--fx1),var(--fx2));box-shadow:0 0 18px rgba(0,255,213,.25)
-    }
-    .f-send.jelly{animation:jelly .5s ease}
-    @keyframes jelly{
-      0%{transform:scale(1)}30%{transform:scale(1.06,.94)}60%{transform:scale(.97,1.03)}100%{transform:scale(1)}
-    }
+    /* ===== FORM ===== */
+    .form{ display:grid; gap:10px }
+    .f-input{ background:linear-gradient(180deg,#1b1b39,#0b0b1e); border:1px solid rgba(255,255,255,.12);
+      border-radius:12px; padding:12px 14px; color:#eaf2ff; outline:none; box-shadow:inset 0 0 14px rgba(0,0,0,.45) }
+    .f-input:focus{ border-color:rgba(0,255,213,.45); box-shadow:0 0 16px rgba(0,255,213,.25), inset 0 0 14px rgba(0,0,0,.45) }
+    .f-row{ display:grid; gap:10px; grid-template-columns:1fr 1fr }
+    .f-send{ -webkit-tap-highlight-color: transparent; outline:none; touch-action:manipulation; border-radius:999px; padding:12px 20px; border:1px solid rgba(255,255,255,.15);
+      color:#fff; font-weight:700; text-transform:uppercase; cursor:pointer; background:linear-gradient(90deg,var(--fx1),var(--fx2)); box-shadow:0 0 18px rgba(0,255,213,.25) }
+    .f-send.jelly{ animation:jelly .5s ease }
+    @keyframes jelly{ 0%{transform:scale(1)} 30%{transform:scale(1.06,.94)} 60%{transform:scale(.97,1.03)} 100%{transform:scale(1)} }
+    /* чтобы на ПК форма точно не "резалась" краями карточки */
+    .lp-card.form-card{ overflow:visible }
 
-    /* «назад» как в других страницах */
-    .back-wrap{text-align:center;margin:12px 0 30px}
+    /* ===== NAV BACK ===== */
+    .back-wrap{ text-align:center; margin:12px 0 30px }
+
+    /* ===== A11y: focus ===== */
+    :focus-visible{ outline:2px solid var(--fx2); outline-offset:2px }
+
+    /* ===== Reduced motion ===== */
+    @media (prefers-reduced-motion: reduce){
+      *{ animation:none !important; transition:none !important }
+    }
 
     @media(max-width:768px){
-      .lp-hero h2{font-size:1.7rem}
-      .f-row{grid-template-columns:1fr}
+      .lp-hero h1{ font-size:1.7rem }
+      .f-row{ grid-template-columns:1fr }
     }
   </style>
 </head>
 <body>
-
-  <!-- Герой -->
+  <!-- HERO -->
   <section class="lp-hero">
-    <h2>Лендинги под цель: быстрые, яркие и понятные.</h2>
-    <p>Ниже — интерактивные заглушки типовых блоков: герой-панель с CTA, карточки преимуществ, прайс, FAQ и мини-форма. Всё в твоём неон/космос-стиле — кликается и мигает, но без реальных действий.</p>
+    <h1>Лендинги под цель: быстрые, яркие и понятные</h1>
+    <p>Ниже — интерактивные заглушки типовых блоков лендинга: герой‑панель с CTA, карточки преимуществ, прайс, FAQ и мини‑форма. Всё кликается и мигает, но без реальных отправок — это витрина моих возможностей в твоём неон/космос‑стиле.</p>
+    <p class="sub">Любой блок адаптирую под фирменный стиль и конкретную задачу: заявки, прогрев, предзаказ и т.д.</p>
   </section>
 
-  <!-- Герой-демо -->
-  <div class="lp-hero-demo">
-    <div class="lp-shimmer"></div>
-    <div class="lp-line" style="max-width:600px"></div>
-    <div class="lp-line" style="max-width:520px"></div>
+  <!-- HERO DEMO -->
+  <div class="lp-hero-demo" aria-label="Демо геро-секции">
+    <div class="lp-shimmer" aria-hidden="true"></div>
+    <div class="lp-line" style="max-width:600px" aria-hidden="true"></div>
+    <div class="lp-line" style="max-width:520px" aria-hidden="true"></div>
     <div class="lp-cta-row">
-      <button class="lp-cta" id="cta1">Заказать</button>
-      <button class="lp-cta" id="cta2" style="background:linear-gradient(180deg, rgba(0,255,213,.18), rgba(0,0,0,.25));box-shadow:0 0 18px rgba(0,255,213,.22), inset 0 0 14px rgba(0,0,0,.25)">Консультация</button>
+      <button type="button" class="lp-cta" id="cta1">Заказать</button>
+      <button type="button" class="lp-cta" id="cta2" style="background:linear-gradient(180deg, rgba(0,255,213,.18), rgba(0,0,0,.25));box-shadow:0 0 18px rgba(0,255,213,.22), inset 0 0 14px rgba(0,0,0,.25)">Консультация</button>
     </div>
   </div>
 
-  <!-- Сетка демо блоков -->
+  <!-- GRID -->
   <section class="lp-grid">
-
-    <!-- Карточки преимуществ -->
+    <!-- Преимущества -->
     <div class="lp-card">
       <h3>Преимущества</h3>
-      <div class="feat">
+      <div class="feat" role="img" aria-label="Карточка преимущества с неоновой подсветкой">
         <div class="tile"></div>
         <div>
           <div class="lp-line" style="max-width:80%"></div>
           <div class="lp-line" style="max-width:60%"></div>
         </div>
       </div>
-      <div class="lp-note">Ховер — мягкий подъём, неон-подсветка</div>
+      <div class="lp-note">Ховер — мягкий подъём и подсветка, без перегруза.</div>
     </div>
 
-    <!-- Прайс -->
+    <!-- Пакеты -->
     <div class="lp-card">
       <h3>Пакеты</h3>
-      <div class="price">
-        <div class="p-toggle" id="ptoggle" title="месяц/год"></div>
-        <div class="p-row">
-          <div class="p-col" id="p1">
-            <div class="lp-line" style="max-width:70%"></div>
-            <div class="p-bullet"></div><div class="p-bullet"></div><div class="p-bullet"></div>
-          </div>
-          <div class="p-col active" id="p2">
-            <div class="lp-line" style="max-width:70%"></div>
-            <div class="p-bullet"></div><div class="p-bullet"></div><div class="p-bullet"></div>
-          </div>
+      <div class="price" aria-label="Демо прайс-блок">
+        <button type="button" class="p-toggle" id="ptoggle" title="Переключить пакет" aria-pressed="false" aria-label="Переключить пакеты"></button>
+        <div class="p-row" role="list">
+          <div class="p-col" id="p1" role="listitem" aria-label="Пакет 1"></div>
+          <div class="p-col active" id="p2" role="listitem" aria-label="Пакет 2 (активный)"></div>
         </div>
       </div>
-      <div class="lp-note">Тумблер поджигает «выбранный» пакет</div>
+      <div class="lp-note">Тумблер «поджигает» выбранный пакет.</div>
     </div>
 
     <!-- FAQ -->
     <div class="lp-card">
       <h3>FAQ</h3>
       <div class="faq-item">
-        <div class="faq-q"><span>Как проходит работа?</span><i class="faq-dot"></i></div>
-        <div class="faq-a"><div>Небольшой текст-заглушка внутри аккордеона.</div></div>
+        <button type="button" class="faq-q" aria-expanded="false"><span>Как проходит работа?</span><i class="faq-dot" aria-hidden="true"></i></button>
+        <div class="faq-a" hidden><div>Демо контент аккордеона: этапы, сроки, согласование макета/верстки.</div></div>
       </div>
       <div class="faq-item" style="margin-top:10px">
-        <div class="faq-q"><span>Сроки и правки?</span><i class="faq-dot"></i></div>
-        <div class="faq-a"><div>Демо раскрытия — без реальной логики.</div></div>
+        <button type="button" class="faq-q" aria-expanded="false"><span>Сроки и правки?</span><i class="faq-dot" aria-hidden="true"></i></button>
+        <div class="faq-a" hidden><div>Раскрытие по клику: без реальной логики отправки.</div></div>
       </div>
-      <div class="lp-note">Тап по вопросу — открыть/закрыть</div>
+      <div class="lp-note">Клик по вопросу — открыть/закрыть.</div>
     </div>
 
-    <!-- Форма-заглушка -->
-    <div class="lp-card">
-      <h3>Мини-форма</h3>
-      <div class="form" id="demoform">
+    <!-- Мини‑форма (заглушка) -->
+    <div class="lp-card form-card">
+      <h3>Мини‑форма</h3>
+      <form class="form" id="demoform" aria-label="Демо мини-формы" onsubmit="return false;">
         <div class="f-row">
-          <input class="f-input" type="text" placeholder="Имя">
-          <input class="f-input" type="text" placeholder="Проект/ниша">
+          <input class="f-input" type="text" placeholder="Имя" aria-label="Имя">
+          <input class="f-input" type="text" placeholder="Проект/ниша" aria-label="Проект или ниша">
         </div>
-        <input class="f-input" type="email" placeholder="Email">
-        <textarea class="f-input" rows="3" placeholder="Комментарий"></textarea>
+        <input class="f-input" type="email" placeholder="Email" aria-label="Email">
+        <textarea class="f-input" rows="3" placeholder="Комментарий" aria-label="Комментарий"></textarea>
         <button type="button" class="f-send" id="sendBtn">Отправить</button>
-      </div>
-      <div class="lp-note">Кнопка просто «пружинит» — без отправки</div>
+      </form>
+      <div class="lp-note">Кнопка «пружинит», форма ничего не отправляет — это демонстрация.</div>
     </div>
-
   </section>
 
-  <!-- Назад на главную (как у других страниц) -->
+  <!-- back -->
   <div class="back-wrap">
-    <a href="../index.html" class="cta-button">Вернуться на главную страницу</a>
+    <a href="../index.html" class="cta-button">Вернуться на главную</a>
   </div>
 
-  <!-- контакты как везде -->
+  <!-- контакты -->
   <section id="contacts">
     <h2>Связаться со мной</h2>
     <p>Напиши в мессенджер или на почту — отвечаю быстро.</p>
     <div class="contact-buttons">
-      <a class="cta-button telegram" href="https://t.me/yourusername" target="_blank">Telegram</a>
-      <a class="cta-button whatsapp" href="https://wa.me/71234567890" target="_blank">WhatsApp</a>
-      <a class="cta-button alt" href="mailto:example@mail.ru?subject=Лендинг">Email</a>
+      <a class="cta-button telegram" href="https://t.me/yourusername" target="_blank" rel="noopener">Telegram</a>
+      <a class="cta-button whatsapp" href="https://wa.me/71234567890" target="_blank" rel="noopener">WhatsApp</a>
+      <a class="cta-button alt" href="mailto:example@mail.ru?subject=Лендинг" target="_blank" rel="noopener">Email</a>
     </div>
   </section>
 
@@ -259,12 +231,9 @@
     <p>&copy; 2025 Ваше имя. Все права защищены. <a href="../privacy-policy.html">Политика конфиденциальности</a></p>
   </footer>
 
-  <!-- общий скрипт проекта (если есть) -->
   <script src="../assets/js/script.js"></script>
-
-  <!-- локальная логика демо -->
   <script>
-    // вспышка CTA по позиции тапа
+    // CTA вспышка
     function attachFlash(btn){
       btn.addEventListener('pointermove', e=>{
         const r=btn.getBoundingClientRect();
@@ -278,22 +247,29 @@
     attachFlash(document.getElementById('cta1'));
     attachFlash(document.getElementById('cta2'));
 
-    // тумблер прайса
+    // Пакеты: тумблер
     const pt = document.getElementById('ptoggle');
     const p1 = document.getElementById('p1');
     const p2 = document.getElementById('p2');
     pt.addEventListener('click',()=>{
-      pt.classList.toggle('on');
+      const on = pt.classList.toggle('on');
+      pt.setAttribute('aria-pressed', on ? 'true' : 'false');
       p1.classList.toggle('active');
       p2.classList.toggle('active');
     });
 
-    // FAQ
-    document.querySelectorAll('.faq-item .faq-q').forEach(q=>{
-      q.addEventListener('click',()=> q.parentElement.classList.toggle('open'));
+    // FAQ a11y
+    document.querySelectorAll('.faq-item').forEach(item=>{
+      const q = item.querySelector('.faq-q');
+      const a = item.querySelector('.faq-a');
+      q.addEventListener('click',()=>{
+        const open = item.classList.toggle('open');
+        q.setAttribute('aria-expanded', open ? 'true':'false');
+        a.toggleAttribute('hidden', !open);
+      });
     });
 
-    // кнопка формы — «желе»
+    // Кнопка формы — «желе»
     const sendBtn = document.getElementById('sendBtn');
     sendBtn.addEventListener('click', ()=>{
       sendBtn.classList.remove('jelly'); void sendBtn.offsetWidth; sendBtn.classList.add('jelly');
