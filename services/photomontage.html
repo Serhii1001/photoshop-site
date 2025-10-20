@@ -1,0 +1,234 @@
+<!DOCTYPE html>
+<html lang="ru">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Ретушь — Photoshop Услуги</title>
+
+  <!-- Подключение общего файла стилей -->
+  <link rel="stylesheet" href="styles.css" />
+
+  <style>
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      margin: 0;
+      font-family: Arial, sans-serif;
+      background: radial-gradient(ellipse at center, #0f0f2b 0%, #000000 100%);
+      color: white;
+    }
+
+    section {
+      padding: 60px 20px;
+      text-align: center;
+    }
+
+    h2 {
+      font-size: 2.5rem;
+      margin-bottom: 20px;
+    }
+
+    p {
+      color: #ccc;
+    }
+
+    .service-gallery {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 20px;
+      justify-items: center;
+      margin-top: 30px;
+      margin-bottom: 30px;
+    }
+
+    .service-card {
+      background: linear-gradient(145deg, #1e1e2f, #12121f);
+      padding: 10px;
+      border-radius: 15px;
+      box-shadow: 0 0 15px rgba(0, 255, 255, 0.2);
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+
+    .service-card:hover {
+      transform: scale(1.05);
+      box-shadow: 0 0 20px rgba(0, 255, 255, 0.5);
+    }
+
+    .service-card img {
+      width: 100%;
+      height: auto;
+      border-radius: 10px;
+      cursor: pointer;
+      transition: transform 0.3s ease;
+    }
+
+    .cta-button {
+      background-color: #ff4c60;
+      color: white;
+      padding: 15px 30px;
+      font-size: 1.2rem;
+      border: none;
+      border-radius: 8px;
+      text-decoration: none;
+      margin-top: 30px;
+      transition: background-color 0.3s ease;
+      display: inline-block;
+    }
+
+    .cta-button:hover {
+      background-color: #e6334f;
+    }
+
+    .modal {
+      display: none;
+      position: fixed;
+      z-index: 1000;
+      left: 0;
+      top: 0;
+      width: 100%;
+      height: 100%;
+      background-color: rgba(10, 10, 30, 0.9);
+      justify-content: center;
+      align-items: center;
+      backdrop-filter: blur(8px);
+      animation: fadeIn 0.4s ease;
+    }
+
+    .modal img {
+      max-width: 90vw;
+      max-height: 90vh;
+      border-radius: 10px;
+      box-shadow: 0 0 50px rgba(0, 255, 255, 0.4);
+      animation: zoomIn 0.3s ease;
+    }
+
+    @keyframes zoomIn {
+      from {
+        transform: scale(0.6);
+        opacity: 0;
+      }
+
+      to {
+        transform: scale(1);
+        opacity: 1;
+      }
+    }
+
+    @keyframes fadeIn {
+      from {
+        opacity: 0;
+      }
+
+      to {
+        opacity: 1;
+      }
+    }
+
+    .contact-buttons {
+      margin-top: 20px;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      justify-content: center;
+    }
+
+    footer {
+      background-color: #111;
+      text-align: center;
+      padding: 20px;
+      color: #bbb;
+    }
+
+    footer a {
+      color: #00ffc8;
+      text-decoration: none;
+    }
+
+    footer a:hover {
+      text-decoration: underline;
+    }
+
+    @media (max-width: 768px) {
+      h2 {
+        font-size: 2rem;
+      }
+
+      .cta-button {
+        font-size: 1rem;
+        padding: 10px 20px;
+      }
+
+      .service-gallery {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 15px;
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+  <section>
+    <h2>Дайте волю своему воображению — создавайте уникальные изображения с помощью фотомонтажа!</h2>
+    <p>Переносите себя в другие миры, создавайте сюрреалистичные сцены или просто улучшайте ваши фотографии. Наши услуги фотомонтажа позволят вам увидеть мир под новым углом. Мы гарантируем качественную обработку, реалистичность и внимание к деталям. Вдохновитесь нашими примерами и создайте нечто совершенно новое и удивительное!</p>
+
+    <div class="service-gallery">
+      <div class="service-card">
+        <img src="images/photomontage/photomontage1.png" alt="1" onclick="openModal(this)" />
+      </div>
+      <div class="service-card">
+        <img src="images/photomontage/photomontage2.png" alt="2" onclick="openModal(this)" />
+      </div>
+      <div class="service-card">
+        <img src="images/photomontage/photomontage3.png" alt="3" onclick="openModal(this)" />
+      </div>
+      <div class="service-card">
+        <img src="images/photomontage/photomontage4.png" alt="4" onclick="openModal(this)" />
+      </div>
+    </div>
+
+    <a href="index.html" class="cta-button">Вернуться на главную страницу</a>
+  </section>
+
+  <div id="myModal" class="modal" onclick="closeModal(event)">
+    <img id="modalImage" src="" alt="Увеличенное изображение" />
+  </div>
+
+  <section id="contacts">
+    <h2>Связаться со мной</h2>
+    <p>Напиши мне в мессенджер или на почту — отвечаю быстро!</p>
+    <div class="contact-buttons">
+      <a class="cta-button telegram" href="https://t.me/yourusername" target="_blank">Telegram</a>
+      <a class="cta-button whatsapp" href="https://wa.me/71234567890" target="_blank">WhatsApp</a>
+      <a class="cta-button alt" href="mailto:example@mail.ru?subject=Заказ%20Photoshop">Email</a>
+    </div>
+  </section>
+
+  <footer>
+    <p>&copy; 2025 Ваше имя. Все права защищены. <a href="privacy-policy.html">Политика конфиденциальности</a></p>
+  </footer>
+  
+  <script>
+    function openModal(imgElement) {
+      const modal = document.getElementById('myModal');
+      const modalImg = document.getElementById('modalImage');
+      modal.style.display = "flex";
+      modalImg.src = imgElement.src;
+    }
+
+    function closeModal(event) {
+      const modal = document.getElementById('myModal');
+      const modalImg = document.getElementById('modalImage');
+      if (event.target === modal || event.target === modalImg) {
+        modal.style.display = "none";
+      }
+    }
+  </script>
+
+</body>
+
+
+</html>
