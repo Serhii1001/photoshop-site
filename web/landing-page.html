@@ -6,6 +6,15 @@
   <title>Создание одностраничных сайтов (лендинги) — демо блоков</title>
   <link rel="stylesheet" href="../assets/css/styles.css"/>
   <style>
+    /* ==== Cross‑browser reset for consistent form rendering ==== */
+    *,*::before,*::after{ box-sizing:border-box }
+    html{ -webkit-text-size-adjust:100% }
+    body{ -webkit-font-smoothing:antialiased; -moz-osx-font-smoothing:grayscale }
+    input,button,textarea,select{ font:inherit }
+    /* Remove Chrome extra inner paddings on inputs */
+    input::-webkit-contacts-auto-fill-button, input::-webkit-credentials-auto-fill-button{ visibility:hidden; display:none !important }
+    /* End reset */
+
     :root {
       --fx1:#ff4ec7; /* фуксия */
       --fx2:#00ffd5; /* бирюза */
@@ -113,24 +122,31 @@
     .faq-dot{ width:8px; height:8px; border-radius:50%; background:linear-gradient(180deg,var(--fx1),var(--fx2)); box-shadow:0 0 12px rgba(0,255,213,.5) }
 
     /* ===== FORM ===== */
-    .form{ display:grid; gap:12px }
-    /* Глобально ровняем поля: одинаковая высота, выравнивание текста и отступы */
-    .f-input{ box-sizing:border-box; font-size:16px; line-height:1; 
-      background:linear-gradient(180deg,#1b1b39,#0b0b1e); border:1px solid rgba(255,255,255,.12);
-      border-radius:12px; padding:12px 14px; color:#eaf2ff; outline:none; box-shadow:inset 0 0 14px rgba(0,0,0,.45) }
-    .f-input::placeholder{ color:#9aa3d6 }
-    /* одна высота у инпутов, textarea — авто */
-    .f-input:not(textarea){ height:48px }
-    .f-row{ display:grid; gap:12px; grid-template-columns:1fr 1fr }
-    /* фиксируем «кривость» на Windows/Chrome — отключаем нативные стили и сглаживаем */
-    .f-input{ -webkit-appearance:none; appearance:none; }
+    .form{ display:grid; gap:14px }
+    /* единая визуальная сетка */
+    .f-row{ display:flex; gap:12px }
+    .f-row .f-input{ flex:1; min-width:0 }
 
-    .f-send{ -webkit-tap-highlight-color: transparent; outline:none; touch-action:manipulation; border-radius:999px; padding:14px 22px; border:1px solid rgba(255,255,255,.15);
-      color:#fff; font-weight:700; text-transform:uppercase; cursor:pointer; background:linear-gradient(90deg,var(--fx1),var(--fx2)); box-shadow:0 0 18px rgba(0,255,213,.25) }
+    /* ровные поля: одинаковая высота, без "вспуханий" в Chrome/Windows */
+    .f-input{ height:48px; line-height:48px; padding:0 14px; border-radius:12px;
+      background:linear-gradient(180deg,#1b1b39,#0b0b1e); border:1px solid rgba(255,255,255,.12);
+      color:#eaf2ff; outline:none; box-shadow:inset 0 0 14px rgba(0,0,0,.45); -webkit-appearance:none; appearance:none }
+    .f-input::placeholder{ color:#9aa3d6 }
+
+    /* textarea — отдельные правила, чтобы не "перекособочивало" строку базовой высоты */
+    textarea.f-input{ height:auto; min-height:96px; line-height:1.45; padding:12px 14px; resize:vertical }
+
+    /* кнопка такая же по высоте, как инпуты */
+    .f-send{ height:48px; line-height:48px; padding:0 22px; border-radius:999px;
+      -webkit-tap-highlight-color:transparent; outline:none; touch-action:manipulation;
+      border:1px solid rgba(255,255,255,.15); color:#fff; font-weight:700; text-transform:uppercase; cursor:pointer;
+      background:linear-gradient(90deg,var(--fx1),var(--fx2)); box-shadow:0 0 18px rgba(0,255,213,.25) }
     .f-send.jelly{ animation:jelly .5s ease }
-    @keyframes jelly{ 0%{transform:scale(1)} 30%{transform:scale(1.06,.94)} 60%{transform:scale(.97,1.03)} 100%{transform:scale(1)} }
-    /* чтобы на ПК форма точно не "резалась" краями карточки */
+
+    /* чтобы на ПК форма точно не обрезалась */
     .lp-card.form-card{ overflow:visible }
+
+    @media(max-width:900px){ .f-send{ width:100% } }
 
     /* На узких экранах — столбиком и кнопка на всю ширину */
     @media(max-width:900px){
@@ -300,4 +316,3 @@
   </script>
 </body>
 </html>
-
