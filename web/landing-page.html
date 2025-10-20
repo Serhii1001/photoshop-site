@@ -1,173 +1,308 @@
 <!DOCTYPE html>
 <html lang="ru">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Создание лендингов — одностраничные сайты под цель</title>
-  <link rel="stylesheet" href="../assets/css/styles.css"/>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Презентация услуг — демо-лендинг</title>
+  <meta name="description" content="Интерактивный демо-лендинг: как могут выглядеть ваши блоки — герой, преимущества, пакеты, FAQ и форма. Ничего не отправляется, всё кликается для демонстрации." />
   <style>
-    :root{ --fx1:#ff4ec7; --fx2:#00ffd5; --panel:#12122a }
+    :root{
+      --bg:#0b0e14;
+      --card:#121826;
+      --text:#e6e9ef;
+      --muted:#aab3c1;
+      --accent:#7c5cff;
+      --accent-2:#2dd4bf;
+      --warning:#ff9f1c;
+      --ok:#22c55e;
+      --danger:#ef4444;
+      --shadow: 0 10px 30px rgba(0,0,0,.35);
+      --radius: 16px;
+      --radius-lg: 22px;
+      --ring: 0 0 0 2px rgba(124,92,255,.35), 0 8px 40px rgba(124,92,255,.25);
+    }
+    *{box-sizing:border-box}
+    html,body{height:100%}
+    body{
+      margin:0; font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Inter, "Helvetica Neue", Arial, "Noto Sans", "Apple Color Emoji", "Segoe UI Emoji";
+      line-height:1.55; color:var(--text); background: radial-gradient(1200px 800px at 15% -10%, rgba(124,92,255,.12), transparent 40%), radial-gradient(1000px 700px at 85% 0%, rgba(45,212,191,.10), transparent 45%), var(--bg);
+      -webkit-font-smoothing:antialiased; -moz-osx-font-smoothing:grayscale;
+    }
+    a{color:inherit}
+    .container{max-width:1200px; margin:0 auto; padding:24px clamp(16px, 4vw, 32px)}
 
-    /* БАЗА */
-    *,*::before,*::after{ box-sizing:border-box }
-    html{ -webkit-text-size-adjust:100% }
-    body{ margin:0; color:#fff; background: radial-gradient(1400px 900px at 50% -10%, #14143b 0%, transparent 55%) no-repeat, #0b0b1e; -webkit-font-smoothing:antialiased; -moz-osx-font-smoothing:grayscale }
-    a{ color:inherit }
+    /* Hero */
+    .hero{display:grid; gap:24px; align-items:center; grid-template-columns: 1.15fr .85fr;}
+    .hero-card{
+      background: linear-gradient(180deg, rgba(124,92,255,.08), transparent 35%), var(--card);
+      border:1px solid rgba(255,255,255,.06); border-radius: var(--radius-lg);
+      padding: clamp(20px, 3.2vw, 36px); box-shadow: var(--shadow);
+      position: relative; overflow: hidden;
+    }
+    .eyebrow{color:var(--accent-2); font-weight:600; letter-spacing:.08em; text-transform:uppercase; font-size:.8rem}
+    h1{font-size: clamp(28px, 4.2vw, 46px); line-height:1.1; margin:8px 0 12px}
+    .sub{color:var(--muted); font-size: clamp(14px, 1.8vw, 18px)}
+    .cta{display:flex; gap:12px; flex-wrap:wrap; margin-top:18px}
+    .btn{appearance:none; border:0; cursor:pointer; border-radius: 999px; padding:12px 18px; font-weight:650; transition: transform .08s ease, box-shadow .2s ease, background .2s ease; will-change: transform;}
+    .btn-primary{background: linear-gradient(90deg, var(--accent), #9d7aff); color:white; box-shadow: var(--ring)}
+    .btn-primary:active{transform: translateY(1px) scale(.99)}
+    .btn-ghost{background: rgba(255,255,255,.06); color:var(--text); border:1px solid rgba(255,255,255,.08)}
+    .btn-ghost:hover{background: rgba(255,255,255,.10)}
 
-    .wrap{ max-width:1100px; margin:0 auto; padding:0 20px }
+    /* Grid cards */
+    .section{margin: clamp(28px, 6vw, 70px) 0}
+    .section h2{font-size: clamp(22px, 3vw, 34px); margin:0 0 16px}
+    .muted{color:var(--muted)}
+    .grid{display:grid; gap:16px}
+    .grid-3{grid-template-columns: repeat(1, 1fr)}
+    .grid-2{grid-template-columns: repeat(1, 1fr)}
+    @media (min-width: 720px){
+      .grid-3{grid-template-columns: repeat(3, 1fr)}
+      .grid-2{grid-template-columns: repeat(2, 1fr)}
+    }
+    .card{
+      background: var(--card); border:1px solid rgba(255,255,255,.06); border-radius: var(--radius);
+      padding: 18px; position:relative; overflow:hidden; box-shadow: var(--shadow);
+      transition: transform .2s ease, box-shadow .2s ease, border-color .2s ease;
+    }
+    .card:hover{ transform: translateY(-2px); box-shadow: 0 16px 50px rgba(0,0,0,.45); border-color: rgba(124,92,255,.35)}
 
-    /* HERO */
-    .hero{ text-align:center; padding:60px 0 24px }
-    .hero .badge{ display:inline-block; padding:6px 10px; border:1px solid rgba(255,255,255,.14); border-radius:999px; background:rgba(255,255,255,.05); color:#cfd7ff; margin-bottom:12px }
-    .hero h1{ font-size:2.1rem; margin:0 0 10px; text-shadow:0 0 22px rgba(154,107,255,.35) }
-    .hero p{ color:#cfd7ff; max-width:880px; margin:0 auto }
+    /* Badges & list */
+    .badge{display:inline-flex; align-items:center; gap:8px; padding:6px 10px; border-radius:999px; border:1px solid rgba(255,255,255,.08); background:rgba(255,255,255,.04); font-size:.85rem}
+    .list{margin:10px 0 0; padding:0; list-style:none}
+    .list li{display:flex; gap:8px; align-items:flex-start; padding:8px 0}
+    .dot{width:8px; height:8px; border-radius:50%; background:var(--accent-2); margin-top:8px}
 
-    .hero-demo{ margin:26px 0 0; border:1px solid rgba(255,255,255,.08); border-radius:22px; overflow:hidden; box-shadow:0 0 36px rgba(0,255,213,.10), inset 0 0 36px rgba(255,78,199,.06);
-      background: linear-gradient(145deg,#1b1b39,#0b0b1e); padding:24px }
-    .hero h2{ font-size:1.6rem; margin:0 0 8px }
-    .cta-row{ display:flex; gap:12px; justify-content:center; flex-wrap:wrap; margin-top:18px }
-    .btn{ -webkit-tap-highlight-color:transparent; border:1px solid rgba(255,255,255,.15); border-radius:999px; padding:14px 22px; font-weight:700; text-transform:uppercase; cursor:pointer; color:#fff; background:linear-gradient(180deg, rgba(154,107,255,.18), rgba(0,0,0,.2)); box-shadow:0 0 18px rgba(154,107,255,.22), inset 0 0 14px rgba(0,0,0,.25); position:relative; overflow:hidden; transition:transform .15s ease }
-    .btn:hover{ transform:translateY(-1px) scale(1.01) }
-    .btn::after{ content:""; position:absolute; inset:0; border-radius:inherit; opacity:0; background:radial-gradient(220px 220px at var(--x,50%) var(--y,50%), rgba(255,255,255,.28), transparent 60%); transition:opacity .25s ease }
-    .btn.flash::after{ opacity:1 }
+    /* Pricing */
+    .pricing-head{display:flex; justify-content:space-between; gap:12px; align-items:center; margin-bottom:12px}
+    .switch{display:inline-flex; background:rgba(255,255,255,.06); border:1px solid rgba(255,255,255,.08); border-radius:999px; padding:4px; gap:4px}
+    .switch button{border:0; padding:8px 12px; border-radius:999px; background:transparent; color:var(--muted); cursor:pointer; transition: background .2s ease, color .2s ease}
+    .switch button.active{background:rgba(124,92,255,.25); color:white}
 
-    /* СЕТКА БЛОКОВ */
-    .grid{ display:grid; gap:22px; grid-template-columns: repeat(auto-fit,minmax(260px,1fr)); margin:30px 0 }
-    .card{ background: linear-gradient(145deg, var(--panel), #0f0f23); border:1px solid rgba(255,255,255,.06); border-radius:18px; padding:18px; box-shadow:0 0 24px rgba(0,255,213,.06), inset 0 0 24px rgba(255,78,199,.04) }
-    .card h3{ font-size:1rem; margin:0 0 10px }
-    .note{ font-size:.9rem; color:#a9b }
+    .price{font-size: 28px; font-weight:800; margin:8px 0}
 
-    /* ПРОЦЕСС */
-    .steps{ display:grid; grid-template-columns:1fr; gap:12px }
-    .step{ display:flex; gap:12px; align-items:flex-start; padding:12px; border:1px solid rgba(255,255,255,.08); border-radius:12px; background:rgba(255,255,255,.02) }
-    .dot{ width:10px; height:10px; border-radius:50%; background:linear-gradient(180deg,var(--fx1),var(--fx2)); box-shadow:0 0 12px rgba(0,255,213,.5); flex:0 0 10px; margin-top:6px }
+    /* FAQ */
+    .faq-item{border:1px solid rgba(255,255,255,.08); border-radius: 14px; background: rgba(0,0,0,.15); overflow:hidden}
+    .faq-q{display:flex; justify-content:space-between; align-items:center; gap:12px; width:100%; background:transparent; color:var(--text); text-align:left; padding:14px 16px; border:0; cursor:pointer}
+    .faq-a{max-height:0; overflow:hidden; transition:max-height .25s ease}
+    .faq-item.open .faq-a{max-height:220px}
+    .faq-a-inner{padding:0 16px 14px; color:var(--muted)}
 
-    /* ПРАЙС */
-    .price{ display:grid; gap:12px; grid-template-columns:1fr 1fr }
-    .pcol{ border-radius:14px; padding:16px; background:linear-gradient(145deg,#1b1b39,#0b0b1e); border:1px solid rgba(255,255,255,.08) }
-    .pcol.active{ box-shadow:0 0 18px rgba(0,255,213,.25), inset 0 0 18px rgba(0,255,213,.18) }
-    .pbullet{ height:10px; border-radius:999px; background:rgba(255,255,255,.12); margin:10px 0 }
+    /* Demo form */
+    .form-card{ /* ключевой фикс: на десктопе форма не обрезается */
+      overflow: visible;
+    }
+    .form{display:grid; gap:10px}
+    .input, .textarea{
+      width:100%; padding:12px 14px; border-radius:12px; border:1px solid rgba(255,255,255,.12); background: rgba(255,255,255,.04); color:var(--text);
+      outline:none; transition: box-shadow .2s ease, border-color .2s ease, background .2s ease;
+    }
+    .input:focus, .textarea:focus{ box-shadow: var(--ring); border-color: rgba(124,92,255,.5); background: rgba(255,255,255,.06) }
+    .hint{font-size:.9rem; color:var(--muted)}
 
-    /* ФОРМА (заглушка) */
-    .form{ display:grid; gap:14px }
-    .row{ display:flex; gap:12px }
-    .input{ flex:1; min-width:0; height:48px; line-height:48px; padding:0 14px; border-radius:12px; color:#eaf2ff; background:linear-gradient(180deg,#1b1b39,#0b0b1e); border:1px solid rgba(255,255,255,.12); outline:none; -webkit-appearance:none; appearance:none }
-    .input::placeholder{ color:#9aa3d6 }
-    textarea.input{ height:auto; min-height:96px; line-height:1.45; padding:12px 14px; resize:vertical }
-    .send{ height:48px; line-height:48px; padding:0 22px; border-radius:999px; border:1px solid rgba(255,255,255,.15); color:#fff; font-weight:700; text-transform:uppercase; cursor:pointer; background:linear-gradient(90deg,var(--fx1),var(--fx2)); box-shadow:0 0 18px rgba(0,255,213,.25) }
+    /* Layout tweaks */
+    .lp-grid{display:grid; gap:16px; grid-template-columns: 1fr}
+    @media (min-width: 992px){
+      .hero{grid-template-columns: 1.15fr .85fr}
+      .lp-grid{grid-template-columns: repeat(12, 1fr)}
+      .lp-grid .span-4{grid-column: span 4}
+      .lp-grid .span-6{grid-column: span 6}
+      .lp-grid .span-8{grid-column: span 8}
+      .lp-grid .form-card{grid-column: span 8} /* форма шире на десктопе */
+    }
 
-    /* BACK + FOOTER */
-    .back{ text-align:center; margin:12px 0 30px }
-    footer{ background:#111; text-align:center; padding:20px; color:#bbb }
-    footer a{ color:#00ffc8; text-decoration:none }
-    footer a:hover{ text-decoration:underline }
-
-    /* АДАПТИВ */
-    @media (max-width:900px){ .price{ grid-template-columns:1fr } .send{ width:100% } }
-    @media (prefers-reduced-motion: reduce){ *{ animation:none!important; transition:none!important } }
-    :focus-visible{ outline:2px solid var(--fx2); outline-offset:2px }
+    /* Motion safety */
+    @media (prefers-reduced-motion: reduce){
+      *{animation-duration:.01ms !important; animation-iteration-count:1 !important; transition-duration:.01ms !important; scroll-behavior:auto !important}
+    }
   </style>
 </head>
 <body>
-  <header class="hero wrap">
-    <span class="badge">Услуга</span>
-    <h1>Лендинг под задачу: заявки, лиды, предзаказ</h1>
-    <p>Собираю одностраничники в вашем стиле: дизайн → адаптив → интеграция форм/аналитики. Ниже — интерактивные заглушки блоков. Всё кликается, но ничего не отправляет — это демо возможностей.</p>
-    <div class="hero-demo">
-      <h2>Заголовок лендинга</h2>
-      <p>Короткий оффер в 1–2 строки: что получит клиент и в какой срок.</p>
-      <div class="cta-row">
-        <button class="btn" id="cta1">Заказать</button>
-        <button class="btn" id="cta2" style="background:linear-gradient(180deg, rgba(0,255,213,.18), rgba(0,0,0,.25));box-shadow:0 0 18px rgba(0,255,213,.22), inset 0 0 14px rgba(0,0,0,.25)">Консультация</button>
+  <header class="container hero">
+    <div class="hero-card">
+      <div class="eyebrow">Лендинги под задачу</div>
+      <h1>Быстро запускаю и довожу до заявок</h1>
+      <p class="sub">Ниже — интерактивная демо-витрина: герой-блок, преимущества, пакеты, FAQ и мини-форма. Все элементы кликабельны и анимированы, но <strong>ничего не отправляется</strong> — это показ того, как может выглядеть ваш проект.</p>
+      <div class="cta">
+        <button class="btn btn-primary">Заказать прототип</button>
+        <button class="btn btn-ghost">Бесплатная консультация</button>
       </div>
+    </div>
+    <div class="hero-card" aria-hidden="true">
+      <div class="badge" style="margin-bottom:10px"><span style="width:10px; height:10px; border-radius:50%; background:var(--ok)"></span>Онлайн демо</div>
+      <div class="muted">Наведите на карточки — увидите мягкую подсветку и подъём. На мобильном всё компактно и читабельно, кнопки крупные.</div>
+      <ul class="list">
+        <li><span class="dot"></span> Прототип → дизайн → вёрстка</li>
+        <li><span class="dot"></span> Адаптив под моб и десктоп</li>
+        <li><span class="dot"></span> Подключение аналитики и целей</li>
+        <li><span class="dot"></span> Лёгкие неон-эффекты без перегруза</li>
+      </ul>
     </div>
   </header>
 
-  <main class="wrap">
-    <section class="grid">
-      <article class="card">
-        <h3>Преимущества</h3>
-        <div class="steps">
-          <div class="step"><span class="dot"></span><div>Фокус на цели: каждая секция подталкивает к действию.</div></div>
-          <div class="step"><span class="dot"></span><div>Быстрая загрузка: чистая верстка, оптимизация графики.</div></div>
-          <div class="step"><span class="dot"></span><div>Адаптив под все экраны, корректно на Windows/Chrome.</div></div>
-        </div>
-      </article>
-
-      <article class="card">
-        <h3>Процесс</h3>
-        <div class="steps">
-          <div class="step"><span class="dot"></span><div>Бриф и оффер: формулируем выгоды, структуру.</div></div>
-          <div class="step"><span class="dot"></span><div>Дизайн и прототип: согласование, правки.</div></div>
-          <div class="step"><span class="dot"></span><div>Верстка, интеграции, тестирование, публикация.</div></div>
-        </div>
-      </article>
-
-      <article class="card">
-        <h3>Пакеты</h3>
-        <div class="price">
-          <div class="pcol" aria-label="Базовый">
-            <strong>Старт</strong>
-            <div class="pbullet"></div>
-            <div class="note">Прототип, дизайн, адаптив.</div>
-          </div>
-          <div class="pcol active" aria-label="С интеграциями">
-            <strong>Про</strong>
-            <div class="pbullet"></div>
-            <div class="note">+ формы, события аналитики, пиксели.</div>
-          </div>
-        </div>
-      </article>
-
-      <article class="card">
-        <h3>FAQ</h3>
-        <details class="step"><summary>Сроки?</summary><div class="note">В среднем 5–10 дней, зависит от объёма.</div></details>
-        <details class="step"><summary>Правки?</summary><div class="note">2 итерации включены, дальше по времени.</div></details>
-      </article>
-
-      <article class="card">
-        <h3>Мини‑форма (демо)</h3>
-        <form class="form" onsubmit="return false">
-          <div class="row">
-            <input class="input" type="text" placeholder="Имя" aria-label="Имя">
-            <input class="input" type="text" placeholder="Проект/ниша" aria-label="Проект или ниша">
-          </div>
-          <input class="input" type="email" placeholder="Email" aria-label="Email">
-          <textarea class="input" rows="3" placeholder="Комментарий" aria-label="Комментарий"></textarea>
-          <button type="button" class="send" id="sendBtn">Отправить</button>
-          <div class="note">Кнопка пружинит, ничего не отправляется — демонстрация.</div>
-        </form>
-      </article>
+  <main class="container">
+    <!-- Преимущества -->
+    <section class="section">
+      <h2>Почему со мной удобно</h2>
+      <div class="grid grid-3">
+        <article class="card">
+          <div class="badge">Смысл и структура</div>
+          <p class="muted">Прорабатываю оффер, триггеры доверия, CTA. Страница ведёт к заявке — без воды.</p>
+        </article>
+        <article class="card">
+          <div class="badge">Скорость</div>
+          <p class="muted">Первый кликабельный вариант — обычно в течение 2–3 дней с момента старта.</p>
+        </article>
+        <article class="card">
+          <div class="badge">Адаптив</div>
+          <p class="muted">На мобильном всё крупно и читаемо, формы удобные. Десктоп выглядит «дороже».</p>
+        </article>
+      </div>
     </section>
 
-    <div class="back"><a href="../index.html" class="btn">Вернуться на главную</a></div>
+    <!-- Пакеты -->
+    <section class="section">
+      <div class="pricing-head">
+        <h2>Пакеты работ</h2>
+        <div class="switch" role="tablist" aria-label="Переключатель тарифа">
+          <button class="active" role="tab" aria-selected="true" id="sw-month">Месяц</button>
+          <button role="tab" aria-selected="false" id="sw-year">Год</button>
+        </div>
+      </div>
+      <div class="grid grid-3" id="pricing">
+        <article class="card" data-tier="start">
+          <div class="badge">Старт</div>
+          <div class="price" data-price-m="39 000 ₽" data-price-y="390 000 ₽">39 000 ₽</div>
+          <ul class="list">
+            <li><span class="dot"></span> Одностраничник под ключ</li>
+            <li><span class="dot"></span> Прототип → дизайн → вёрстка</li>
+            <li><span class="dot"></span> Базовая анимация и CTA</li>
+            <li><span class="dot"></span> Подключение аналитики</li>
+          </ul>
+        </article>
+        <article class="card" data-tier="business" style="outline:2px solid rgba(124,92,255,.35)">
+          <div class="badge">Бизнес</div>
+          <div class="price" data-price-m="69 000 ₽" data-price-y="690 000 ₽">69 000 ₽</div>
+          <ul class="list">
+            <li><span class="dot"></span> Всё из «Старт»</li>
+            <li><span class="dot"></span> 3 секции A/B-вариантов</li>
+            <li><span class="dot"></span> Доп. блоки: кейсы, FAQ</li>
+            <li><span class="dot"></span> Настройка событий и целей</li>
+          </ul>
+        </article>
+        <article class="card" data-tier="pro">
+          <div class="badge">Pro</div>
+          <div class="price" data-price-m="99 000 ₽" data-price-y="990 000 ₽">99 000 ₽</div>
+          <ul class="list">
+            <li><span class="dot"></span> Мультилендинг / каталог</li>
+            <li><span class="dot"></span> Сложные анимации, микровзаимодействия</li>
+            <li><span class="dot"></span> Интеграции (формы, CRM)</li>
+            <li><span class="dot"></span> Поддержка и развитие</li>
+          </ul>
+        </article>
+      </div>
+    </section>
+
+    <!-- FAQ -->
+    <section class="section">
+      <h2>FAQ</h2>
+      <div class="grid grid-2" id="faq">
+        <div class="faq-item">
+          <button class="faq-q" aria-expanded="false"><span>Как проходит работа?</span><span>▾</span></button>
+          <div class="faq-a" aria-hidden="true"><div class="faq-a-inner">Короткий созвон → прототип в Figma → согласование → дизайн и вёрстка → подключение аналитики → передача.</div></div>
+        </div>
+        <div class="faq-item">
+          <button class="faq-q" aria-expanded="false"><span>Сроки и правки?</span><span>▾</span></button>
+          <div class="faq-a" aria-hidden="true"><div class="faq-a-inner">Первый кликабельный вариант — 2–3 дня. Включены итерации правок до финального согласования.</div></div>
+        </div>
+        <div class="faq-item">
+          <button class="faq-q" aria-expanded="false"><span>Поможете с текстами?</span><span>▾</span></button>
+          <div class="faq-a" aria-hidden="true"><div class="faq-a-inner">Да. Сформулирую заголовки, оффер и CTA на языке клиента. Могу предложить варианты A/B.</div></div>
+        </div>
+        <div class="faq-item">
+          <button class="faq-q" aria-expanded="false"><span>Можно в вашем стиле?</span><span>▾</span></button>
+          <div class="faq-a" aria-hidden="true"><div class="faq-a-inner">Конечно. Космос/неон аккуратно интегрирую в фирменный стиль, без потери читабельности.</div></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Мини-форма (демо) -->
+    <section class="section">
+      <h2>Расскажите о задаче</h2>
+      <div class="lp-grid">
+        <article class="card form-card span-8">
+          <form class="form" id="demoform" onsubmit="return false" aria-describedby="formHint">
+            <input class="input" type="text" placeholder="Имя" aria-label="Имя" />
+            <input class="input" type="text" placeholder="Проект / ниша" aria-label="Проект или ниша" />
+            <input class="input" type="email" placeholder="Email" aria-label="Email" />
+            <textarea class="textarea" rows="3" placeholder="Коротко о задаче" aria-label="Комментарий"></textarea>
+            <div style="display:flex; gap:10px; align-items:center; flex-wrap:wrap">
+              <button class="btn btn-primary" id="formBtn">Обсудить проект</button>
+              <span class="hint" id="formHint">Кнопка «пружинит» для демонстрации. Отправки нет.</span>
+            </div>
+          </form>
+        </article>
+        <article class="card span-4">
+          <div class="badge">Контакты</div>
+          <p class="muted">Пишите в удобный мессенджер — обычно отвечаю в течение дня.</p>
+          <div class="cta">
+            <button class="btn btn-ghost">Telegram</button>
+            <button class="btn btn-ghost">WhatsApp</button>
+            <button class="btn btn-ghost">Email</button>
+          </div>
+        </article>
+      </div>
+    </section>
   </main>
 
-  <section id="contacts" class="wrap" style="text-align:center; padding-bottom:40px">
-    <h2 style="font-size:1.6rem; margin:0 0 10px">Связаться со мной</h2>
-    <p class="note">Напиши в мессенджер или на почту — отвечаю быстро.</p>
-    <div class="cta-row">
-      <a class="btn" href="https://t.me/yourusername" target="_blank" rel="noopener">Telegram</a>
-      <a class="btn" href="https://wa.me/71234567890" target="_blank" rel="noopener">WhatsApp</a>
-      <a class="btn" href="mailto:example@mail.ru?subject=Лендинг" target="_blank" rel="noopener">Email</a>
-    </div>
-  </section>
-
-  <footer>
-    <p>&copy; 2025 Ваше имя. Все права защищены. <a href="../privacy-policy.html">Политика конфиденциальности</a></p>
+  <footer class="container" style="opacity:.8; padding-bottom:40px">
+    <div class="muted">Демо-страница: показано, как может выглядеть ваш будущий лендинг. Все клики — без отправки данных.</div>
   </footer>
 
   <script>
-    // вспышка на CTA
-    function attachFlash(btn){
-      btn.addEventListener('pointermove', e=>{ const r=btn.getBoundingClientRect(); btn.style.setProperty('--x',(e.clientX-r.left)+'px'); btn.style.setProperty('--y',(e.clientY-r.top)+'px'); });
-      btn.addEventListener('click', ()=>{ btn.classList.add('flash'); setTimeout(()=>btn.classList.remove('flash'),220); });
-    }
-    attachFlash(document.getElementById('cta1'));
-    attachFlash(document.getElementById('cta2'));
-    // жели-эффект на кнопке отправки (визуально)
-    const sendBtn=document.getElementById('sendBtn');
-    sendBtn.addEventListener('click',()=>{ sendBtn.style.transform='scale(0.98)'; setTimeout(()=>sendBtn.style.transform='scale(1)',120); });
+    // Переключатель цен (месяц/год)
+    (function(){
+      const swMonth = document.getElementById('sw-month');
+      const swYear  = document.getElementById('sw-year');
+      const prices = document.querySelectorAll('.price');
+      function apply(active){
+        prices.forEach(p=>{ p.textContent = active==='year' ? p.dataset.priceY : p.dataset.priceM; });
+        swMonth.classList.toggle('active', active==='month');
+        swMonth.setAttribute('aria-selected', active==='month');
+        swYear.classList.toggle('active', active==='year');
+        swYear.setAttribute('aria-selected', active==='year');
+      }
+      swMonth?.addEventListener('click', ()=>apply('month'));
+      swYear?.addEventListener('click',  ()=>apply('year'));
+    })();
+
+    // FAQ аккордеон
+    (function(){
+      document.querySelectorAll('.faq-item').forEach(item=>{
+        const btn = item.querySelector('.faq-q');
+        const ans = item.querySelector('.faq-a');
+        btn.addEventListener('click', ()=>{
+          const open = item.classList.toggle('open');
+          btn.setAttribute('aria-expanded', open);
+          ans.setAttribute('aria-hidden', !open);
+        });
+      });
+    })();
+
+    // Демо-анимация кнопки формы
+    (function(){
+      const btn = document.getElementById('formBtn');
+      if(!btn) return;
+      btn.addEventListener('click', (e)=>{
+        e.preventDefault();
+        btn.animate([
+          { transform:'translateY(0) scale(1)' },
+          { transform:'translateY(1px) scale(.98)' },
+          { transform:'translateY(0) scale(1.02)' },
+          { transform:'translateY(0) scale(1)' }
+        ], { duration: 280, easing:'cubic-bezier(.2,.8,.2,1)' });
+      });
+    })();
   </script>
 </body>
 </html>
