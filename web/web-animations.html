@@ -17,16 +17,23 @@
       --fx3: #9a6bff;   /* лиловый */
     }
 
+    body {
+      background:
+        radial-gradient(1400px 900px at 50% -10%, #14143b 0%, transparent 55%) no-repeat,
+        #0b0b1e;
+      color: #fff;
+    }
+
     /* верхний блок-описание */
     .lab-hero {
       max-width: 1100px; margin: 60px auto 30px; padding: 0 20px; text-align: center;
     }
-    .lab-hero h2 { font-size: 2rem; margin-bottom: 10px; text-shadow: 0 0 20px rgba(154,107,255,.35); }
-    .lab-hero p  { color: #cfd7ff; max-width: 860px; margin: 0 auto; }
+    .lab-hero h2 { font-size: 2rem; margin-bottom: 10px; text-shadow: 0 0 22px rgba(154,107,255,.35); }
+    .lab-hero p  { color: #cfd7ff; max-width: 900px; margin: 0 auto; }
 
     /* сетка демо-блоков */
     .lab-grid {
-      max-width: 1100px; margin: 24px auto 50px; padding: 0 20px;
+      max-width: 1100px; margin: 26px auto 56px; padding: 0 20px;
       display: grid; gap: 22px; grid-template-columns: repeat(auto-fit, minmax(230px,1fr));
     }
     .lab-card {
@@ -138,68 +145,139 @@
       transition: width .6s ease;
     }
 
-    /* контакты снизу */
+    /* 7) Табло-переключатель — просто перелистывает состояние */
+    .lab-seg {
+      display:flex; justify-content:center; gap:8px; margin-top:8px;
+    }
+    .lab-seg b {
+      width: 28px; height: 36px; border-radius: 8px;
+      background: linear-gradient(180deg,#1b1b39,#0b0b1e);
+      box-shadow: inset 0 0 12px rgba(0,0,0,.6), 0 0 16px rgba(154,107,255,.28);
+      opacity:.35; transition: opacity .2s ease, transform .2s ease;
+    }
+    .lab-seg.on b { opacity:1; transform: translateY(-2px); }
+
+    /* 8) Пружинная карточка — дрожит при клике */
+    .lab-spring {
+      height: 140px; border-radius: 14px; border:1px solid rgba(255,255,255,.1);
+      background: linear-gradient(145deg, #1b1b39, #0b0b1e);
+      box-shadow: inset 0 0 22px rgba(255,78,199,.08), 0 0 28px rgba(0,255,213,.12);
+    }
+    .lab-spring.shake { animation: springShake .5s ease; }
+    @keyframes springShake {
+      0%{ transform: translateX(0) }
+      25%{ transform: translateX(-6px) }
+      50%{ transform: translateX(5px) }
+      75%{ transform: translateX(-3px) }
+      100%{ transform: translateX(0) }
+    }
+
+    /* 9) Радужная линия — мерцает */
+    .lab-glowline {
+      height: 10px; border-radius:999px; overflow:hidden; background: rgba(255,255,255,.08);
+      position: relative;
+    }
+    .lab-glowline::before {
+      content:""; position:absolute; inset:0;
+      background: linear-gradient(90deg, transparent, var(--fx1), var(--fx2), transparent);
+      filter: blur(4px); transform: translateX(-100%);
+      animation: gg 2.2s infinite linear;
+    }
+    @keyframes gg { to { transform: translateX(100%); } }
+
+    /* контакты снизу (как на других страницах) */
     .contact-buttons { margin-top: 20px; display: flex; flex-wrap: wrap; gap: 10px; justify-content: center; }
     footer { background-color: #111; text-align: center; padding: 20px; color: #bbb; }
     footer a { color: #00ffc8; text-decoration: none; }
     footer a:hover { text-decoration: underline; }
+
+    @media (max-width: 768px){
+      .lab-hero h2 { font-size: 1.7rem; }
+    }
   </style>
 </head>
 <body>
 
   <!-- верхнее описание страницы -->
   <section class="lab-hero">
-    <h2>Анимации и интерактив — пример визуальных эффектов для сайта.</h2>
-    <p>Набор безопасных «кликабельных» элементов: кнопки, тумблеры, подсветка, точки-лоадер и прогресс — всё в неон-космос стиле. Элементы лишь реагируют и мигают, логики отправки/действий нет.</p>
+    <h2>Анимации и интерактив — набор визуальных эффектов для сайта.</h2>
+    <p>Здесь собраны безопасные «кликабельные» элементы под твой стиль: неоновые кнопки, тумблеры, подсветка, лоадеры и прогресс. Они просто реагируют на наведение/клик — без реальных действий.</p>
   </section>
 
-  <!-- сетка "приколюх" -->
+  <!-- сетка «приколюх» -->
   <section class="lab-grid">
+    <!-- 1. Неоновая кнопка -->
     <div class="lab-card">
       <h3>Неоновая кнопка</h3>
       <button class="lab-neon-btn pulse" id="btnNeon">Нажми</button>
       <div class="lab-note">Пульсирует, вспышка под курсором при клике</div>
     </div>
 
+    <!-- 2. Тумблер -->
     <div class="lab-card">
       <h3>Тумблер</h3>
       <div class="lab-toggle" id="toggleDemo" aria-label="toggle"></div>
       <div class="lab-note">Клик — смена подсветки</div>
     </div>
 
+    <!-- 3. «Желе»-кнопка -->
     <div class="lab-card">
       <h3>Кнопка «желе»</h3>
       <button class="lab-jelly" id="btnJelly">Прыг-скок</button>
       <div class="lab-note">Пружинит при клике</div>
     </div>
 
+    <!-- 4. Loader точки -->
     <div class="lab-card">
       <h3>Точки-загрузчик</h3>
       <div class="lab-dots" id="dots"><span></span><span></span><span></span></div>
       <div class="lab-note">Клик — старт/стоп</div>
     </div>
 
+    <!-- 5. Параллакс подсветка -->
     <div class="lab-card">
       <h3>Параллакс подсветка</h3>
       <div class="lab-parallax" id="parallax"></div>
       <div class="lab-note">Блик следует за курсором</div>
     </div>
 
+    <!-- 6. Прогресс-бар -->
     <div class="lab-card">
       <h3>Прогресс-бар</h3>
       <div class="lab-progress"><i id="bar" style="--p: 0%"></i></div>
       <div class="lab-note">Клик — +20%, до 100%</div>
+    </div>
+
+    <!-- 7. Табло (переключатель) -->
+    <div class="lab-card">
+      <h3>Табло (переключатель)</h3>
+      <div class="lab-seg" id="seg"><b></b><b></b><b></b><b></b></div>
+      <div class="lab-note">Клик — меняет состояние</div>
+    </div>
+
+    <!-- 8. Пружинная карточка -->
+    <div class="lab-card">
+      <h3>Пружинная карточка</h3>
+      <div class="lab-spring" id="spring"></div>
+      <div class="lab-note">Клик — короткая «дрожь»</div>
+    </div>
+
+    <!-- 9. Радужная линия -->
+    <div class="lab-card">
+      <h3>Световая линия</h3>
+      <div class="lab-glowline"></div>
+      <div class="lab-note">Мягкое мерцание по циклу</div>
     </div>
   </section>
 
   <!-- контакты (как и в остальных страницах) -->
   <section id="contacts">
     <h2>Связаться со мной</h2>
-    <p>Напиши в удобный мессенджер или на почту — отвечаю быстро.</p>
+    <p>Напиши мне в мессенджер или на почту — отвечаю быстро!</p>
     <div class="contact-buttons">
       <a class="cta-button telegram" href="https://t.me/yourusername" target="_blank">Telegram</a>
       <a class="cta-button whatsapp" href="https://wa.me/71234567890" target="_blank">WhatsApp</a>
-      <a class="cta-button alt" href="mailto:example@mail.ru?subject=Заказ%20анимаций%20для%20сайта">Email</a>
+      <a class="cta-button alt" href="mailto:example@mail.ru?subject=Заказ%20анимаций">Email</a>
     </div>
     <div style="margin-top:16px;">
       <a class="cta-button small" href="../index.html">Назад на главную</a>
@@ -259,6 +337,18 @@
       const current = parseInt(getComputedStyle(bar).getPropertyValue('--p')) || 0;
       const next = current >= 100 ? 0 : Math.min(current + 20, 100);
       bar.style.setProperty('--p', next + '%');
+    });
+
+    // 7) Табло — цикличный переключатель
+    const seg = document.getElementById('seg');
+    seg.addEventListener('click', () => seg.classList.toggle('on'));
+
+    // 8) Пружинная карточка
+    const spring = document.getElementById('spring');
+    spring.addEventListener('click', () => {
+      spring.classList.remove('shake');
+      void spring.offsetWidth; // restart
+      spring.classList.add('shake');
     });
   </script>
 </body>
