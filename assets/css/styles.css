@@ -230,7 +230,7 @@ body {
   left: -50%;
   width: 200%;
   height: 200%;
-  background: url('images/design/stardust.png') repeat;
+  background: url('../../images/design/stardust.png') repeat;
   animation: starsMove 60s linear infinite;
   opacity: 1;
 }
