@@ -3,274 +3,255 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Анимации — демо элементов</title>
+  <title>Создание одностраничных сайтов — демо блоков лендинга</title>
 
   <!-- общий стиль проекта -->
   <link rel="stylesheet" href="../assets/css/styles.css"/>
 
-  <!-- локальные стили демо (неймспейс .lab-*) -->
   <style>
     :root {
-      --lab-panel: #12122a;
-      --fx1: #ff4ec7;   /* фуксия */
-      --fx2: #00ffd5;   /* бирюза */
-      --fx3: #9a6bff;   /* лиловый */
+      --fx1:#ff4ec7;   /* фуксия */
+      --fx2:#00ffd5;   /* бирюза */
+      --fx3:#9a6bff;   /* лиловый */
+      --panel:#12122a;
     }
 
-    body {
+    body{
       background:
-        radial-gradient(1400px 900px at 50% -10%, #14143b 0%, transparent 55%) no-repeat,
+        radial-gradient(1400px 900px at 50% -10%, #151545 0%, transparent 55%) no-repeat,
         #0b0b1e;
-      color: #fff;
+      color:#fff;
     }
 
-    /* верхний блок-описание */
-    .lab-hero {
-      max-width: 1100px; margin: 60px auto 30px; padding: 0 20px; text-align: center;
+    /* герой */
+    .lp-hero{
+      max-width:1100px;margin:60px auto 24px;padding:0 20px;text-align:center;
     }
-    .lab-hero h2 { font-size: 2rem; margin-bottom: 10px; text-shadow: 0 0 22px rgba(154,107,255,.35); }
-    .lab-hero p  { color: #cfd7ff; max-width: 900px; margin: 0 auto; }
-
-    /* сетка демо-блоков */
-    .lab-grid {
-      max-width: 1100px; margin: 26px auto 24px; padding: 0 20px;
-      display: grid; gap: 22px; grid-template-columns: repeat(auto-fit, minmax(230px,1fr));
-    }
-    .lab-card {
-      background: linear-gradient(145deg, var(--lab-panel), #0f0f23);
-      border: 1px solid rgba(255,255,255,.06);
-      border-radius: 18px; padding: 18px;
-      box-shadow: 0 0 24px rgba(0,255,213,.06), inset 0 0 24px rgba(255,78,199,.04);
-      position: relative; overflow: hidden;
-    }
-    .lab-card h3 { font-size: 1rem; margin: 0 0 12px; color: #eaf2ff; }
-    .lab-note     { font-size: .85rem; color: #a9b; margin-top: 8px; }
-
-    /* 1) Неоновая кнопка — пульс + вспышка */
-    .lab-neon-btn {
-      width: 100%; padding: 14px 16px; border-radius: 999px;
-      border: 1px solid rgba(255,255,255,.15);
-      background: radial-gradient(120% 120% at 10% 10%, rgba(0,255,213,.15), transparent 60%),
-                  linear-gradient(180deg, rgba(255,78,199,.18), rgba(0,0,0,.2));
-      color: #fff; letter-spacing: .5px; cursor: pointer; font-weight: 700; text-transform: uppercase;
-      transition: transform .15s ease, box-shadow .15s ease;
-      box-shadow: 0 0 18px rgba(0,255,213,.18), inset 0 0 14px rgba(255,78,199,.12);
-      position: relative; overflow: hidden;
-    }
-    .lab-neon-btn:hover { transform: translateY(-1px) scale(1.01); }
-    .lab-neon-btn:active { transform: translateY(0) scale(.99); }
-    .lab-neon-btn::after {
-      content:""; position:absolute; inset:0;
-      background: radial-gradient(200px 200px at var(--x,50%) var(--y,50%), rgba(255,255,255,.25), transparent 60%);
-      opacity: 0; transition: opacity .25s ease;
-    }
-    .lab-neon-btn.is-flash::after { opacity: 1; }
-    .lab-neon-btn.pulse { animation: labPulse 2.2s infinite; }
-    @keyframes labPulse {
-      0%,100% { box-shadow: 0 0 18px rgba(0,255,213,.18), inset 0 0 14px rgba(255,78,199,.12); }
-      50%     { box-shadow: 0 0 28px rgba(0,255,213,.32), inset 0 0 24px rgba(255,78,199,.22); }
-    }
-
-    /* 2) Тумблер */
-    .lab-toggle {
-      --w: 64px; --h: 34px;
-      width: var(--w); height: var(--h); border-radius: 999px;
-      background: #0d0d1f; border: 1px solid rgba(255,255,255,.12);
-      position: relative; margin: 10px auto 0; cursor: pointer;
-      box-shadow: inset 0 0 18px rgba(0,255,213,.06);
-      transition: box-shadow .25s ease, border-color .25s ease;
-    }
-    .lab-toggle::before {
-      content:""; position:absolute; top: 3px; left: 3px;
-      width: calc(var(--h) - 6px); height: calc(var(--h) - 6px);
-      background: linear-gradient(180deg, #1b1b39, #0b0b1e); border-radius: 50%;
-      box-shadow: 0 0 10px rgba(154,107,255,.25), inset 0 0 12px rgba(0,0,0,.55);
-      transition: transform .25s ease;
-    }
-    .lab-toggle.is-on { border-color: rgba(0,255,213,.4); box-shadow: 0 0 18px rgba(0,255,213,.28), inset 0 0 28px rgba(0,255,213,.18); }
-    .lab-toggle.is-on::before { transform: translateX(calc(var(--w) - var(--h))); }
-
-    /* 3) Желе-кнопка */
-    .lab-jelly {
-      width: 100%; padding: 14px; border-radius: 14px; border: 1px solid rgba(255,255,255,.12);
-      background: linear-gradient(180deg, rgba(154,107,255,.18), rgba(0,0,0,.2));
-      color: #fff; cursor: pointer; font-weight: 600;
-      box-shadow: 0 10px 30px rgba(154,107,255,.15);
-    }
-    .lab-jelly.is-bounce { animation: labJelly .5s ease; }
-    @keyframes labJelly {
-      0% { transform: scale(1); }
-      30% { transform: scale(1.08,.92); }
-      60% { transform: scale(.96,1.04); }
-      100% { transform: scale(1); }
-    }
-
-    /* 4) Loader-точки */
-    .lab-dots {
-      display:flex; justify-content:center; gap:10px; margin-top:8px;
-    }
-    .lab-dots span {
-      width:10px; height:10px; border-radius:50%;
-      background: radial-gradient(circle at 30% 30%, #fff, #9a6bff);
-      box-shadow: 0 0 12px rgba(154,107,255,.6);
-      opacity:.5; transform: translateY(0);
-    }
-    .lab-dots.is-run span { animation: labDot 1.2s infinite ease-in-out; }
-    .lab-dots.is-run span:nth-child(2){ animation-delay:.15s; }
-    .lab-dots.is-run span:nth-child(3){ animation-delay:.3s; }
-    @keyframes labDot {
-      0%,100% { transform: translateY(0); opacity:.5; }
-      50%     { transform: translateY(-8px); opacity:1; }
-    }
-
-    /* 5) Параллакс подсветка */
-    .lab-parallax {
-      height: 160px; border-radius: 14px; border:1px solid rgba(255,255,255,.1);
+    .lp-hero h2{font-size:2rem;margin:0 0 10px;text-shadow:0 0 22px rgba(154,107,255,.35)}
+    .lp-hero p{max-width:880px;margin:0 auto;color:#cfd7ff}
+    .lp-hero-demo{
+      margin:26px auto 0;max-width:1100px;padding:24px;border-radius:22px;
       background:
-        radial-gradient(200px 140px at var(--mx,60%) var(--my,40%), rgba(0,255,213,.16), transparent 60%),
-        linear-gradient(145deg, #1b1b39, #0b0b1e);
-      box-shadow: inset 0 0 22px rgba(255,78,199,.08), 0 0 28px rgba(0,255,213,.12);
-      transition: transform .15s ease;
-      will-change: transform, background-position;
+        radial-gradient(260px 180px at 20% 10%, rgba(0,255,213,.18), transparent 60%),
+        radial-gradient(260px 180px at 80% 90%, rgba(255,78,199,.16), transparent 60%),
+        linear-gradient(145deg,#1b1b39,#0b0b1e);
+      border:1px solid rgba(255,255,255,.08);
+      box-shadow:0 0 36px rgba(0,255,213,.10), inset 0 0 36px rgba(255,78,199,.06);
+      overflow:hidden;
     }
-    .lab-parallax:hover { transform: translateY(-2px); }
+    .lp-shimmer{
+      height:44px;border-radius:12px;margin:0 auto 14px;max-width:720px;
+      background:linear-gradient(90deg,rgba(255,255,255,.08),rgba(255,255,255,.22),rgba(255,255,255,.08));
+      background-size:200% 100%;animation:sh 2.4s linear infinite;
+      filter: blur(.2px);
+    }
+    .lp-line{height:12px;border-radius:8px;margin:10px auto;max-width:520px;background:rgba(255,255,255,.12)}
+    .lp-cta-row{display:flex;gap:12px;justify-content:center;margin-top:18px;flex-wrap:wrap}
+    .lp-cta{
+      -webkit-tap-highlight-color: transparent; outline:none; touch-action:manipulation;
+      border-radius:999px;padding:14px 24px;border:1px solid rgba(255,255,255,.15);
+      color:#fff;font-weight:700;text-transform:uppercase;letter-spacing:.5px;cursor:pointer;
+      background:linear-gradient(180deg, rgba(154,107,255,.18), rgba(0,0,0,.2));
+      box-shadow:0 0 18px rgba(154,107,255,.22), inset 0 0 14px rgba(0,0,0,.25);
+      position:relative;overflow:hidden;transition:transform .15s ease;
+    }
+    .lp-cta:hover{transform:translateY(-1px) scale(1.01)}
+    .lp-cta::after{
+      content:"";position:absolute;inset:0;border-radius:inherit;opacity:0;
+      background:radial-gradient(220px 220px at var(--x,50%) var(--y,50%), rgba(255,255,255,.28), transparent 60%);
+      transition:opacity .25s ease;
+    }
+    .lp-cta.flash::after{opacity:1}
 
-    /* 6) Прогресс-бар */
-    .lab-progress { height: 10px; border-radius: 999px; background: rgba(255,255,255,.08); overflow: hidden; position: relative; }
-    .lab-progress > i {
-      --p: 0%;
-      position: absolute; left:0; top:0; bottom:0; width: var(--p);
-      background: linear-gradient(90deg, var(--fx1), var(--fx2));
-      box-shadow: 0 0 16px rgba(0,255,213,.35);
-      transition: width .6s ease;
+    @keyframes sh{to{background-position:200% 0}}
+
+    /* секции демо */
+    .lp-grid{max-width:1100px;margin:30px auto;padding:0 20px;display:grid;gap:22px;grid-template-columns:repeat(auto-fit,minmax(240px,1fr))}
+    .lp-card{
+      background:linear-gradient(145deg,var(--panel),#0f0f23);
+      border:1px solid rgba(255,255,255,.06);
+      border-radius:18px;padding:18px;position:relative;overflow:hidden;
+      box-shadow:0 0 24px rgba(0,255,213,.06), inset 0 0 24px rgba(255,78,199,.04);
+    }
+    .lp-card h3{font-size:1rem;margin:0 0 12px}
+    .lp-note{font-size:.85rem;color:#a9b;margin-top:8px}
+
+    /* фичи-карточки */
+    .feat{
+      display:grid;grid-template-rows:120px auto;gap:12px;border-radius:14px;
+      background:linear-gradient(145deg,#1b1b39,#0b0b1e);
+      border:1px solid rgba(255,255,255,.08);
+      box-shadow:inset 0 0 22px rgba(255,78,199,.08), 0 0 22px rgba(0,255,213,.12);
+      transition:transform .15s ease
+    }
+    .feat:hover{transform:translateY(-2px)}
+    .feat .tile{
+      border-radius:12px;
+      background:
+        radial-gradient(180px 120px at 30% 20%, rgba(0,255,213,.18), transparent 60%),
+        radial-gradient(160px 120px at 80% 80%, rgba(255,78,199,.14), transparent 60%),
+        linear-gradient(145deg,#1a1a32,#0b0b1e);
     }
 
-    /* 7) Табло-переключатель */
-    .lab-seg { display:flex; justify-content:center; gap:8px; margin-top:8px; }
-    .lab-seg b {
-      width: 28px; height: 36px; border-radius: 8px;
-      background: linear-gradient(180deg,#1b1b39,#0b0b1e);
-      box-shadow: inset 0 0 12px rgba(0,0,0,.6), 0 0 16px rgba(154,107,255,.28);
-      opacity:.35; transition: opacity .2s ease, transform .2s ease;
+    /* прайс */
+    .price{
+      border-radius:16px;padding:14px;background:linear-gradient(145deg,#1b1b39,#0b0b1e);
+      border:1px solid rgba(255,255,255,.08);box-shadow:inset 0 0 22px rgba(0,0,0,.5)
     }
-    .lab-seg.on b { opacity:1; transform: translateY(-2px); }
+    .p-row{display:flex;gap:12px}
+    .p-col{flex:1;border-radius:12px;padding:14px;border:1px solid rgba(255,255,255,.08);background:rgba(255,255,255,.02)}
+    .p-col.active{box-shadow:0 0 18px rgba(0,255,213,.25), inset 0 0 18px rgba(0,255,213,.18)}
+    .p-bullet{height:10px;border-radius:999px;background:rgba(255,255,255,.12);margin:8px 0}
+    .p-toggle{
+      --w:68px;--h:34px;margin:8px 0 14px auto;border-radius:999px;width:var(--w);height:var(--h);
+      background:#0d0d1f;border:1px solid rgba(255,255,255,.12);position:relative;cursor:pointer;
+      box-shadow:inset 0 0 18px rgba(0,255,213,.06)
+    }
+    .p-toggle::before{
+      content:"";position:absolute;top:3px;left:3px;width:calc(var(--h) - 6px);height:calc(var(--h) - 6px);
+      border-radius:50%;background:linear-gradient(180deg,#1b1b39,#0b0b1e);box-shadow:0 0 10px rgba(154,107,255,.25), inset 0 0 12px rgba(0,0,0,.55);
+      transition:transform .25s ease
+    }
+    .p-toggle.on{border-color:rgba(0,255,213,.4);box-shadow:0 0 18px rgba(0,255,213,.28), inset 0 0 28px rgba(0,255,213,.18)}
+    .p-toggle.on::before{transform:translateX(calc(var(--w) - var(--h)))}
 
-    /* 8) Пружинная карточка */
-    .lab-spring {
-      height: 140px; border-radius: 14px; border:1px solid rgba(255,255,255,.1);
-      background: linear-gradient(145deg, #1b1b39, #0b0b1e);
-      box-shadow: inset 0 0 22px rgba(255,78,199,.08), 0 0 28px rgba(0,255,213,.12);
+    /* FAQ */
+    .faq-item{border:1px solid rgba(255,255,255,.08);border-radius:12px;background:rgba(255,255,255,.02);overflow:hidden}
+    .faq-q{padding:12px;display:flex;justify-content:space-between;align-items:center;cursor:pointer}
+    .faq-a{max-height:0;overflow:hidden;transition:max-height .25s ease}
+    .faq-item.open .faq-a{max-height:120px}
+    .faq-a div{padding:0 12px 12px;color:#cfd7ff}
+    .faq-dot{width:8px;height:8px;border-radius:50%;background:linear-gradient(180deg,var(--fx1),var(--fx2));box-shadow:0 0 12px rgba(0,255,213,.5)}
+
+    /* форма */
+    .form{
+      display:grid;gap:10px
     }
-    .lab-spring.shake { animation: springShake .5s ease; }
-    @keyframes springShake {
-      0%{ transform: translateX(0) }
-      25%{ transform: translateX(-6px) }
-      50%{ transform: translateX(5px) }
-      75%{ transform: translateX(-3px) }
-      100%{ transform: translateX(0) }
+    .f-input{
+      background:linear-gradient(180deg,#1b1b39,#0b0b1e);border:1px solid rgba(255,255,255,.12);
+      border-radius:12px;padding:12px 14px;color:#eaf2ff;outline:none;
+      box-shadow:inset 0 0 14px rgba(0,0,0,.45)
+    }
+    .f-input:focus{border-color:rgba(0,255,213,.45);box-shadow:0 0 16px rgba(0,255,213,.25), inset 0 0 14px rgba(0,0,0,.45)}
+    .f-row{display:grid;gap:10px;grid-template-columns:1fr 1fr}
+    .f-send{
+      -webkit-tap-highlight-color: transparent; outline:none; touch-action:manipulation;
+      border-radius:999px;padding:12px 20px;border:1px solid rgba(255,255,255,.15);
+      color:#fff;font-weight:700;text-transform:uppercase;cursor:pointer;
+      background:linear-gradient(90deg,var(--fx1),var(--fx2));box-shadow:0 0 18px rgba(0,255,213,.25)
+    }
+    .f-send.jelly{animation:jelly .5s ease}
+    @keyframes jelly{
+      0%{transform:scale(1)}30%{transform:scale(1.06,.94)}60%{transform:scale(.97,1.03)}100%{transform:scale(1)}
     }
 
-    /* 9) Световая линия */
-    .lab-glowline {
-      height: 10px; border-radius:999px; overflow:hidden; background: rgba(255,255,255,.08);
-      position: relative;
-    }
-    .lab-glowline::before {
-      content:""; position:absolute; inset:0;
-      background: linear-gradient(90deg, transparent, var(--fx1), var(--fx2), transparent);
-      filter: blur(4px); transform: translateX(-100%);
-      animation: gg 2.2s infinite linear;
-    }
-    @keyframes gg { to { transform: translateX(100%); } }
+    /* «назад» как в других страницах */
+    .back-wrap{text-align:center;margin:12px 0 30px}
 
-    /* контакты/футер как на других страницах */
-    .contact-buttons { margin-top: 20px; display: flex; flex-wrap: wrap; gap: 10px; justify-content: center; }
-    footer { background-color: #111; text-align: center; padding: 20px; color: #bbb; }
-    footer a { color: #00ffc8; text-decoration: none; }
-    footer a:hover { text-decoration: underline; }
-
-    @media (max-width: 768px){
-      .lab-hero h2 { font-size: 1.7rem; }
+    @media(max-width:768px){
+      .lp-hero h2{font-size:1.7rem}
+      .f-row{grid-template-columns:1fr}
     }
   </style>
 </head>
 <body>
 
-  <!-- верхнее описание -->
-  <section class="lab-hero">
-    <h2>Анимации и интерактив — пример визуальных эффектов для сайта</h2>
-    <p>Набор безопасных «кликабельных» элементов: кнопки, тумблеры, подсветка, точки-лоадер и прогресс.</p>
+  <!-- Герой -->
+  <section class="lp-hero">
+    <h2>Лендинги под цель: быстрые, яркие и понятные.</h2>
+    <p>Ниже — интерактивные заглушки типовых блоков: герой-панель с CTA, карточки преимуществ, прайс, FAQ и мини-форма. Всё в твоём неон/космос-стиле — кликается и мигает, но без реальных действий.</p>
   </section>
 
-  <!-- сетка «приколюх» -->
-  <section class="lab-grid">
-    <div class="lab-card">
-      <h3>Неоновая кнопка</h3>
-      <button class="lab-neon-btn pulse" id="btnNeon">Нажми</button>
-      <div class="lab-note">Пульсирует, вспышка под курсором при клике</div>
+  <!-- Герой-демо -->
+  <div class="lp-hero-demo">
+    <div class="lp-shimmer"></div>
+    <div class="lp-line" style="max-width:600px"></div>
+    <div class="lp-line" style="max-width:520px"></div>
+    <div class="lp-cta-row">
+      <button class="lp-cta" id="cta1">Заказать</button>
+      <button class="lp-cta" id="cta2" style="background:linear-gradient(180deg, rgba(0,255,213,.18), rgba(0,0,0,.25));box-shadow:0 0 18px rgba(0,255,213,.22), inset 0 0 14px rgba(0,0,0,.25)">Консультация</button>
+    </div>
+  </div>
+
+  <!-- Сетка демо блоков -->
+  <section class="lp-grid">
+
+    <!-- Карточки преимуществ -->
+    <div class="lp-card">
+      <h3>Преимущества</h3>
+      <div class="feat">
+        <div class="tile"></div>
+        <div>
+          <div class="lp-line" style="max-width:80%"></div>
+          <div class="lp-line" style="max-width:60%"></div>
+        </div>
+      </div>
+      <div class="lp-note">Ховер — мягкий подъём, неон-подсветка</div>
     </div>
 
-    <div class="lab-card">
-      <h3>Тумблер</h3>
-      <div class="lab-toggle" id="toggleDemo" aria-label="toggle"></div>
-      <div class="lab-note">Клик — смена подсветки</div>
+    <!-- Прайс -->
+    <div class="lp-card">
+      <h3>Пакеты</h3>
+      <div class="price">
+        <div class="p-toggle" id="ptoggle" title="месяц/год"></div>
+        <div class="p-row">
+          <div class="p-col" id="p1">
+            <div class="lp-line" style="max-width:70%"></div>
+            <div class="p-bullet"></div><div class="p-bullet"></div><div class="p-bullet"></div>
+          </div>
+          <div class="p-col active" id="p2">
+            <div class="lp-line" style="max-width:70%"></div>
+            <div class="p-bullet"></div><div class="p-bullet"></div><div class="p-bullet"></div>
+          </div>
+        </div>
+      </div>
+      <div class="lp-note">Тумблер поджигает «выбранный» пакет</div>
     </div>
 
-    <div class="lab-card">
-      <h3>Кнопка «желе»</h3>
-      <button class="lab-jelly" id="btnJelly">Прыг-скок</button>
-      <div class="lab-note">Пружинит при клике</div>
+    <!-- FAQ -->
+    <div class="lp-card">
+      <h3>FAQ</h3>
+      <div class="faq-item">
+        <div class="faq-q"><span>Как проходит работа?</span><i class="faq-dot"></i></div>
+        <div class="faq-a"><div>Небольшой текст-заглушка внутри аккордеона.</div></div>
+      </div>
+      <div class="faq-item" style="margin-top:10px">
+        <div class="faq-q"><span>Сроки и правки?</span><i class="faq-dot"></i></div>
+        <div class="faq-a"><div>Демо раскрытия — без реальной логики.</div></div>
+      </div>
+      <div class="lp-note">Тап по вопросу — открыть/закрыть</div>
     </div>
 
-    <div class="lab-card">
-      <h3>Точки-загрузчик</h3>
-      <div class="lab-dots" id="dots"><span></span><span></span><span></span></div>
-      <div class="lab-note">Клик — старт/стоп</div>
+    <!-- Форма-заглушка -->
+    <div class="lp-card">
+      <h3>Мини-форма</h3>
+      <div class="form" id="demoform">
+        <div class="f-row">
+          <input class="f-input" type="text" placeholder="Имя">
+          <input class="f-input" type="text" placeholder="Проект/ниша">
+        </div>
+        <input class="f-input" type="email" placeholder="Email">
+        <textarea class="f-input" rows="3" placeholder="Комментарий"></textarea>
+        <button type="button" class="f-send" id="sendBtn">Отправить</button>
+      </div>
+      <div class="lp-note">Кнопка просто «пружинит» — без отправки</div>
     </div>
 
-    <div class="lab-card">
-      <h3>Параллакс подсветка</h3>
-      <div class="lab-parallax" id="parallax"></div>
-      <div class="lab-note">Блик следует за курсором</div>
-    </div>
-
-    <div class="lab-card">
-      <h3>Прогресс-бар</h3>
-      <div class="lab-progress"><i id="bar" style="--p: 0%"></i></div>
-      <div class="lab-note">Клик — +20%, до 100%</div>
-    </div>
-
-    <div class="lab-card">
-      <h3>Табло (переключатель)</h3>
-      <div class="lab-seg" id="seg"><b></b><b></b><b></b><b></b></div>
-      <div class="lab-note">Клик — меняет состояние</div>
-    </div>
-
-    <div class="lab-card">
-      <h3>Пружинная карточка</h3>
-      <div class="lab-spring" id="spring"></div>
-      <div class="lab-note">Клик — короткая «дрожь»</div>
-    </div>
-
-    <div class="lab-card">
-      <h3>Световая линия</h3>
-      <div class="lab-glowline"></div>
-      <div class="lab-note">Мягкое мерцание по циклу</div>
-    </div>
   </section>
 
-  <div style="text-align:center; margin: 10px 0 30px;">
+  <!-- Назад на главную (как у других страниц) -->
+  <div class="back-wrap">
     <a href="../index.html" class="cta-button">Вернуться на главную страницу</a>
   </div>
 
-  <!-- контакты (точно как у тебя) -->
+  <!-- контакты как везде -->
   <section id="contacts">
     <h2>Связаться со мной</h2>
-    <p>Напиши мне в мессенджер или на почту — отвечаю быстро!</p>
+    <p>Напиши в мессенджер или на почту — отвечаю быстро.</p>
     <div class="contact-buttons">
       <a class="cta-button telegram" href="https://t.me/yourusername" target="_blank">Telegram</a>
       <a class="cta-button whatsapp" href="https://wa.me/71234567890" target="_blank">WhatsApp</a>
-      <a class="cta-button alt" href="mailto:example@mail.ru?subject=Заказ%20анимаций">Email</a>
+      <a class="cta-button alt" href="mailto:example@mail.ru?subject=Лендинг">Email</a>
     </div>
   </section>
 
@@ -278,70 +259,45 @@
     <p>&copy; 2025 Ваше имя. Все права защищены. <a href="../privacy-policy.html">Политика конфиденциальности</a></p>
   </footer>
 
-  <!-- общий скрипт проекта (если используешь) -->
+  <!-- общий скрипт проекта (если есть) -->
   <script src="../assets/js/script.js"></script>
 
   <!-- локальная логика демо -->
   <script>
-    // 1) Неоновая кнопка: вспышка под курсором при клике
-    const btnNeon = document.getElementById('btnNeon');
-    btnNeon.addEventListener('pointermove', (e) => {
-      const r = btnNeon.getBoundingClientRect();
-      btnNeon.style.setProperty('--x', (e.clientX - r.left) + 'px');
-      btnNeon.style.setProperty('--y', (e.clientY - r.top) + 'px');
-    });
-    btnNeon.addEventListener('click', () => {
-      btnNeon.classList.add('is-flash');
-      setTimeout(()=>btnNeon.classList.remove('is-flash'), 220);
-    });
+    // вспышка CTA по позиции тапа
+    function attachFlash(btn){
+      btn.addEventListener('pointermove', e=>{
+        const r=btn.getBoundingClientRect();
+        btn.style.setProperty('--x',(e.clientX - r.left)+'px');
+        btn.style.setProperty('--y',(e.clientY - r.top)+'px');
+      });
+      btn.addEventListener('click',()=>{
+        btn.classList.add('flash'); setTimeout(()=>btn.classList.remove('flash'),220);
+      });
+    }
+    attachFlash(document.getElementById('cta1'));
+    attachFlash(document.getElementById('cta2'));
 
-    // 2) Тумблер
-    const toggle = document.getElementById('toggleDemo');
-    toggle.addEventListener('click', () => toggle.classList.toggle('is-on'));
-
-    // 3) «Желе»-кнопка
-    const btnJelly = document.getElementById('btnJelly');
-    btnJelly.addEventListener('click', () => {
-      btnJelly.classList.remove('is-bounce');
-      void btnJelly.offsetWidth; // перезапуск анимации
-      btnJelly.classList.add('is-bounce');
-    });
-
-    // 4) Loader точки — запуск/стоп по клику
-    const dots = document.getElementById('dots');
-    dots.addEventListener('click', () => dots.classList.toggle('is-run'));
-
-    // 5) Параллакс-подсветка
-    const par = document.getElementById('parallax');
-    par.addEventListener('pointermove', (e) => {
-      const r = par.getBoundingClientRect();
-      const x = ((e.clientX - r.left) / r.width) * 100;
-      const y = ((e.clientY - r.top) / r.height) * 100;
-      par.style.setProperty('--mx', x + '%');
-      par.style.setProperty('--my', y + '%');
+    // тумблер прайса
+    const pt = document.getElementById('ptoggle');
+    const p1 = document.getElementById('p1');
+    const p2 = document.getElementById('p2');
+    pt.addEventListener('click',()=>{
+      pt.classList.toggle('on');
+      p1.classList.toggle('active');
+      p2.classList.toggle('active');
     });
 
-    // 6) Прогресс-бар — по клику растёт до 100%, затем сброс
-    const bar = document.getElementById('bar');
-    bar.parentElement.addEventListener('click', () => {
-      const current = parseInt(getComputedStyle(bar).getPropertyValue('--p')) || 0;
-      const next = current >= 100 ? 0 : Math.min(current + 20, 100);
-      bar.style.setProperty('--p', next + '%');
+    // FAQ
+    document.querySelectorAll('.faq-item .faq-q').forEach(q=>{
+      q.addEventListener('click',()=> q.parentElement.classList.toggle('open'));
     });
 
-    // 7) Табло — цикличный переключатель
-    const seg = document.getElementById('seg');
-    seg.addEventListener('click', () => seg.classList.toggle('on'));
-
-    // 8) Пружинная карточка
-    const spring = document.getElementById('spring');
-    spring.addEventListener('click', () => {
-      spring.classList.remove('shake');
-      void spring.offsetWidth; // restart
-      spring.classList.add('shake');
+    // кнопка формы — «желе»
+    const sendBtn = document.getElementById('sendBtn');
+    sendBtn.addEventListener('click', ()=>{
+      sendBtn.classList.remove('jelly'); void sendBtn.offsetWidth; sendBtn.classList.add('jelly');
     });
   </script>
 </body>
 </html>
-
-
