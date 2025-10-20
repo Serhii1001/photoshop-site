@@ -6,201 +6,166 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Реставрация — Photoshop Услуги</title>
 
+  <!-- Подключение общего файла стилей -->
   <link rel="stylesheet" href="../assets/css/styles.css" />
 
   <style>
+    html {
+      scroll-behavior: smooth;
+    }
 
-html {
-  scroll-behavior: smooth;
-}
+    body {
+      margin: 0;
+      font-family: Arial, sans-serif;
+      background: radial-gradient(ellipse at center, #0f0f2b 0%, #000000 100%);
+      color: white;
+    }
 
-body {
-  margin: 0;
-  font-family: Arial, sans-serif;
-  background: radial-gradient(ellipse at center, #0f0f2b 0%, #000000 100%);
-  color: white;
-}
+    section {
+      padding: 60px 20px;
+      text-align: center;
+    }
 
-section {
-  padding: 60px 20px;
-  text-align: center;
-}
+    h2 {
+      font-size: 2.5rem;
+      margin-bottom: 20px;
+    }
 
-h2 {
-  font-size: 2.5rem;
-  margin-bottom: 20px;
-}
+    p {
+      color: #ccc;
+    }
 
-p {
-  color: #ccc;
-  line-height: 1.6;
-  max-width: 900px;
-  margin: 0 auto;
-}
+    .service-gallery {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 20px;
+      justify-items: center;
+      margin-top: 30px;
+      margin-bottom: 30px;
+    }
 
-.service-gallery {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-  gap: 20px;
-  justify-items: center;
-  margin: 40px auto 30px;
-  width: min(1100px, 100%);
-}
+    .service-card {
+      background: linear-gradient(145deg, #1e1e2f, #12121f);
+      padding: 10px;
+      border-radius: 15px;
+      box-shadow: 0 0 15px rgba(0, 255, 255, 0.2);
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
 
-.service-card {
-  background: linear-gradient(145deg, #1e1e2f, #12121f);
-  padding: 12px;
-  border-radius: 15px;
-  box-shadow: 0 0 15px rgba(0, 255, 255, 0.25);
-  transition: transform 0.3s ease, box-shadow 0.3s ease;
-  width: 100%;
-  max-width: 340px;
-}
+    .service-card:hover {
+      transform: scale(1.05);
+      box-shadow: 0 0 20px rgba(0, 255, 255, 0.5);
+    }
 
-.service-card:hover {
-  transform: scale(1.03);
-  box-shadow: 0 0 20px rgba(0, 255, 255, 0.5);
-}
+    .service-card img {
+      width: 100%;
+      height: auto;
+      border-radius: 10px;
+      cursor: pointer;
+      transition: transform 0.3s ease;
+    }
 
-.service-card img {
-  width: 100%;
-  height: auto;
-  border-radius: 10px;
-  cursor: pointer;
-  transition: transform 0.3s ease;
-}
+    .cta-button {
+      background-color: #ff4c60;
+      color: white;
+      padding: 15px 30px;
+      font-size: 1.2rem;
+      border: none;
+      border-radius: 8px;
+      text-decoration: none;
+      margin-top: 30px;
+      transition: background-color 0.3s ease;
+      display: inline-block;
+    }
 
-.service-card img:hover {
-  transform: scale(1.02);
-}
+    .cta-button:hover {
+      background-color: #e6334f;
+    }
 
-.cta-button {
-  background-color: #ff4c60;
-  color: white;
-  padding: 15px 30px;
-  font-size: 1.2rem;
-  border: none;
-  border-radius: 8px;
-  text-decoration: none;
-  margin-top: 30px;
-  transition: background-color 0.3s ease;
-  display: inline-block;
-}
+    .modal {
+      display: none;
+      position: fixed;
+      z-index: 1000;
+      left: 0;
+      top: 0;
+      width: 100%;
+      height: 100%;
+      background-color: rgba(10, 10, 30, 0.9);
+      justify-content: center;
+      align-items: center;
+      backdrop-filter: blur(8px);
+      animation: fadeIn 0.4s ease;
+    }
 
-.cta-button:hover {
-  background-color: #e6334f;
-}
+    .modal img {
+      max-width: 90vw;
+      max-height: 90vh;
+      border-radius: 10px;
+      box-shadow: 0 0 50px rgba(0, 255, 255, 0.4);
+      animation: zoomIn 0.3s ease;
+    }
 
-.cta-button.telegram {
-  background-color: #0088cc;
-}
+    @keyframes zoomIn {
+      from {
+        transform: scale(0.6);
+        opacity: 0;
+      }
 
-.cta-button.telegram:hover {
-  background-color: #007bb5;
-}
+      to {
+        transform: scale(1);
+        opacity: 1;
+      }
+    }
 
-.cta-button.whatsapp {
-  background-color: #25d366;
-}
+    @keyframes fadeIn {
+      from {
+        opacity: 0;
+      }
 
-.cta-button.whatsapp:hover {
-  background-color: #1da851;
-}
+      to {
+        opacity: 1;
+      }
+    }
 
-.cta-button.alt {
-  background-color: #555;
-}
+    .contact-buttons {
+      margin-top: 20px;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      justify-content: center;
+    }
 
-.cta-button.alt:hover {
-  background-color: #444;
-}
+    footer {
+      background-color: #111;
+      text-align: center;
+      padding: 20px;
+      color: #bbb;
+    }
 
-.modal {
-  display: none;
-  position: fixed;
-  z-index: 1000;
-  left: 0;
-  top: 0;
-  width: 100%;
-  height: 100%;
-  background-color: rgba(10, 10, 30, 0.9);
-  justify-content: center;
-  align-items: center;
-  backdrop-filter: blur(8px);
-  animation: fadeIn 0.4s ease;
-  padding: 20px;
-}
+    footer a {
+      color: #00ffc8;
+      text-decoration: none;
+    }
 
-.modal img {
-  max-width: 90vw;
-  max-height: 90vh;
-  border-radius: 10px;
-  box-shadow: 0 0 50px rgba(0, 255, 255, 0.4);
-  animation: zoomIn 0.3s ease;
-  background: radial-gradient(circle at center, rgba(0, 0, 0, 0.2), transparent 70%);
-}
+    footer a:hover {
+      text-decoration: underline;
+    }
 
-@keyframes zoomIn {
-  from {
-    transform: scale(0.6);
-    opacity: 0;
-  }
+    @media (max-width: 768px) {
+      h2 {
+        font-size: 2rem;
+      }
 
-  to {
-    transform: scale(1);
-    opacity: 1;
-  }
-}
+      .cta-button {
+        font-size: 1rem;
+        padding: 10px 20px;
+      }
 
-@keyframes fadeIn {
-  from {
-    opacity: 0;
-  }
-
-  to {
-    opacity: 1;
-  }
-}
-
-.contact-buttons {
-  margin-top: 20px;
-  display: flex;
-  flex-wrap: wrap;
-  gap: 10px;
-  justify-content: center;
-}
-
-footer {
-  background-color: #111;
-  text-align: center;
-  padding: 20px;
-  color: #bbb;
-}
-
-footer a {
-  color: #00ffc8;
-  text-decoration: none;
-}
-
-footer a:hover {
-  text-decoration: underline;
-}
-
-@media (max-width: 768px) {
-  h2 {
-    font-size: 2rem;
-  }
-
-  .cta-button {
-    font-size: 1rem;
-    padding: 12px 24px;
-  }
-
-  .service-gallery {
-    gap: 16px;
-  }
-}
-
+      .service-gallery {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 15px;
+      }
+    }
   </style>
 </head>
 
@@ -212,16 +177,16 @@ footer a:hover {
 
     <div class="service-gallery">
       <div class="service-card">
-        <img src="../images/restoration/restoration1.png" alt="1" onclick="openModal(this)" />
+        <img src="../images/retouch/restoration1.png" alt="Ретушь 1" onclick="openModal(this)" />
       </div>
       <div class="service-card">
-        <img src="../images/restoration/restoration2.png" alt="2" onclick="openModal(this)" />
+        <img src="../images/retouch/restoration2.png" alt="Ретушь 2" onclick="openModal(this)" />
       </div>
       <div class="service-card">
-        <img src="../images/restoration/restoration3.png" alt="3" onclick="openModal(this)" />
+        <img src="../images/retouch/restoration3.png" alt="Ретушь 3" onclick="openModal(this)" />
       </div>
       <div class="service-card">
-        <img src="../images/restoration/restoration4.png" alt="4" onclick="openModal(this)" />
+        <img src="../images/retouch/restoration4.png" alt="Ретушь 4" onclick="openModal(this)" />
       </div>
     </div>
 
@@ -243,35 +208,25 @@ footer a:hover {
   </section>
 
   <footer>
-    <p>&copy; 2025 Ваше имя. Все права защищены. <a href="../privacy-policy.html">Политика конфиденциальности</a></p>
+    <p>&copy; 2025 Ваше имя. Все права защищены. <a href="#">Политика конфиденциальности</a></p>
   </footer>
 
-
-<script>
-  function openModal(imgElement) {
-    const modal = document.getElementById('myModal');
-    const modalImg = document.getElementById('modalImage');
-    modal.style.display = 'flex';
-    modalImg.src = imgElement.src;
-    modalImg.alt = imgElement.alt;
-  }
-
-  function closeModal(event) {
-    const modal = document.getElementById('myModal');
-    if (event.target === modal) {
-      modal.style.display = 'none';
-    }
-  }
-
-  document.addEventListener('keydown', (event) => {
-    if (event.key === 'Escape') {
+  <script>
+    function openModal(imgElement) {
       const modal = document.getElementById('myModal');
-      if (modal.style.display === 'flex') {
-        modal.style.display = 'none';
+      const modalImg = document.getElementById('modalImage');
+      modal.style.display = "flex";
+      modalImg.src = imgElement.src;
+    }
+
+    function closeModal(event) {
+      const modal = document.getElementById('myModal');
+      const modalImg = document.getElementById('modalImage');
+      if (event.target === modal || event.target === modalImg) {
+        modal.style.display = "none";
       }
     }
-  });
-</script>
+  </script>
 
 </body>
 
