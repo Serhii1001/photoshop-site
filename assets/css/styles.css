@@ -348,3 +348,21 @@ body {
     padding: 10px 20px;
   }
 }
+
+/* мобильный тап-хайлайт и форма вспышки */
+button, .cta-button, .lab-neon-btn, .lab-jelly, .lab-toggle {
+  -webkit-tap-highlight-color: transparent;
+  outline: none;
+  touch-action: manipulation;
+}
+
+/* чтобы вспышка повторяла скругление */
+.lab-neon-btn::after {
+  border-radius: inherit;
+}
+
+/* клип прямоугольных оверлеев на скруглённых кнопках */
+.lab-neon-btn, .lab-jelly {
+  overflow: hidden;
+  border-radius: 999px;
+}
