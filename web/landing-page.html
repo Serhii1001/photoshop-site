@@ -66,12 +66,12 @@
     .card-b{padding:14px; display:flex; flex:1; align-items:center; justify-content:center}
 
     @media (min-width:960px){
-      .grid{grid-template-columns:repeat(3, 1fr); align-items:start} /* добавили align-items:start */
-      .card{min-height:var(--cardH)}                                 /* было height -> стало min-height */
+      .grid{grid-template-columns:repeat(3, 1fr); align-items:start}
+      .card{height:var(--cardH)}                 /* фиксируем одинаковую высоту */
       .card-b{
-        padding:18px;                 /* было 16px */
-        align-items:flex-start;       /* было center */
-        justify-content:flex-start;   /* было center */
+        padding:18px;
+        align-items:flex-start;                  /* контент сверху */
+        justify-content:flex-start;
       }
     }
     @media (min-width:600px) and (max-width:959.98px){
@@ -95,6 +95,11 @@
     .aof .ctas{display:flex; gap:8px; flex-wrap:wrap}
     .ghost{padding:10px 14px; border-radius:10px; border:1px dashed rgba(255,255,255,.22); color:#e9faff; background:transparent}
 
+    /* растягиваем контент первой карточки на ПК, а на моб/планшете оставляем комфортную ширину */
+    .card-inner{display:grid;gap:12px;width:100%}
+    @media (max-width:959.98px){
+      .aof-wrap{max-width:520px}     /* как было визуально на моб/планшете */
+    }
     /* 2) Три УТП */
     .utp{display:grid; gap:8px; width:100%}
     .utp .item{display:flex; gap:10px; align-items:flex-start; padding:10px;
@@ -158,7 +163,7 @@
     .parallax{position:relative;width:100%;height:160px;border-radius:12px;overflow:hidden;background:#0c1026;perspective:800px}
     .parallax .layer{position:absolute;inset:0;background-position:center;background-size:cover;opacity:.65;transition:transform .15s ease-out}
     .parallax .text{position:absolute;left:0;right:0;bottom:12px;text-align:center;font-weight:800;color:#e6ffff;text-shadow:0 10px 30px rgba(0,0,0,.5)}
-    @media (min-width:960px){ .parallax{height:170px} } /* немного ниже, чтобы не перевешивал соседние карточки */
+    @media (min-width:960px){ .parallax{height:160px} } /* ещё чуточку компактнее на ПК */
     .card-b > * { width:100% } /* чтобы внутренности растягивались на ширину контейнера */
 
     /* Reveal */
@@ -209,8 +214,7 @@
         <article class="card reveal">
           <div class="card-h">Above-the-fold (герой)</div>
           <div class="card-b">
-            <div style="display:grid;gap:12px;width:100%;max-width:520px">
-              <div class="parallax" data-parallax>
+            <div class="card-inner aof-wrap">              <div class="parallax" data-parallax>
                 <div class="layer" style="background-image: radial-gradient(600px 140px at 50% 20%, rgba(127,255,212,.35), transparent 60%);"></div>
                 <div class="layer" style="background-image: linear-gradient(90deg, rgba(39,215,255,.25), rgba(124,77,255,.25)); mix-blend: screen;"></div>
                 <div class="text">Ясный заголовок + выгодность</div>
