@@ -11,7 +11,7 @@
       --accent:#00ffc8; --text:#fff; --muted:#b7c0cb;
       --hot:#ff4c60;         /* красный фирменный */
       --radius:16px;
-      --cardH: 360px;        /* одинаковая высота карточек на ПК */
+      --cardH: 380px;        /* одинаковая высота карточек на ПК */
     }
     html{scroll-behavior:smooth}
     *{box-sizing:border-box}
@@ -174,28 +174,48 @@
     /* === Метрики результата === */
     .metrics{
       display:grid; grid-template-columns:repeat(3,1fr); gap:14px; width:100%;
+      align-items:stretch;                 /* все .kpi одной высоты */
     }
     .kpi{
-      border:1px solid rgba(0,255,200,.12); border-radius:12px; background:#0b0f22;
-      padding:16px; display:grid; gap:10px; text-align:center;
-      grid-template-rows:auto 1fr auto;        /* число в «центре» */
-      align-items:center; min-height:132px;    /* больше воздуха под цифры */
+      border:1px solid rgba(0,255,200,.12);
+      border-radius:12px; background:#0b0f22;
+      padding:18px; display:grid; gap:12px; text-align:center;
+
+      /* три «ряды»: подпись / число / подстрока; растягиваемся по высоте */
+      grid-template-rows:auto 1fr auto;
+      align-items:center;
+      min-height:150px;                     /* стало выше — больше воздуха */
     }
+
     .kpi .label{
       color:#cfe; font-size:12.5px; letter-spacing:.2px;
+      line-height:1.1; min-height:1.1em;    /* выравнивание по высоте заголовка */
     }
+
     .kpi .num{
-      display:inline-block;                    /* чтобы можно было паддинг */
-      font-weight:900; font-size:32px; line-height:1; letter-spacing:.3px; color:#e9faff;
-      padding:8px 14px; border-radius:12px;    /* «пилюля» вокруг числа */
+      display:inline-block;
+      white-space:nowrap;                   /* число не переносится */
+      text-align:center;
+      font-weight:900; letter-spacing:.3px; color:#e9faff;
+      font-size:32px; line-height:1;
+
+      /* «пилюля» стабильно шире числа */
+      min-width:6.2ch;                      /* фиксирует ширину, убирает «скачки» */
+      padding:10px 18px; border-radius:14px;
       background:linear-gradient(145deg,#0e1327,#0b0f22);
-      box-shadow:inset 0 0 0 1px rgba(0,255,200,.15), 0 6px 18px rgba(0,0,0,.25);
+      box-shadow:inset 0 0 0 1px rgba(0,255,200,.16), 0 6px 18px rgba(0,0,0,.25);
     }
-    .kpi .small{color:#9fb3c7; font-size:12px}
+
+    .kpi .small{
+      color:#9fb3c7; font-size:12px; line-height:1.2;
+      min-height:1.2em;                     /* нижняя подпись не «дергает» высоту */
+    }
+
     @media (min-width:960px){
-      .kpi{min-height:140px}
-      .kpi .num{font-size:34px; padding:10px 16px}
+      .kpi{min-height:160px}
+      .kpi .num{font-size:34px}
     }
+
 
 
     @media (max-width:959.98px){
