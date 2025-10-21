@@ -181,14 +181,14 @@
     }
 
     .kpi{
-          border:1px solid rgba(0,255,200,.12);
+      border:1px solid rgba(0,255,200,.12);
       border-radius:12px; background:#0b0f22;
-      padding:20px; display:grid; gap:12px; text-align:center;
+      padding:22px; display:grid; gap:14px; text-align:center;
 
       /* три ряда: label / num / small */
       grid-template-rows:auto 1fr auto;
       justify-items:center; align-items:center;
-      min-height:168px;                    /* больше воздуха под число */
+      min-height:180px;                         /* на ПК хватает, ничего не жмёт */
     }
 
     .kpi .label{
@@ -197,20 +197,36 @@
     }
 
     .kpi .num{
+      position:relative;                      /* для псевдоэлемента */
       display:inline-flex; align-items:center; justify-content:center;
       white-space:nowrap; text-align:center;
       font-weight:900; color:#e9faff;
-      font-size:34px; line-height:1.05;
+      font-size:36px; line-height:1.05;
 
-      /* РОВНЫЕ цифры: без «плясок» при смене */
+      /* ровная ширина цифр — ничего не «прыгает» */
       font-variant-numeric: tabular-nums;
       -webkit-font-feature-settings:"tnum" 1; font-feature-settings:"tnum" 1;
 
-      /* стабильная «пилюля» вокруг числа */
-      min-width:7.0ch;                     /* шире — не жмётся ни с 3 цифрами, ни с 5.5% */
-      padding:12px 18px; border-radius:16px;
-      background:linear-gradient(145deg,#0e1327,#0b0f22);
-      box-shadow:inset 0 0 0 1px rgba(0,255,200,.16), 0 6px 18px rgba(0,0,0,.25);
+      /* стабильная ширина «контента» числа — под проценты/секунды */
+      min-width:6.8ch;
+      padding:6px 8px;                        /* минимальный внутренний отступ */
+
+      /* ВАЖНО: убираем фон и рамки, чтобы не было «пилюли» */
+      background:none;
+      box-shadow:none;
+    }
+    .kpi .num::after{
+      content:"";
+      position:absolute; left:50%; transform:translateX(-50%);
+      bottom:-10px;                             /* расстояние до числа */
+      width:68%; height:10px;                   /* длина/высота «капсулы» */
+      border-radius:999px;
+      background:
+        radial-gradient(60% 120% at 50% 50%, rgba(0,255,200,.18), transparent 70%),
+        linear-gradient(145deg, rgba(0,255,200,.22), rgba(124,77,255,.12));
+      box-shadow: 0 0 0 1px rgba(0,255,200,.18) inset;
+      opacity:.9;
+      pointer-events:none;
     }
 
     .kpi .small{
