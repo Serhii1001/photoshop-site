@@ -85,6 +85,57 @@
       display:grid; gap:10px;
       border:1px solid rgba(0,255,200,.12);
     }
+	    /* === Каркас лендинга (анимированный) === */
+    .wireframe{
+      width:100%; border:1px solid rgba(0,255,200,.12); border-radius:12px; background:#0b0f22;
+      padding:16px; display:grid; gap:14px;
+    }
+    .wf-top{display:flex; justify-content:space-between; align-items:center; gap:12px}
+    .wf-logo{width:100px; height:18px; border-radius:6px}
+    .wf-menu{flex:1; height:14px; border-radius:6px}
+
+    .wf-hero{display:grid; grid-template-columns:1.2fr 1fr; gap:14px}
+    .wf-hero-left{display:grid; gap:10px; align-content:start}
+    .wf-h1{height:28px; width:80%; border-radius:8px}
+    .wf-p{height:16px; width:65%; border-radius:8px}
+    .wf-cta{
+      border:1px dashed rgba(255,255,255,.25); background:transparent; color:#e9faff;
+      padding:10px 14px; border-radius:10px; width:max-content; cursor:default;
+    }
+
+    .wf-hero-right{display:grid}
+    .wf-img{height:110px; border-radius:10px}
+
+    .wf-feats{display:grid; grid-template-columns:repeat(3,1fr); gap:10px}
+    .wf-feat{height:16px; border-radius:8px}
+
+    /* skeleton + shine */
+    .skeleton{background:linear-gradient(145deg,#0e1327,#0b0f22); position:relative; overflow:hidden}
+    .shine::after{
+      content:""; position:absolute; inset:0;
+      background:linear-gradient(90deg, transparent, rgba(255,255,255,.08), transparent);
+      transform:translateX(-100%);
+      animation:shine 2.2s linear infinite;
+    }
+    @keyframes shine{to{transform:translateX(100%)}}
+
+    /* CTA пульс */
+    .pulse{position:relative}
+    .pulse::before{
+      content:""; position:absolute; inset:-2px; border-radius:inherit;
+      border:1px solid rgba(0,255,200,.25); filter:blur(1px);
+      animation:pulse 2.4s ease-in-out infinite;
+    }
+    @keyframes pulse{
+      0%{opacity:.45} 50%{opacity:.1} 100%{opacity:.45}
+    }
+
+    /* адаптации */
+    @media (max-width:959.98px){
+      .wf-hero{grid-template-columns:1fr}
+      .wf-img{height:90px}
+    }
+
     .aof .headline{
       font-weight:900; letter-spacing:.2px;
       background:linear-gradient(90deg,#fff,#b8fff0 40%,#7fd7ff 80%);
@@ -120,6 +171,21 @@
       filter:saturate(1.1) drop-shadow(0 8px 20px rgba(0,0,0,.35));
       transition:transform .2s ease, filter .2s ease;
     }
+    /* === Метрики результата === */
+    .metrics{
+      display:grid; grid-template-columns:repeat(3,1fr); gap:12px; width:100%;
+    }
+    .kpi{
+      border:1px solid rgba(0,255,200,.12); border-radius:12px; background:#0b0f22;
+      padding:12px; display:grid; gap:6px; text-align:center;
+    }
+    .kpi .label{color:#cfe; font-size:12.5px}
+    .kpi .num{font-weight:900; font-size:28px; letter-spacing:.3px; color:#e9faff}
+    .kpi .small{color:#9fb3c7; font-size:12px}
+
+    @media (max-width:959.98px){
+      .metrics{grid-template-columns:1fr 1fr}
+    }
     .badge:hover{transform:translateY(-2px); filter:saturate(1.25) drop-shadow(0 10px 24px rgba(0,0,0,.45))}
 
     /* 4) Форма лида (с согласиями и UTM) */
@@ -134,8 +200,21 @@
 
     /* 5) Процесс/этапы */
     .steps{display:grid;gap:10px;width:100%}
-    .step{display:flex;gap:10px;align-items:center;background:#0b0f22;border:1px solid rgba(255,255,255,.07);border-radius:12px;padding:12px}
-    .num{width:30px;height:30px;border-radius:8px;background:#131a39;display:grid;place-items:center;font-weight:800;color:#bff;border:1px solid rgba(0,255,200,.18)}
+    .step{
+      display:flex;gap:10px;align-items:center;background:#0b0f22;
+      border:1px solid rgba(255,255,255,.07);border-radius:12px;padding:10px
+    }
+    .num{
+      width:26px;height:26px;border-radius:8px;background:#131a39;display:grid;place-items:center;
+      font-weight:800;color:#bff;border:1px solid rgba(0,255,200,.18); font-size:12px
+    }
+
+    /* На ПК — две колонки, чтобы влезло в фикс-высоту карточки */
+    @media (min-width:960px){
+      .steps{grid-template-columns:1fr 1fr; gap:10px}
+      .step{padding:9px}
+      .step div:last-child{font-size:14px; line-height:1.25}
+    }
 
     /* 6) SEO/OG превью */
     .seo{
@@ -209,27 +288,34 @@
       <h2>Что входит в продающий лендинг</h2>
       <p>На ПК ниже — карточки одинаковой высоты; на мобильных — авто-высота.</p>
 
-      <div class="grid">
-        <!-- 1. Above-the-fold герой + лёгкий параллакс фон -->
+        <!-- 1. Каркас лендинга (анимированный) -->
         <article class="card reveal">
-          <div class="card-h">Above-the-fold (герой)</div>
+          <div class="card-h">Каркас лендинга (анимированный)</div>
           <div class="card-b">
-            <div class="card-inner aof-wrap">              <div class="parallax" data-parallax>
-                <div class="layer" style="background-image: radial-gradient(600px 140px at 50% 20%, rgba(127,255,212,.35), transparent 60%);"></div>
-                <div class="layer" style="background-image: linear-gradient(90deg, rgba(39,215,255,.25), rgba(124,77,255,.25)); mix-blend: screen;"></div>
-                <div class="text">Ясный заголовок + выгодность</div>
+            <div class="wireframe">
+              <div class="wf-top">
+                <div class="wf-logo skeleton shine"></div>
+                <div class="wf-menu skeleton shine"></div>
               </div>
-              <div class="aof">
-                <div class="headline">Запускаем лендинг за 3–7 дней</div>
-                <div class="sub">Чёткое УТП, понятная структура, акцент на целевом действии.</div>
-                <div class="ctas">
-                  <button class="ghost">CTA: Получить расчёт</button>
-                  <button class="ghost">CTA: Консультация</button>
+              <div class="wf-hero">
+                <div class="wf-hero-left">
+                  <div class="wf-h1 skeleton shine"></div>
+                  <div class="wf-p skeleton shine"></div>
+                  <button class="wf-cta pulse">Целевое действие</button>
                 </div>
+                <div class="wf-hero-right">
+                  <div class="wf-img skeleton shine"></div>
+                </div>
+              </div>
+              <div class="wf-feats">
+                <div class="wf-feat skeleton shine"></div>
+                <div class="wf-feat skeleton shine"></div>
+                <div class="wf-feat skeleton shine"></div>
               </div>
             </div>
           </div>
         </article>
+
 
         <!-- 2. Три УТП -->
         <article class="card reveal">
@@ -243,15 +329,26 @@
           </div>
         </article>
 
-        <!-- 3. Блок доверия -->
+        <!-- 3. Метрики результата (анимированные) -->
         <article class="card reveal">
-          <div class="card-h">Доверие и социальные доказательства</div>
+          <div class="card-h">Метрики результата</div>
           <div class="card-b">
-            <div class="trust">
-              <div class="badge">★★★★★ Отзывы</div>
-              <div class="badge">Кейсы</div>
-              <div class="badge">Сертификаты</div>
-              <div class="badge">Гарантия</div>
+            <div class="metrics">
+              <div class="kpi">
+                <div class="label">Заявок в месяц</div>
+                <div class="num" data-count="128">0</div>
+                <div class="small">после запуска</div>
+              </div>
+              <div class="kpi">
+                <div class="label">Конверсия</div>
+                <div class="num" data-count="4.8" data-suffix="%">0%</div>
+                <div class="small">средняя по проектам</div>
+              </div>
+              <div class="kpi">
+                <div class="label">Скорость загрузки</div>
+                <div class="num" data-count="1.2" data-suffix="s">0s</div>
+                <div class="small">на главной секции</div>
+              </div>
             </div>
           </div>
         </article>
@@ -389,6 +486,33 @@
     document.querySelectorAll('#faq .acc-item').forEach(item=>{
       item.querySelector('.acc-head').addEventListener('click', ()=> item.classList.toggle('open'));
     });
+    // Счётчик для .num[data-count]
+    const runCounters = entries => {
+      entries.forEach(en=>{
+        if(!en.isIntersecting) return;
+        const nums = en.target.querySelectorAll('.num[data-count]');
+        nums.forEach(el=>{
+          const target = parseFloat(el.dataset.count);
+          const suffix = el.dataset.suffix || '';
+          const isInt = Number.isInteger(target);
+          const dur = 1200; // ms
+          const t0 = performance.now();
+          const step = (t)=>{
+            const p = Math.min(1,(t-t0)/dur);
+            const val = target*p;
+            el.textContent = isInt ? Math.round(val) + suffix : (val).toFixed(1) + suffix;
+            if(p<1) requestAnimationFrame(step);
+          };
+          requestAnimationFrame(step);
+          // чтобы не перезапускалось
+          el.removeAttribute('data-count');
+        });
+        io2.unobserve(en.target);
+      });
+    };
+    const io2 = new IntersectionObserver(runCounters,{threshold:.4});
+    document.querySelectorAll('.metrics').forEach(m=>io2.observe(m));
+
   </script>
 </body>
 </html>
