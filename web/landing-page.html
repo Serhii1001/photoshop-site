@@ -1,332 +1,267 @@
 <!DOCTYPE html>
 <html lang="ru">
-
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Лендинг — Создание одностраничных сайтов</title>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover"/>
+  <title>Лендинг — Демонстрация анимаций</title>
 
-  <!-- Подключение общего файла стилей (оставляем как в оригинале) -->
-  <link rel="stylesheet" href="../assets/css/styles.css"/>
+  <!-- Если у тебя есть общий styles.css — можешь подключить. Встроенные стили ниже учитывают мобильные правки -->
+  <!-- <link rel="stylesheet" href="../assets/css/styles.css"> -->
 
   <style>
-    html { scroll-behavior: smooth; }
     :root{
-      --bg1:#0f0f2b; --bg2:#000;
-      --card1:#1e1e2f; --card2:#12121f;
+      --bg1:#0e1024; --bg2:#05060f;
+      --card1:#17192e; --card2:#101225;
       --accent:#00ffc8; --hot:#ff4c60;
-      --text:#ffffff; --muted:#bfc2cc;
-      --glow:0 0 15px rgba(0,255,255,.22);
+      --text:#fff; --muted:#b7c0cb;
+      --radius:16px;
     }
-
+    html{scroll-behavior:smooth}
+    *{box-sizing:border-box}
     body{
-      margin:0;
-      font-family: Arial, system-ui, -apple-system, Segoe UI, Roboto, sans-serif;
-      background: radial-gradient(ellipse at center, var(--bg1) 0%, var(--bg2) 100%);
+      margin:0; font-family:Inter,system-ui,Segoe UI,Roboto,Arial,sans-serif;
       color:var(--text);
+      background: radial-gradient(1200px 400px at 50% -20%, rgba(0,255,200,.08), transparent 60%), linear-gradient(180deg,var(--bg1),var(--bg2));
     }
+    section{padding:56px 18px}
+    h1,h2{margin:0 0 10px}
+    p{margin:0 0 12px;color:var(--muted)}
+    .wrap{max-width:1100px;margin:0 auto}
 
-    section{ padding:60px 20px; text-align:center; }
-
-    h2{
-      font-size: clamp(1.8rem, 2.2rem + 1vw, 2.8rem);
-      margin:0 0 12px;
-      line-height:1.15;
-      letter-spacing:.3px;
-    }
-
-    p{ color:#ccc; margin:0 auto 14px; max-width:900px; }
-
-    /* ====== HERO ====== */
+    /* ===== HERO (мобильно-дружелюбный) ===== */
     .hero{
-      position:relative; overflow:hidden; border-radius:18px; padding:56px 18px 24px;
-      background:
-        radial-gradient(1200px 400px at 50% -30%, rgba(0,255,200,.18), transparent 60%),
-        linear-gradient(145deg, #141430 0%, #0c0c1b 100%);
-      box-shadow: var(--glow);
-      margin-bottom:28px;
+      position:relative; overflow:hidden; border-radius:20px;
+      padding:38px 16px 24px; background:linear-gradient(145deg,#14162e,#0b0d20);
+      box-shadow:0 0 0 1px rgba(0,255,200,.08) inset, 0 20px 60px rgba(0,0,0,.35);
     }
     .hero .spark{
-      position:absolute; inset:-30% -10% auto -10%;
-      height:60vh; min-height:320px; filter: blur(40px); opacity:.45;
-      background: conic-gradient(from 0deg, #27d7ff, #7c4dff, #00ffc8, #27d7ff);
-      animation: spin 14s linear infinite;
+      position:absolute; inset:-35% -15% auto -15%; height:52vh; min-height:260px;
+      filter:blur(40px); opacity:.45;
+      background:conic-gradient(from 0deg,#27d7ff,#7c4dff,#00ffc8,#27d7ff);
+      animation:spin 18s linear infinite;
       pointer-events:none;
     }
-    @keyframes spin { to { transform: rotate(360deg); } }
-
+    @keyframes spin{to{transform:rotate(360deg)}}
     .hero-title{
-      background: linear-gradient(90deg, #fff, #a4ffe8 30%, #7bd7ff 60%, #fff);
-      -webkit-background-clip:text; background-clip:text; color:transparent;
-      text-shadow: 0 10px 40px rgba(0,255,255,.12);
+      font-size:clamp(22px,4.6vw,40px); line-height:1.15; letter-spacing:.2px;
+      background:linear-gradient(90deg,#fff,#b8fff0 40%,#7fd7ff 70%,#fff);
+      -webkit-background-clip:text;background-clip:text;color:transparent;
+      text-wrap:balance;
     }
-    .type{
-      margin-top:10px; font-size:1.05rem; color:var(--muted);
-      min-height:1.4em; letter-spacing:.2px;
+    .hero-sub{font-size:clamp(14px,2.8vw,18px)}
+
+    /* ===== Demos grid ===== */
+    .grid{
+      display:grid; gap:14px; margin-top:18px;
+      grid-template-columns:repeat(12,1fr);
     }
-    .hero-cta{
-      margin-top:18px; display:inline-flex; gap:10px; flex-wrap:wrap; justify-content:center;
+    .card{
+      grid-column:span 12;
+      border-radius:var(--radius); overflow:hidden;
+      background:linear-gradient(145deg,var(--card1),var(--card2));
+      box-shadow:0 0 0 1px rgba(0,255,200,.08) inset, 0 10px 30px rgba(0,0,0,.35);
+      transition:transform .2s ease, box-shadow .2s ease;
+      will-change:transform;
     }
+    .card:hover{transform:translateY(-2px);}
+    .card-h{padding:12px 14px; font-weight:700; letter-spacing:.2px; color:#e9faff; border-bottom:1px solid rgba(255,255,255,.06)}
+    .card-b{padding:14px}
+
+    /*  >= 600px: по 2 в ряд  */
+    @media (min-width:600px){
+      .card{grid-column:span 6}
+    }
+    /*  >= 960px: микс ширин */
+    @media (min-width:960px){
+      .wide{grid-column:span 12}
+      .half{grid-column:span 6}
+      .third{grid-column:span 4}
+    }
+
+    /* ===== Demo blocks ===== */
+    /* Parallax */
+    .parallax{position:relative;height:180px;border-radius:12px;overflow:hidden;background:#0c1026;perspective:800px}
+    .parallax .layer{position:absolute;inset:0;background-position:center;background-size:cover;opacity:.65;transition:transform .15s ease-out}
+    .parallax .text{position:absolute;left:0;right:0;bottom:12px;text-align:center;font-weight:800;color:#e6ffff;text-shadow:0 10px 30px rgba(0,0,0,.5)}
+
+    /* Feature bullets with subtle fade-in */
+    .bullets{display:grid;gap:10px}
+    .bullet{display:flex;gap:10px;align-items:flex-start;padding:12px;border:1px solid rgba(255,255,255,.07);border-radius:12px;background:#0b0f22}
+    .dot{width:10px;height:10px;border-radius:50%;box-shadow:0 0 12px rgba(0,255,200,.6)}
+    .bullet p{margin:0;color:#dfe9f7}
+
+    /* CTA Ripple button (оставим как демонстрацию эффекта) */
     .btn{
-      background-color: var(--hot); color:#fff; padding:14px 22px; font-size:1.05rem;
-      border:none; border-radius:10px; text-decoration:none; transition:.25s ease;
-      box-shadow:0 6px 24px rgba(255,76,96,.25);
+      display:inline-block; border:0; border-radius:12px; padding:14px 18px;
+      background:var(--hot); color:#fff; font-weight:700; cursor:pointer;
+      position:relative; overflow:hidden;
     }
-    .btn:hover{ transform: translateY(-2px); background-color:#e6334f; }
+    @keyframes ripple{to{transform:scale(40);opacity:0}}
+    .btn span.r{position:absolute;width:8px;height:8px;border-radius:999px;background:#fff;opacity:.45;pointer-events:none;animation:ripple .6s ease-out forwards}
 
-    /* ====== DEMO GRID ====== */
-    .demo-grid{
-      display:grid;
-      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
-      gap:18px; margin:28px 0 30px;
-    }
-    .demo-card{
-      position:relative; overflow:hidden; border-radius:16px; padding:14px;
-      background: linear-gradient(145deg, var(--card1), var(--card2));
-      box-shadow: var(--glow); transition: transform .25s ease, box-shadow .25s ease;
-      transform-style: preserve-3d; will-change: transform;
-    }
-    .demo-card:hover{ transform: translateY(-4px); box-shadow:0 0 24px rgba(0,255,255,.45);}
-    .demo-title{
-      font-weight:700; font-size:1.05rem; text-align:left; margin:6px 8px 10px;
-      color:#e4f8ff; letter-spacing:.2px;
-    }
-    .demo-body{
-      background:#0b0b1a; border:1px solid rgba(0,255,255,.1);
-      border-radius:12px; min-height:150px; display:grid; place-items:center; padding:14px;
-    }
-    .chip{
-      position:absolute; right:10px; top:10px; font-size:.72rem;
-      color:#05251f; background:linear-gradient(90deg, #6dffe6, #41d2ff);
-      padding:6px 10px; border-radius:999px; font-weight:700;
-      box-shadow:inset 0 0 0 2px rgba(255,255,255,.15);
-    }
+    /* Smart form fields */
+    .form{display:grid;gap:10px;max-width:520px}
+    .field{position:relative;border:1px solid rgba(0,255,200,.12);border-radius:12px;background:#0b0f22}
+    .field input,.field textarea{width:100%;padding:12px 14px;background:transparent;border:0;outline:0;color:#e9faff;font-size:16px}
+    .field label{position:absolute;left:12px;top:10px;color:#8aa;transition:.2s ease;pointer-events:none}
+    .field:has(input:focus),.field:has(textarea:focus){box-shadow:0 0 0 2px rgba(0,255,200,.2) inset}
+    .field input:not(:placeholder-shown)+label,
+    .field textarea:not(:placeholder-shown)+label,
+    .field input:focus+label,
+    .field textarea:focus+label{top:2px;font-size:12px;color:#bff}
 
-    /* ====== INDIVIDUAL DEMOS ====== */
-    /* 1. Parallax Banner */
-    .parallax{
-      position:relative; width:100%; height:150px; overflow:hidden; border-radius:10px;
-      background: linear-gradient(120deg, #1a2848, #0e1730);
-      perspective: 800px;
-    }
-    .parallax .layer{
-      position:absolute; inset:0; background-position:center; background-size:cover;
-      opacity:.6; transform: translateZ(var(--z, -60px)) scale(calc(1 - var(--z, -60)/600));
-      transition: transform .2s ease-out;
-    }
-    .parallax .text{
-      position:absolute; inset:auto 0 12px 0; text-align:center; font-weight:800;
-      letter-spacing:.8px; color:#dff; font-size:1rem;
-      text-shadow:0 6px 20px rgba(0,0,0,.5);
+    /* Accordion */
+    .acc{display:grid;gap:8px}
+    .acc-item{border:1px solid rgba(0,255,200,.12);border-radius:12px;overflow:hidden;background:#0b0f22}
+    .acc-head{display:flex;justify-content:space-between;gap:10px;padding:12px 14px;cursor:pointer}
+    .acc-body{display:none;padding:0 14px 12px;color:#dfe9f7}
+    .acc-item.open .acc-body{display:block}
+    .acc-item.open .acc-head{background:#111638}
+
+    /* Reveal utility */
+    .reveal{opacity:0;transform:translateY(12px);transition:.45s ease}
+    .reveal.visible{opacity:1;transform:none}
+
+    /* Кнопка назад + контакты (как есть) */
+    .cta-button{background:var(--hot);color:#fff;padding:14px 22px;border-radius:10px;text-decoration:none;display:inline-block;margin-top:24px}
+    .cta-button:hover{filter:brightness(.95)}
+    .contact-buttons{display:flex;flex-wrap:wrap;gap:10px;justify-content:center;margin-top:16px}
+    footer{background:#0b0c14;color:#b8c2cc;text-align:center;padding:20px}
+    footer a{color:var(--accent);text-decoration:none}
+
+    /* Мобайл фиксы */
+    @media (max-width:599px){
+      section{padding:44px 14px}
+      .card-b{padding:12px}
+      .parallax{height:150px}
+      .hero{padding:28px 14px 18px}
     }
 
-    /* 2. Pricing Card */
-    .pricing{
-      display:grid; gap:6px; text-align:left; width:100%;
-    }
-    .pricing .price{
-      font-size:1.8rem; font-weight:900;
-      background: linear-gradient(90deg, #b6fff2, #7fd7ff);
-      -webkit-background-clip:text; background-clip:text; color:transparent;
-    }
-    .pricing ul{ margin:8px 0 0 16px; padding:0; color:#cde; font-size:.95rem; }
-    .pricing li{ margin:6px 0; }
-
-    /* 3. CTA Ripple Button */
-    .ripple-btn{ position:relative; overflow:hidden; }
-    .ripple-btn:after{
-      content:""; position:absolute; width:8px; height:8px; background:#fff;
-      opacity:.4; border-radius:50%; transform:scale(1); pointer-events:none;
-      animation: none;
-    }
-    @keyframes ripple { to { transform: scale(40); opacity:0; } }
-
-    /* 4. Form */
-    .form{ display:grid; gap:10px; width:100%; max-width:520px; margin:0 auto; }
-    .field{
-      position:relative;
-      background:#0d0d1f; border:1px solid rgba(0,255,255,.12);
-      border-radius:10px; overflow:hidden;
-    }
-    .field input, .field textarea{
-      width:100%; background:transparent; border:0; outline:0; color:#e9f9ff;
-      padding:12px 14px; font-size:1rem;
-    }
-    .field:focus-within{ box-shadow:0 0 0 2px rgba(0,255,200,.3) inset; }
-    .field label{
-      position:absolute; left:12px; top:10px; font-size:.9rem; color:#8aa;
-      transition:.2s ease; pointer-events:none;
-    }
-    .field input:focus + label,
-    .field input:not(:placeholder-shown) + label,
-    .field textarea:focus + label,
-    .field textarea:not(:placeholder-shown) + label{
-      top:2px; font-size:.72rem; color:#aef;
+    /* Prefers-reduced-motion: отключаем навороты */
+    @media (prefers-reduced-motion:reduce){
+      .hero .spark{animation:none}
+      .reveal{transition:none}
     }
 
-    /* 5. Accordion */
-    .acc{ text-align:left; width:100%; }
-    .acc-item{ border:1px solid rgba(0,255,255,.12); border-radius:10px; margin:8px 0; overflow:hidden; }
-    .acc-head{
-      background:#0b0b1a; padding:12px 14px; display:flex; justify-content:space-between; cursor:pointer;
-    }
-    .acc-body{ padding:0 14px 12px; color:#cfe; display:none; background:#0f1022; }
-    .acc-item.open .acc-body{ display:block; }
-    .acc-item.open .acc-head{ background:#121431; }
-
-    /* 6. Scroll reveal utility */
-    .reveal{ opacity:0; transform: translateY(16px); transition:.5s ease; }
-    .reveal.visible{ opacity:1; transform:none; }
-
-    /* ====== CONTACTS & FOOTER (как в оригинале) ====== */
-    .contact-buttons{
-      margin-top:20px; display:flex; flex-wrap:wrap; gap:10px; justify-content:center;
-    }
-    .cta-button{ background-color:var(--hot); color:white; padding:15px 30px; font-size:1.2rem;
-      border:none; border-radius:8px; text-decoration:none; margin-top:30px; transition: background-color .3s ease; display:inline-block;}
-    .cta-button:hover{ background-color:#e6334f; }
-    footer{ background-color:#111; text-align:center; padding:20px; color:#bbb; }
-    footer a{ color:var(--accent); text-decoration:none; }
-    footer a:hover{ text-decoration:underline; }
-
-    @media (max-width: 768px){
-      .demo-body{ min-height:140px; }
-    }
+    /* Touch: отключаем «tilt» */
+    @media (hover:none){ .card:hover{transform:none} }
   </style>
 </head>
-
 <body>
-
-  <!-- ====== HERO ====== -->
   <section class="hero">
     <div class="spark" aria-hidden="true"></div>
-    <h2 class="hero-title">Лендинг, который продаёт и выглядит дорого</h2>
-    <p class="type" id="typeLine"
-       aria-label="typewriter">Фокус на скорости, адаптивности, понятной структуре и мощных CTA.</p>
-
-    <div class="hero-cta">
-      <a href="#demos" class="btn">Смотреть демо</a>
-      <a href="#contacts" class="btn" style="background:#00b894;">Обсудить проект</a>
+    <div class="wrap">
+      <h1 class="hero-title">Одностраничные сайты с чистой анимацией и понятной структурой</h1>
+      <p class="hero-sub">Ниже — набор мини-демо эффектов, которые использую в лендингах: параллакс, reveal при скролле, интерактив, smart-формы и аккуратные микровзаимодействия.</p>
     </div>
   </section>
 
-  <!-- ====== DEMOS ====== -->
   <section id="demos">
-    <h2>Что я умею для одностраничников</h2>
-    <p>Ниже — живые мини-демо: параллакс, прайс-карта, аккордеон FAQ, «умные» поля формы, CTA-кнопка с эффектом,
-      а также общие приёмы анимации и раскрытия контента при скролле.</p>
+    <div class="wrap">
+      <h2>Демо-эффекты для лендинга</h2>
+      <p>Все примеры адаптированы под мобильные устройства.</p>
 
-    <div class="demo-grid">
-      <!-- Parallax -->
-      <div class="demo-card reveal" data-tilt>
-        <span class="chip">UI/FX</span>
-        <div class="demo-title">Параллакс-баннер (герой)</div>
-        <div class="demo-body">
-          <div class="parallax" data-parallax>
-            <div class="layer" style="--z:-80px; background-image: radial-gradient(600px 140px at 50% 20%, rgba(127,255,212,.35), transparent 60%);"></div>
-            <div class="layer" style="--z:-40px; background-image: linear-gradient(90deg, rgba(39,215,255,.25), rgba(124,77,255,.25)); mix-blend: screen;"></div>
-            <div class="text">Твой продукт — в центре внимания</div>
-          </div>
-        </div>
-      </div>
-
-      <!-- Pricing Card -->
-      <div class="demo-card reveal" data-tilt>
-        <span class="chip">Conversion</span>
-        <div class="demo-title">Прайс-карта с выгодой</div>
-        <div class="demo-body">
-          <div class="pricing">
-            <div class="price">от 299&nbsp;$</div>
-            <ul>
-              <li>Адаптивность под все устройства</li>
-              <li>Быстрая загрузка &lt; 1.5s</li>
-              <li>SEO-блоки: мета, OG, микроразметка</li>
-            </ul>
-            <button class="btn" style="margin-top:8px;">Зафиксировать цену</button>
-          </div>
-        </div>
-      </div>
-
-      <!-- CTA Ripple -->
-      <div class="demo-card reveal" data-tilt>
-        <span class="chip">CTA</span>
-        <div class="demo-title">CTA-кнопка с «ripple»</div>
-        <div class="demo-body">
-          <button class="btn ripple-btn" id="rippleDemo">Оставить заявку</button>
-        </div>
-      </div>
-
-      <!-- Smart Form -->
-      <div class="demo-card reveal" data-tilt>
-        <span class="chip">UX</span>
-        <div class="demo-title">«Умные» поля формы</div>
-        <div class="demo-body">
-          <form class="form" onsubmit="event.preventDefault(); this.reset();">
-            <div class="field">
-              <input id="f1" type="text" placeholder=" " aria-label="Имя"/>
-              <label for="f1">Ваше имя</label>
-            </div>
-            <div class="field">
-              <input id="f2" type="email" placeholder=" " aria-label="Email"/>
-              <label for="f2">Email</label>
-            </div>
-            <div class="field">
-              <textarea id="f3" rows="3" placeholder=" " aria-label="Задача"></textarea>
-              <label for="f3">Коротко о задаче</label>
-            </div>
-            <button class="btn" type="submit">Отправить</button>
-          </form>
-        </div>
-      </div>
-
-      <!-- FAQ Accordion -->
-      <div class="demo-card reveal" data-tilt>
-        <span class="chip">FAQ</span>
-        <div class="demo-title">Аккордеон с анимацией</div>
-        <div class="demo-body">
-          <div class="acc" id="faq">
-            <div class="acc-item">
-              <div class="acc-head">Сколько занимает разработка?<span>+</span></div>
-              <div class="acc-body">Обычно 3–7 дней на полноценный лендинг с текстами и анимациями.</div>
-            </div>
-            <div class="acc-item">
-              <div class="acc-head">Насколько быстро грузится сайт?<span>+</span></div>
-              <div class="acc-body">Оптимизация на уровне: lazy-loading, сжатие, критические стили. Цель — &lt; 1.5s.</div>
-            </div>
-            <div class="acc-item">
-              <div class="acc-head">Можно интеграцию форм и аналитики?<span>+</span></div>
-              <div class="acc-body">Да: Telegram/почта/CRM, события GA4/Meta Pixel, цели и конверсии.</div>
+      <div class="grid">
+        <!-- 1. Параллакс-герой (wide) -->
+        <article class="card wide reveal">
+          <div class="card-h">Параллакс-герой</div>
+          <div class="card-b">
+            <div class="parallax" data-parallax>
+              <div class="layer" style="background-image: radial-gradient(600px 140px at 50% 20%, rgba(127,255,212,.35), transparent 60%);"></div>
+              <div class="layer" style="background-image: linear-gradient(90deg, rgba(39,215,255,.25), rgba(124,77,255,.25)); mix-blend: screen;"></div>
+              <div class="text">Акцент на ценности продукта</div>
             </div>
           </div>
-        </div>
+        </article>
+
+        <!-- 2. Буллеты преимуществ (half) -->
+        <article class="card half reveal">
+          <div class="card-h">Чёткие преимущества</div>
+          <div class="card-b">
+            <div class="bullets">
+              <div class="bullet reveal"><div class="dot"></div><p>Скорость загрузки &lt; 1.5s за счёт оптимизаций</p></div>
+              <div class="bullet reveal"><div class="dot"></div><p>Анимации без перегруза, приоритет контента</p></div>
+              <div class="bullet reveal"><div class="dot"></div><p>SEO-готовность: мета, OG, микроразметка</p></div>
+            </div>
+          </div>
+        </article>
+
+        <!-- 3. CTA-микровзаимодействие (third) -->
+        <article class="card third reveal">
+          <div class="card-h">Микровзаимодействие кнопки</div>
+          <div class="card-b">
+            <button class="btn" id="ctaMicro">Кликни — ripple</button>
+          </div>
+        </article>
+
+        <!-- 4. Smart-форма (half) -->
+        <article class="card half reveal">
+          <div class="card-h">«Умные» поля формы</div>
+          <div class="card-b">
+            <form class="form" onsubmit="event.preventDefault();this.reset();">
+              <div class="field">
+                <input id="f1" type="text" placeholder=" "/><label for="f1">Ваше имя</label>
+              </div>
+              <div class="field">
+                <input id="f2" type="email" placeholder=" "/><label for="f2">Email</label>
+              </div>
+              <div class="field">
+                <textarea id="f3" rows="3" placeholder=" "></textarea><label for="f3">Задача/описание</label>
+              </div>
+              <button class="btn" type="submit">Отправить</button>
+            </form>
+          </div>
+        </article>
+
+        <!-- 5. FAQ-аккордеон (half) -->
+        <article class="card half reveal">
+          <div class="card-h">FAQ-аккордеон</div>
+          <div class="card-b">
+            <div class="acc" id="faq">
+              <div class="acc-item">
+                <div class="acc-head">Сроки разработки?<span>+</span></div>
+                <div class="acc-body">Обычно 3–7 дней на полноценный лендинг с текстами и анимациями.</div>
+              </div>
+              <div class="acc-item">
+                <div class="acc-head">Грузится быстро?<span>+</span></div>
+                <div class="acc-body">Да: lazy-loading, критические стили, оптимизация изображений.</div>
+              </div>
+              <div class="acc-item">
+                <div class="acc-head">Интеграции?<span>+</span></div>
+                <div class="acc-body">Формы в Telegram/почту/CRM, события GA4/Pixel.</div>
+              </div>
+            </div>
+          </div>
+        </article>
+
+        <!-- 6. Reveal-шоукейс (third) -->
+        <article class="card third reveal">
+          <div class="card-h">Reveal при скролле</div>
+          <div class="card-b">
+            <div class="bullets">
+              <div class="bullet reveal"><div class="dot"></div><p>Плавное появление блоков</p></div>
+              <div class="bullet reveal"><div class="dot"></div><p>Подсветка ключевых зон</p></div>
+              <div class="bullet reveal"><div class="dot"></div><p>Фокус на CTA-элементах</p></div>
+            </div>
+          </div>
+        </article>
       </div>
 
-      <!-- Reveal on Scroll Showcase -->
-      <div class="demo-card reveal" data-tilt>
-        <span class="chip">Motion</span>
-        <div class="demo-title">Reveal-анимации при скролле</div>
-        <div class="demo-body">
-          <div style="display:grid; gap:10px; width:100%;">
-            <div class="reveal demo-pill" style="--i:1">Блоки появляются мягко</div>
-            <div class="reveal demo-pill" style="--i:2">Контент не «прыгает»</div>
-            <div class="reveal demo-pill" style="--i:3">Акцент на CTA и ценность</div>
-          </div>
-        </div>
-      </div>
+      <!-- Кнопка «назад на главную» — оставить как есть -->
+      <a href="../index.html" class="cta-button">Вернуться на главную страницу</a>
     </div>
-
-    <!-- Кнопка «назад на главную» — как в оригинале -->
-    <a href="../index.html" class="cta-button">Вернуться на главную страницу</a>
   </section>
 
-  <!-- ====== CONTACTS (оставляем как у тебя) ====== -->
+  <!-- Контакты — оставить как есть -->
   <section id="contacts">
-    <h2>Связаться со мной</h2>
-    <p>Напиши мне в мессенджер или на почту — отвечаю быстро!</p>
-    <div class="contact-buttons">
-      <a class="cta-button telegram" href="https://t.me/yourusername" target="_blank">Telegram</a>
-      <a class="cta-button whatsapp" href="https://wa.me/71234567890" target="_blank">WhatsApp</a>
-      <a class="cta-button alt" href="mailto:example@mail.ru?subject=Заказ%20Лендинга">Email</a>
+    <div class="wrap" style="text-align:center">
+      <h2>Связаться со мной</h2>
+      <p>Напиши в мессенджер или на почту — отвечаю быстро!</p>
+      <div class="contact-buttons">
+        <a class="cta-button" href="https://t.me/yourusername" target="_blank" rel="noopener">Telegram</a>
+        <a class="cta-button" href="https://wa.me/71234567890" target="_blank" rel="noopener">WhatsApp</a>
+        <a class="cta-button" href="mailto:example@mail.ru?subject=Заказ%20Лендинга">Email</a>
+      </div>
     </div>
   </section>
 
@@ -335,96 +270,61 @@
   </footer>
 
   <script>
-    // ===== Typewriter mini
-    (function(){
-      const el = document.getElementById('typeLine');
-      const full = "Фокус на скорости, адаптивности, понятной структуре и мощных CTA.";
-      let i = 0; el.textContent = "";
-      const tick = () => {
-        el.textContent += full[i++];
-        if(i < full.length) requestAnimationFrame(()=> setTimeout(tick, 18));
-      };
-      setTimeout(tick, 300);
-    })();
+    // IntersectionObserver для reveal
+    const io = new IntersectionObserver((ents)=>{
+      ents.forEach(e=>{ if(e.isIntersecting){ e.target.classList.add('visible'); io.unobserve(e.target); }});
+    },{threshold:.12});
+    document.querySelectorAll('.reveal').forEach((el,i)=>{ el.style.transitionDelay = (i*50)+'ms'; io.observe(el); });
 
-    // ===== Reveal on scroll
-    const io = new IntersectionObserver((entries)=>{
-      entries.forEach(e=>{
-        if(e.isIntersecting){ e.target.classList.add('visible'); io.unobserve(e.target); }
-      })
-    },{ threshold: .12 });
-    document.querySelectorAll('.reveal').forEach((el, idx)=>{
-      el.style.transitionDelay = (Number(el.style.getPropertyValue('--i')) * 90 || idx*40) + 'ms';
-      io.observe(el);
-    });
-
-    // ===== Tilt effect (lightweight)
-    document.querySelectorAll('[data-tilt]').forEach(card=>{
-      let rAF;
-      const onMove = (e) => {
-        const b = card.getBoundingClientRect();
-        const px = (e.clientX - b.left) / b.width - .5;
-        const py = (e.clientY - b.top) / b.height - .5;
-        cancelAnimationFrame(rAF);
-        rAF = requestAnimationFrame(()=>{
-          card.style.transform = `rotateX(${(-py*6).toFixed(2)}deg) rotateY(${(px*8).toFixed(2)}deg) translateY(-4px)`;
+    // Параллакс (без tilt на touch)
+    document.querySelectorAll('[data-parallax]').forEach(w=>{
+      const layers = w.querySelectorAll('.layer');
+      const move = (dx,dy)=>{
+        layers.forEach((l,i)=>{
+          const d = (i+1)*8;
+          l.style.transform = `translate(${dx*d}px,${dy*d}px) scale(1.05)`;
         });
       };
-      const reset = () => card.style.transform = '';
-      card.addEventListener('mousemove', onMove);
-      card.addEventListener('mouseleave', reset);
+      const reset = ()=> layers.forEach(l=> l.style.transform='');
+      const isTouch = matchMedia('(hover:none)').matches;
+
+      if(!isTouch){
+        w.addEventListener('mousemove', e=>{
+          const r = w.getBoundingClientRect();
+          const dx = ((e.clientX - r.left)/r.width - .5)*.8;
+          const dy = ((e.clientY - r.top)/r.height - .5)*.6;
+          move(dx,dy);
+        });
+        w.addEventListener('mouseleave', reset);
+      } else {
+        // лёгкий авто-параллакс при скролле на мобилке
+        let lastY = window.scrollY;
+        window.addEventListener('scroll', ()=>{
+          const d = (window.scrollY - lastY)*0.02;
+          move(0,d);
+          lastY = window.scrollY;
+        }, {passive:true});
+      }
     });
 
-    // ===== Parallax mouse move
-    document.querySelectorAll('[data-parallax]').forEach(wrapper=>{
-      const layers = wrapper.querySelectorAll('.layer');
-      wrapper.addEventListener('mousemove', (e)=>{
-        const r = wrapper.getBoundingClientRect();
-        const dx = (e.clientX - r.left) / r.width - .5;
-        const dy = (e.clientY - r.top) / r.height - .5;
-        layers.forEach((l, i)=>{
-          const depth = (i+1) * 10;
-          l.style.transform = `translateZ(${-(depth*8)}px) translate(${dx * depth * 6}px, ${dy * depth * 4}px) scale(1.05)`;
-        });
+    // Ripple-микроэффект на кнопке
+    const cta = document.getElementById('ctaMicro');
+    if(cta){
+      cta.addEventListener('click', (e)=>{
+        const r = cta.getBoundingClientRect();
+        const s = document.createElement('span');
+        s.className='r';
+        s.style.left = (e.clientX - r.left - 4) + 'px';
+        s.style.top  = (e.clientY - r.top - 4) + 'px';
+        cta.appendChild(s);
+        setTimeout(()=>s.remove(), 650);
       });
-      wrapper.addEventListener('mouseleave', ()=> layers.forEach(l=> l.style.transform = ''));
-    });
+    }
 
-    // ===== CTA ripple
-    const rippleBtn = document.getElementById('rippleDemo');
-    rippleBtn.addEventListener('click', (e)=>{
-      const rect = rippleBtn.getBoundingClientRect();
-      const x = e.clientX - rect.left, y = e.clientY - rect.top;
-      rippleBtn.style.setProperty('--x', x + 'px');
-      rippleBtn.style.setProperty('--y', y + 'px');
-      const span = document.createElement('span');
-      span.style.position='absolute';
-      span.style.left = (x-4)+'px';
-      span.style.top  = (y-4)+'px';
-      span.style.width='8px'; span.style.height='8px'; span.style.borderRadius='50%';
-      span.style.background='#fff'; span.style.opacity='.45';
-      span.style.transform='scale(1)'; span.style.pointerEvents='none';
-      span.style.animation='ripple .6s ease-out forwards';
-      rippleBtn.appendChild(span);
-      setTimeout(()=> span.remove(), 620);
-    });
-
-    // ===== Accordion
+    // Аккордеон
     document.querySelectorAll('#faq .acc-item').forEach(item=>{
-      item.querySelector('.acc-head').addEventListener('click', ()=>{
-        item.classList.toggle('open');
-      });
-    });
-
-    // Small pills styling (programmatic to keep CSS small)
-    document.querySelectorAll('.demo-pill').forEach(p=>{
-      p.style.padding='10px 12px';
-      p.style.border='1px solid rgba(0,255,255,.15)';
-      p.style.borderRadius='999px';
-      p.style.background='#0b0b1a';
-      p.style.textAlign='center';
+      item.querySelector('.acc-head').addEventListener('click', ()=> item.classList.toggle('open'));
     });
   </script>
-
 </body>
 </html>
