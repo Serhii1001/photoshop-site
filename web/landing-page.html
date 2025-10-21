@@ -5,15 +5,12 @@
   <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover"/>
   <title>Лендинг — Демонстрация анимаций</title>
 
-  <!-- Если у тебя есть общий styles.css — можешь подключить. Встроенные стили ниже учитывают мобильные правки -->
-  <!-- <link rel="stylesheet" href="../assets/css/styles.css"> -->
-
   <style>
     :root{
       --bg1:#0e1024; --bg2:#05060f;
       --card1:#17192e; --card2:#101225;
-      --accent:#00ffc8; --hot:#ff4c60;
-      --text:#fff; --muted:#b7c0cb;
+      --accent:#00ffc8; --text:#fff; --muted:#b7c0cb;
+      --hot:#ff4c60; /* красный фирменный */
       --radius:16px;
     }
     html{scroll-behavior:smooth}
@@ -21,14 +18,15 @@
     body{
       margin:0; font-family:Inter,system-ui,Segoe UI,Roboto,Arial,sans-serif;
       color:var(--text);
-      background: radial-gradient(1200px 400px at 50% -20%, rgba(0,255,200,.08), transparent 60%), linear-gradient(180deg,var(--bg1),var(--bg2));
+      background: radial-gradient(1200px 400px at 50% -20%, rgba(0,255,200,.08), transparent 60%),
+                  linear-gradient(180deg,var(--bg1),var(--bg2));
     }
     section{padding:56px 18px}
     h1,h2{margin:0 0 10px}
     p{margin:0 0 12px;color:var(--muted)}
     .wrap{max-width:1100px;margin:0 auto}
 
-    /* ===== HERO (мобильно-дружелюбный) ===== */
+    /* ===== HERO ===== */
     .hero{
       position:relative; overflow:hidden; border-radius:20px;
       padding:38px 16px 24px; background:linear-gradient(145deg,#14162e,#0b0d20);
@@ -38,8 +36,7 @@
       position:absolute; inset:-35% -15% auto -15%; height:52vh; min-height:260px;
       filter:blur(40px); opacity:.45;
       background:conic-gradient(from 0deg,#27d7ff,#7c4dff,#00ffc8,#27d7ff);
-      animation:spin 18s linear infinite;
-      pointer-events:none;
+      animation:spin 18s linear infinite; pointer-events:none;
     }
     @keyframes spin{to{transform:rotate(360deg)}}
     .hero-title{
@@ -50,9 +47,9 @@
     }
     .hero-sub{font-size:clamp(14px,2.8vw,18px)}
 
-    /* ===== Demos grid ===== */
+    /* ===== GRID (карточки одинаковой высоты на ПК) ===== */
     .grid{
-      display:grid; gap:14px; margin-top:18px;
+      display:grid; gap:16px; margin-top:18px;
       grid-template-columns:repeat(12,1fr);
     }
     .card{
@@ -61,46 +58,39 @@
       background:linear-gradient(145deg,var(--card1),var(--card2));
       box-shadow:0 0 0 1px rgba(0,255,200,.08) inset, 0 10px 30px rgba(0,0,0,.35);
       transition:transform .2s ease, box-shadow .2s ease;
-      will-change:transform;
+      display:flex; flex-direction:column; /* для выравнивания по высоте */
+      min-height:220px; /* базовая высота на мобиле */
     }
-    .card:hover{transform:translateY(-2px);}
+    .card:hover{transform:translateY(-2px)}
     .card-h{padding:12px 14px; font-weight:700; letter-spacing:.2px; color:#e9faff; border-bottom:1px solid rgba(255,255,255,.06)}
-    .card-b{padding:14px}
+    .card-b{padding:14px; display:flex; flex:1} /* содержимое растягивается */
 
-    /*  >= 600px: по 2 в ряд  */
+    /* Сетки по брейкпоинтам */
     @media (min-width:600px){
       .card{grid-column:span 6}
     }
-    /*  >= 960px: микс ширин */
     @media (min-width:960px){
       .wide{grid-column:span 12}
       .half{grid-column:span 6}
       .third{grid-column:span 4}
+      .card{min-height:280px;}      /* ЕДИНАЯ высота на ПК */
+      .card-b{align-items:center}    /* выравнивание контента по центру по высоте */
     }
 
-    /* ===== Demo blocks ===== */
+    /* ===== DEMOS ===== */
     /* Parallax */
-    .parallax{position:relative;height:180px;border-radius:12px;overflow:hidden;background:#0c1026;perspective:800px}
+    .parallax{position:relative;height:180px;border-radius:12px;overflow:hidden;background:#0c1026;perspective:800px;width:100%}
     .parallax .layer{position:absolute;inset:0;background-position:center;background-size:cover;opacity:.65;transition:transform .15s ease-out}
     .parallax .text{position:absolute;left:0;right:0;bottom:12px;text-align:center;font-weight:800;color:#e6ffff;text-shadow:0 10px 30px rgba(0,0,0,.5)}
 
-    /* Feature bullets with subtle fade-in */
-    .bullets{display:grid;gap:10px}
+    /* Bullets */
+    .bullets{display:grid;gap:10px;width:100%}
     .bullet{display:flex;gap:10px;align-items:flex-start;padding:12px;border:1px solid rgba(255,255,255,.07);border-radius:12px;background:#0b0f22}
     .dot{width:10px;height:10px;border-radius:50%;box-shadow:0 0 12px rgba(0,255,200,.6)}
     .bullet p{margin:0;color:#dfe9f7}
 
-    /* CTA Ripple button (оставим как демонстрацию эффекта) */
-    .btn{
-      display:inline-block; border:0; border-radius:12px; padding:14px 18px;
-      background:var(--hot); color:#fff; font-weight:700; cursor:pointer;
-      position:relative; overflow:hidden;
-    }
-    @keyframes ripple{to{transform:scale(40);opacity:0}}
-    .btn span.r{position:absolute;width:8px;height:8px;border-radius:999px;background:#fff;opacity:.45;pointer-events:none;animation:ripple .6s ease-out forwards}
-
-    /* Smart form fields */
-    .form{display:grid;gap:10px;max-width:520px}
+    /* Smart form */
+    .form{display:grid;gap:10px;max-width:520px;width:100%}
     .field{position:relative;border:1px solid rgba(0,255,200,.12);border-radius:12px;background:#0b0f22}
     .field input,.field textarea{width:100%;padding:12px 14px;background:transparent;border:0;outline:0;color:#e9faff;font-size:16px}
     .field label{position:absolute;left:12px;top:10px;color:#8aa;transition:.2s ease;pointer-events:none}
@@ -111,20 +101,38 @@
     .field textarea:focus+label{top:2px;font-size:12px;color:#bff}
 
     /* Accordion */
-    .acc{display:grid;gap:8px}
+    .acc{display:grid;gap:8px;width:100%}
     .acc-item{border:1px solid rgba(0,255,200,.12);border-radius:12px;overflow:hidden;background:#0b0f22}
     .acc-head{display:flex;justify-content:space-between;gap:10px;padding:12px 14px;cursor:pointer}
     .acc-body{display:none;padding:0 14px 12px;color:#dfe9f7}
     .acc-item.open .acc-body{display:block}
     .acc-item.open .acc-head{background:#111638}
 
+    /* Hover Gradient Border (замена ripple-карты) */
+    .g-border{
+      position:relative; border-radius:14px; padding:18px; width:100%;
+      background:#0b0f22; isolation:isolate;
+    }
+    .g-border::before{
+      content:""; position:absolute; inset:-1px; border-radius:16px; z-index:-1;
+      background:conic-gradient(from var(--a,0deg), #ff4c60, #ffb86b, #22e4ac, #27d7ff, #7c4dff, #ff4c60);
+      filter:blur(8px); opacity:.9; transition:--a .6s linear;
+      animation:spin 8s linear infinite;
+    }
+    .g-border h3{margin:0 0 6px; color:#e9faff}
+    .g-border p{margin:0;color:#cfe}
+
     /* Reveal utility */
     .reveal{opacity:0;transform:translateY(12px);transition:.45s ease}
     .reveal.visible{opacity:1;transform:none}
 
-    /* Кнопка назад + контакты (как есть) */
-    .cta-button{background:var(--hot);color:#fff;padding:14px 22px;border-radius:10px;text-decoration:none;display:inline-block;margin-top:24px}
-    .cta-button:hover{filter:brightness(.95)}
+    /* ===== КНОПКИ НАЗАД И КОНТАКТЫ — КРАСНЫЕ ===== */
+    .cta-button{
+      background:var(--hot); color:#fff; padding:14px 22px; border-radius:10px;
+      text-decoration:none; display:inline-block; margin-top:24px; border:0;
+      box-shadow:0 10px 24px rgba(255,76,96,.25); transition:transform .2s ease, filter .2s ease;
+    }
+    .cta-button:hover{transform:translateY(-1px); filter:brightness(.95)}
     .contact-buttons{display:flex;flex-wrap:wrap;gap:10px;justify-content:center;margin-top:16px}
     footer{background:#0b0c14;color:#b8c2cc;text-align:center;padding:20px}
     footer a{color:var(--accent);text-decoration:none}
@@ -136,14 +144,10 @@
       .parallax{height:150px}
       .hero{padding:28px 14px 18px}
     }
-
-    /* Prefers-reduced-motion: отключаем навороты */
     @media (prefers-reduced-motion:reduce){
       .hero .spark{animation:none}
       .reveal{transition:none}
     }
-
-    /* Touch: отключаем «tilt» */
     @media (hover:none){ .card:hover{transform:none} }
   </style>
 </head>
@@ -186,11 +190,14 @@
           </div>
         </article>
 
-        <!-- 3. CTA-микровзаимодействие (third) -->
+        <!-- 3. Градиентная рамка (third) — замена ripple -->
         <article class="card third reveal">
-          <div class="card-h">Микровзаимодействие кнопки</div>
+          <div class="card-h">Аккуратная анимация рамки</div>
           <div class="card-b">
-            <button class="btn" id="ctaMicro">Кликни — ripple</button>
+            <div class="g-border">
+              <h3>Наведи курсор / тап</h3>
+              <p>Нежная подсветка контента — выглядит премиально, не отвлекает от текста.</p>
+            </div>
           </div>
         </article>
 
@@ -208,7 +215,7 @@
               <div class="field">
                 <textarea id="f3" rows="3" placeholder=" "></textarea><label for="f3">Задача/описание</label>
               </div>
-              <button class="btn" type="submit">Отправить</button>
+              <button class="cta-button" type="submit">Отправить</button>
             </form>
           </div>
         </article>
@@ -247,12 +254,12 @@
         </article>
       </div>
 
-      <!-- Кнопка «назад на главную» — оставить как есть -->
+      <!-- Кнопка «назад на главную» — КРАСНАЯ -->
       <a href="../index.html" class="cta-button">Вернуться на главную страницу</a>
     </div>
   </section>
 
-  <!-- Контакты — оставить как есть -->
+  <!-- Контакты — КРАСНЫЕ кнопки -->
   <section id="contacts">
     <div class="wrap" style="text-align:center">
       <h2>Связаться со мной</h2>
@@ -270,21 +277,16 @@
   </footer>
 
   <script>
-    // IntersectionObserver для reveal
+    // Reveal
     const io = new IntersectionObserver((ents)=>{
       ents.forEach(e=>{ if(e.isIntersecting){ e.target.classList.add('visible'); io.unobserve(e.target); }});
     },{threshold:.12});
     document.querySelectorAll('.reveal').forEach((el,i)=>{ el.style.transitionDelay = (i*50)+'ms'; io.observe(el); });
 
-    // Параллакс (без tilt на touch)
+    // Parallax
     document.querySelectorAll('[data-parallax]').forEach(w=>{
       const layers = w.querySelectorAll('.layer');
-      const move = (dx,dy)=>{
-        layers.forEach((l,i)=>{
-          const d = (i+1)*8;
-          l.style.transform = `translate(${dx*d}px,${dy*d}px) scale(1.05)`;
-        });
-      };
+      const move = (dx,dy)=> layers.forEach((l,i)=>{ const d=(i+1)*8; l.style.transform=`translate(${dx*d}px,${dy*d}px) scale(1.05)`; });
       const reset = ()=> layers.forEach(l=> l.style.transform='');
       const isTouch = matchMedia('(hover:none)').matches;
 
@@ -297,29 +299,13 @@
         });
         w.addEventListener('mouseleave', reset);
       } else {
-        // лёгкий авто-параллакс при скролле на мобилке
         let lastY = window.scrollY;
         window.addEventListener('scroll', ()=>{
           const d = (window.scrollY - lastY)*0.02;
-          move(0,d);
-          lastY = window.scrollY;
+          move(0,d); lastY = window.scrollY;
         }, {passive:true});
       }
     });
-
-    // Ripple-микроэффект на кнопке
-    const cta = document.getElementById('ctaMicro');
-    if(cta){
-      cta.addEventListener('click', (e)=>{
-        const r = cta.getBoundingClientRect();
-        const s = document.createElement('span');
-        s.className='r';
-        s.style.left = (e.clientX - r.left - 4) + 'px';
-        s.style.top  = (e.clientY - r.top - 4) + 'px';
-        cta.appendChild(s);
-        setTimeout(()=>s.remove(), 650);
-      });
-    }
 
     // Аккордеон
     document.querySelectorAll('#faq .acc-item').forEach(item=>{
