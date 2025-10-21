@@ -173,15 +173,30 @@
     }
     /* === Метрики результата === */
     .metrics{
-      display:grid; grid-template-columns:repeat(3,1fr); gap:12px; width:100%;
+      display:grid; grid-template-columns:repeat(3,1fr); gap:14px; width:100%;
     }
     .kpi{
       border:1px solid rgba(0,255,200,.12); border-radius:12px; background:#0b0f22;
-      padding:12px; display:grid; gap:6px; text-align:center;
+      padding:16px; display:grid; gap:10px; text-align:center;
+      grid-template-rows:auto 1fr auto;        /* число в «центре» */
+      align-items:center; min-height:132px;    /* больше воздуха под цифры */
     }
-    .kpi .label{color:#cfe; font-size:12.5px}
-    .kpi .num{font-weight:900; font-size:28px; letter-spacing:.3px; color:#e9faff}
+    .kpi .label{
+      color:#cfe; font-size:12.5px; letter-spacing:.2px;
+    }
+    .kpi .num{
+      display:inline-block;                    /* чтобы можно было паддинг */
+      font-weight:900; font-size:32px; line-height:1; letter-spacing:.3px; color:#e9faff;
+      padding:8px 14px; border-radius:12px;    /* «пилюля» вокруг числа */
+      background:linear-gradient(145deg,#0e1327,#0b0f22);
+      box-shadow:inset 0 0 0 1px rgba(0,255,200,.15), 0 6px 18px rgba(0,0,0,.25);
+    }
     .kpi .small{color:#9fb3c7; font-size:12px}
+    @media (min-width:960px){
+      .kpi{min-height:140px}
+      .kpi .num{font-size:34px; padding:10px 16px}
+    }
+
 
     @media (max-width:959.98px){
       .metrics{grid-template-columns:1fr 1fr}
@@ -336,17 +351,17 @@
             <div class="metrics">
               <div class="kpi">
                 <div class="label">Заявок в месяц</div>
-                <div class="num" data-count="128">0</div>
+                <div class="num" data-min="90" data-max="180"></div>
                 <div class="small">после запуска</div>
               </div>
               <div class="kpi">
                 <div class="label">Конверсия</div>
-                <div class="num" data-count="4.8" data-suffix="%">0%</div>
+                <div class="num" data-min="2.5" data-max="6.5" data-suffix="%" data-decimals="1"></div>
                 <div class="small">средняя по проектам</div>
               </div>
               <div class="kpi">
                 <div class="label">Скорость загрузки</div>
-                <div class="num" data-count="1.2" data-suffix="s">0s</div>
+                <div class="num" data-min="0.9" data-max="1.6" data-suffix="s" data-decimals="1"></div>
                 <div class="small">на главной секции</div>
               </div>
             </div>
@@ -486,34 +501,51 @@
     document.querySelectorAll('#faq .acc-item').forEach(item=>{
       item.querySelector('.acc-head').addEventListener('click', ()=> item.classList.toggle('open'));
     });
-    // Счётчик для .num[data-count]
-    const runCounters = entries => {
-      entries.forEach(en=>{
-        if(!en.isIntersecting) return;
-        const nums = en.target.querySelectorAll('.num[data-count]');
-        nums.forEach(el=>{
-          const target = parseFloat(el.dataset.count);
-          const suffix = el.dataset.suffix || '';
-          const isInt = Number.isInteger(target);
-          const dur = 1200; // ms
-          const t0 = performance.now();
-          const step = (t)=>{
-            const p = Math.min(1,(t-t0)/dur);
-            const val = target*p;
-            el.textContent = isInt ? Math.round(val) + suffix : (val).toFixed(1) + suffix;
-            if(p<1) requestAnimationFrame(step);
-          };
-          requestAnimationFrame(step);
-          // чтобы не перезапускалось
-          el.removeAttribute('data-count');
+    // Бесконечные счётчики в .metrics
+    (function(){
+      const ease = t => 1 - Math.pow(1 - t, 3);             // easeOutCubic
+      function animate(el, from, to, dur, suffix, decs, done){
+        const t0 = performance.now();
+        const step = (t)=>{
+          const p = Math.min(1, (t - t0) / dur);
+          const v = from + (to - from) * ease(p);
+          el.textContent = decs ? v.toFixed(decs) + suffix : Math.round(v) + suffix;
+          if(p < 1) requestAnimationFrame(step); else done && done();
+        };
+        requestAnimationFrame(step);
+      }
+      function loopNumber(el){
+        const min = parseFloat(el.dataset.min ?? '0');
+        const max = parseFloat(el.dataset.max ?? '100');
+        const suffix = el.dataset.suffix || '';
+        const decs = parseInt(el.dataset.decimals || '0', 10);
+        const pause = 1200;                                   // пауза между циклами
+        const dur   = 1400;                                   // длительность счёта
+
+        let current = min;
+        const tick = ()=>{
+          const target = +(min + Math.random() * (max - min)).toFixed(decs);
+          animate(el, current, target, dur, suffix, decs, ()=>{
+            current = target;
+            setTimeout(tick, pause);
+          });
+        };
+        // стартовое значение
+        el.textContent = decs ? current.toFixed(decs) + suffix : Math.round(current) + suffix;
+        tick();
+      }
+      // Запускаем, когда блок .metrics виден
+      const startWhenVisible = entries =>{
+        entries.forEach(en=>{
+          if(!en.isIntersecting) return;
+          en.target.querySelectorAll('.num').forEach(loopNumber);
+          io3.unobserve(en.target);
         });
-        io2.unobserve(en.target);
-      });
-    };
-    const io2 = new IntersectionObserver(runCounters,{threshold:.4});
-    document.querySelectorAll('.metrics').forEach(m=>io2.observe(m));
+      };
+      const io3 = new IntersectionObserver(startWhenVisible,{threshold:.35});
+      document.querySelectorAll('.metrics').forEach(m=>io3.observe(m));
+    })();
 
   </script>
 </body>
 </html>
-
