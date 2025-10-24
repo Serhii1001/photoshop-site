@@ -377,29 +377,22 @@
       margin:0 auto;
       padding:0 18px;
     }
-    /* === 3 кнопки в одну строку === */
+    /* === контакты: как на web-animations.html (короткие капсулы) === */
     #contacts .contact-buttons{
-      display:grid;
-      grid-template-columns:repeat(3, minmax(0,1fr));
-      gap:12px;
-      justify-items:center;
+      display:flex;
+      flex-wrap:wrap;
+      gap:10px;
+      justify-content:center;
     }
-
-    /* кнопка растягивается в свою ячейку */
+    /* кнопки — авто-ширина, без верхнего отступа */
     #contacts .contact-buttons .cta-button{
-      width:100%;
+      width:auto;
       min-width:0;
-      padding:12px 0;
-      font-size:16px;            /* можно 15px, если не влазит WhatsApp */
-      border-radius:999px;       /* чтобы вид остался «капсулой» */
+      padding:12px 18px;      /* как на «верхнем» варианте */
+      margin-top:0;           /* перебиваем .cta-button{margin-top:24px} */
+      border-radius:999px;
     }
 
-    /* очень узкие экраны — разрешаем перенос на 2 строки */
-    @media (max-width:360px){
-      #contacts .contact-buttons{
-        grid-template-columns:repeat(2, minmax(0,1fr));
-      }
-    }
 
   </style>
 </head>
@@ -562,16 +555,19 @@
   </div> <!-- /grid -->
   <div style="text-align:center; margin: 10px 0 30px;">
     <a href="../index.html" class="cta-button">Вернуться на главную страницу</a>
+	</section>
   </div>
 
   <!-- контакты (точно как у тебя) -->
-  <section id="contacts">
+  <section id="contacts" class="full-bleed">
+    <div class="wrap">
     <h2>Связаться со мной</h2>
     <p>Напиши мне в мессенджер или на почту — отвечаю быстро!</p>
     <div class="contact-buttons">
       <a class="cta-button telegram" href="https://t.me/yourusername" target="_blank">Telegram</a>
       <a class="cta-button whatsapp" href="https://wa.me/71234567890" target="_blank">WhatsApp</a>
       <a class="cta-button alt" href="mailto:example@mail.ru?subject=Заказ%20лендинга">Email</a>
+    </div>
     </div>
   </section>
 
@@ -691,4 +687,3 @@
   </script>
 </body>
 </html>
-
