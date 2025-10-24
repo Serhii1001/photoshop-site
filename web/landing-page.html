@@ -335,8 +335,8 @@
       .hero{padding:28px 14px 18px}
     }
     @media (prefers-reduced-motion:reduce){
-      .hero .spark{animation:none}
-      .reveal{transition:none}
+      .hero .spark{ animation: spin 36s linear infinite } /* было 18s */
+      .reveal{ transition:none }
     }
     @media (hover:none){ .card:hover{transform:none} }
     /* === FIX: компактный hero только на этой странице === */
