@@ -355,6 +355,52 @@
         padding:38px 18px 26px !important; /* можно подогнать по вкусу */
       }
     }
+    /* === full-bleed: секция контактов во всю ширину === */
+    #contacts.full-bleed{
+          /* выравниваем по центру и тянем на всю ширину окна */
+      width:100vw;
+      margin-left:calc(50% - 50vw);
+      margin-right:calc(50% - 50vw);
+
+      /* снимаем горизонтальные паддинги секции */
+      padding-left:0;
+      padding-right:0;
+
+      /* сам фон серой «полосы» */
+      background:#1e1f24;
+      box-shadow:0 -1px 0 rgba(255,255,255,.06) inset;
+    }
+
+    /* внутри оставляем привычную сетку и поля для контента */
+    #contacts.full-bleed .wrap{
+      max-width:1100px;
+      margin:0 auto;
+      padding:0 18px;
+    }
+    /* === 3 кнопки в одну строку === */
+    #contacts .contact-buttons{
+      display:grid;
+      grid-template-columns:repeat(3, minmax(0,1fr));
+      gap:12px;
+      justify-items:center;
+    }
+
+    /* кнопка растягивается в свою ячейку */
+    #contacts .contact-buttons .cta-button{
+      width:100%;
+      min-width:0;
+      padding:12px 0;
+      font-size:16px;            /* можно 15px, если не влазит WhatsApp */
+      border-radius:999px;       /* чтобы вид остался «капсулой» */
+    }
+
+    /* очень узкие экраны — разрешаем перенос на 2 строки */
+    @media (max-width:360px){
+      #contacts .contact-buttons{
+        grid-template-columns:repeat(2, minmax(0,1fr));
+      }
+    }
+
   </style>
 </head>
 <body>
@@ -516,16 +562,19 @@
   </div> <!-- /grid -->
   <div style="text-align:center; margin: 10px 0 30px;">
     <a href="../index.html" class="cta-button">Вернуться на главную страницу</a>
+	</section>
   </div>
 
   <!-- контакты (точно как у тебя) -->
-  <section id="contacts">
+  <section id="contacts" class="full-bleed">
+    <div class="wrap">
     <h2>Связаться со мной</h2>
     <p>Напиши мне в мессенджер или на почту — отвечаю быстро!</p>
     <div class="contact-buttons">
       <a class="cta-button telegram" href="https://t.me/yourusername" target="_blank">Telegram</a>
       <a class="cta-button whatsapp" href="https://wa.me/71234567890" target="_blank">WhatsApp</a>
       <a class="cta-button alt" href="mailto:example@mail.ru?subject=Заказ%20лендинга">Email</a>
+    </div>
     </div>
   </section>
 
