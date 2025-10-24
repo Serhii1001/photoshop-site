@@ -382,3 +382,30 @@ body {
   opacity:.12;                          /* можно 0.10–0.16 по вкусу */
   pointer-events:none;
 }
+/* === FIX: tap-rectangle на мобилках (Android/Chrome, Samsung Internet) === */
+@media (hover:none) and (pointer:coarse){
+  html, body, *, *::before, *::after{
+    /* гасим серый прямоугольник браузера */
+    -webkit-tap-highlight-color: rgba(0,0,0,0) !important;
+  }
+
+  /* убираем системные focus/active-рамки у тач-нажатия (клавиатурный фокус не трогаем на десктопе) */
+  a:focus, a:active,
+  button:focus, button:active,
+  .cta-button:focus, .cta-button:active,
+  .lab-neon-btn:focus, .lab-neon-btn:active,
+  .lab-jelly:focus, .lab-jelly:active,
+  .lab-toggle:focus, .lab-toggle:active{
+    outline:none !important;
+    box-shadow:none !important;
+    background-color:transparent !important;
+  }
+}
+
+/* гарантируем, что оверлеи будут круглыми и обрезанными по радиусу */
+.cta-button, .lab-neon-btn, .lab-jelly, .lab-toggle{
+  position:relative;
+  border-radius:999px;
+  overflow:hidden;                                      /* клип по радиусу */
+  -webkit-mask-image:-webkit-radial-gradient(white, black); /* хак для Samsung/Chrome */
+}
