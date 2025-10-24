@@ -409,3 +409,5 @@ body {
   overflow:hidden;                                      /* клип по радиусу */
   -webkit-mask-image:-webkit-radial-gradient(white, black); /* хак для Samsung/Chrome */
 }
+/* клики только по самой кнопке, не по внутренним спанам */
+.cta-button > *, .lab-neon-btn > *, .lab-jelly > *{ pointer-events:none; }
