@@ -349,20 +349,36 @@ body {
   }
 }
 
-/* мобильный тап-хайлайт и форма вспышки */
-button, .cta-button, .lab-neon-btn, .lab-jelly, .lab-toggle {
-  -webkit-tap-highlight-color: transparent;
+/* мобильный тап-хайлайт и «ровное» нажатие на тач-устройствах */
+:where(a, button, .cta-button, .lab-neon-btn, .lab-jelly, .lab-toggle){
+  -webkit-tap-highlight-color: transparent;   /* убираем серый прямоугольник */
+  -webkit-appearance: none;
   outline: none;
   touch-action: manipulation;
 }
 
-/* чтобы вспышка повторяла скругление */
-.lab-neon-btn::after {
-  border-radius: inherit;
+/* На тачах убираем фокус-рамку, но оставляем её на клавиатуре (доступность) */
+@media (hover:none) and (pointer:coarse){
+  :where(a, button, .cta-button, .lab-neon-btn, .lab-jelly, .lab-toggle):focus,
+  :where(a, button, .cta-button, .lab-neon-btn, .lab-jelly, .lab-toggle):focus-visible{
+    outline: none !important;
+    box-shadow: none !important;
+  }
 }
 
-/* клип прямоугольных оверлеев на скруглённых кнопках */
-.lab-neon-btn, .lab-jelly {
-  overflow: hidden;
+/* Гарантируем скругление и обрезку любых оверлеев */
+:where(.cta-button, .lab-neon-btn, .lab-jelly, .lab-toggle){
+  position: relative;
   border-radius: 999px;
+  overflow: hidden;                     /* обрезает подсветку по радиусу */
+}
+
+/* Аккуратная «нажатая» подсветка (овальная, не прямоугольная) */
+:where(.cta-button, .lab-neon-btn, .lab-jelly, .lab-toggle):active::after{
+  content:"";
+  position:absolute; inset:0;
+  border-radius:inherit;
+  background:#000;
+  opacity:.12;                          /* можно 0.10–0.16 по вкусу */
+  pointer-events:none;
 }
