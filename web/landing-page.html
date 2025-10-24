@@ -339,11 +339,27 @@
       .reveal{transition:none}
     }
     @media (hover:none){ .card:hover{transform:none} }
+    /* === FIX: компактный hero только на этой странице === */
+    .hero.hero--compact{
+      /* гасим возможные глобальные height/min-height и центрирование сеткой */
+      height:auto !important;
+      min-height:auto !important;
+      display:block !important;
+
+      /* аккуратные отступы как «раньше» */
+      padding:36px 16px 24px !important;
+    }
+
+    @media (min-width:960px){
+      .hero.hero--compact{
+        padding:38px 18px 26px !important; /* можно подогнать по вкусу */
+      }
+    }
   </style>
 </head>
 <body>
   <!-- HERO -->
-  <section class="hero">
+  <section class="hero hero--compact">
     <div class="spark" aria-hidden="true"></div>
     <div class="wrap">
       <h1 class="hero-title">Создание одностраничных сайтов</h1>
