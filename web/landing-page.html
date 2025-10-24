@@ -237,6 +237,16 @@
     }
     .metrics .kpi .num::before,
     .metrics .kpi .num::after{ content:none !important; } /* никаких капсул/полосок */
+    @media (min-width:960px){
+      /* Чуть шире правый внутренний край только в карточке «Метрики результата» */
+      .metrics-card .card-b{ padding-right:28px; }   /* запас у всей карточки */
+
+      /* И у каждой строки KPI внутри метрик */
+      .metrics .kpi{ padding-right:28px; }           /* было 26px глобально */
+
+      /* Небольшой зазор у самого числа */
+      .metrics .kpi .num{ margin-right:6px; }        /* можно 8px, если хочется ещё */
+    }
 
     @media (max-width:959.98px){
       .metrics{grid-template-columns:1fr 1fr}
