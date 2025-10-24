@@ -174,61 +174,78 @@
       filter:saturate(1.1) drop-shadow(0 8px 20px rgba(0,0,0,.35));
       transition:transform .2s ease, filter .2s ease;
     }
-    /* === Метрики результата === */
+    /* === Метрики результата — плоский, аккуратный стиль === */
     .metrics{
-      display:grid; grid-template-columns:repeat(3,1fr); gap:14px; width:100%;
-      align-items:stretch;                 /* все KPI одной высоты */
+    display:grid;
+    grid-template-columns:repeat(3, minmax(0,1fr));
+    gap:20px;
+    width:100%;
+    align-items:center;                  /* выравниваем по центру по вертикали */
     }
 
+    /* убираем внутренние коробки у KPI */
     .kpi{
-      border:1px solid rgba(0,255,200,.12);
-      border-radius:12px; background:#0b0f22;
-      padding:22px; display:grid; gap:14px; text-align:center;
+      background:transparent !important;
+      border:0 !important;
+      border-radius:0 !important;
 
-      /* три ряда: label / num / small */
-      grid-template-rows:auto 1fr auto;
-      justify-items:center; align-items:center;
-      min-height:180px;                         /* на ПК хватает, ничего не жмёт */
+      padding:10px 0 16px;                 /* ровные отступы */
+      display:grid;
+      grid-template-rows:auto auto auto;   /* label / num / small */
+      gap:10px;
+      text-align:center;
+      justify-items:center;
     }
 
+    /* тонкие вертикальные разделители между столбцами */
+    .metrics .kpi + .kpi{
+      position:relative;
+    }
+    .metrics .kpi + .kpi::before{
+      content:"";
+      position:absolute;
+      left:-10px;                          /* по центру gap (20px) */
+      top:12%;
+      bottom:12%;
+      width:1px;
+      background:linear-gradient(to bottom, transparent, rgba(255,255,255,.06), transparent);
+      border-radius:1px;
+    }
+
+    /* подписи */
     .kpi .label{
-      color:#cfe; font-size:12.5px; letter-spacing:.2px; line-height:1.15;
-      min-height:1.15em;
+      color:#cfe;
+      font-size:13px;
+      line-height:1.2;
+    }
+    .kpi .small{
+      color:#9fb3c7;
+      font-size:12px;
+      line-height:1.2;
     }
 
-    /* Чистое число — без фона, теней и «капсул» */
+    /* числа — чистые, крупные и ровные по ширине */
     .metrics .kpi .num{
       display:inline-flex; align-items:center; justify-content:center;
       white-space:nowrap; text-align:center;
       font-weight:900; color:#e9faff;
       font-size:38px; line-height:1.05;
 
-      /* цифры ровной ширины — не «пляшут» при смене */
       font-variant-numeric: tabular-nums;
       -webkit-font-feature-settings:"tnum" 1; font-feature-settings:"tnum" 1;
 
-      /* чуть стабилизируем ширину под 3–4 знака, %, s */
-      min-width:6.8ch;
+      min-width:6.8ch;                     /* 3–4 знака, %, s — без скачков */
       padding:0;
-
-      /* жёсткий сброс любого наследованного декора */
+    
+      /* жёсткий сброс декоративных хвостов, если остались */
       background:none !important;
       box-shadow:none !important;
       border:0 !important;
       border-radius:0 !important;
     }
+    .metrics .kpi .num::before,
+    .metrics .kpi .num::after{ content:none !important; }  /* гарантированно убираем полоски/капсулы */
 
-    /* На всякий случай выключаем возможный старый ::before */
-    .metrics .kpi .num::before{ content:none !important; }
-
-    .kpi .small{
-      color:#9fb3c7; font-size:12px; line-height:1.2;
-      min-height:1.2em;
-    }
-
-    @media (min-width:960px){
-      .kpi{min-height:176px}
-    }
 
     @media (max-width:959.98px){
       .metrics{grid-template-columns:1fr 1fr}
@@ -336,8 +353,8 @@
       <p>На ПК ниже — карточки одинаковой высоты; на мобильных — авто-высота.</p>
       <div class="grid">
         <!-- 1. Каркас лендинга (анимированный) -->
-        <article class="card reveal">
-          <div class="card-h">Каркас лендинга (анимированный)</div>
+        <article class="card reveal metrics-card">
+          <div class="card-h">Метрики результата</div>
           <div class="card-b">
             <div class="wireframe">
               <div class="wf-top">
