@@ -188,7 +188,7 @@
       background:linear-gradient(145deg,#0b0f22,#0e1426);
       border:1px solid rgba(255,255,255,.08);
       border-radius:12px;
-      padding:14px 16px;
+      padding:14px 20px;
 
       /* раскладка внутри: слева подписи (две строки), справа крупное число */
       display:grid;
@@ -217,8 +217,11 @@
       white-space:nowrap; text-align:right;
 
       font-weight:900; color:#e9faff;
-      font-size:40px; line-height:1.05;
-
+      font-size:clamp(28px, 4.2vw, 38px);
+      line-height:1.05;
+      overflow:hidden; text-overflow:ellipsis;
+	  max-width:100%;
+  
       /* ровные цифры — не «пляшут» при смене */
       font-variant-numeric: tabular-nums;
       -webkit-font-feature-settings:"tnum" 1; font-feature-settings:"tnum" 1;
@@ -239,6 +242,11 @@
     @media (max-width:959.98px){
       .metrics{grid-template-columns:1fr 1fr}
     }
+	/* Цветовая индикация состояния */
+	.metrics .kpi .num{ transition: color .25s ease, text-shadow .25s ease }
+	.metrics .kpi .num.good{  color:#90ffbf; text-shadow:0 0 10px rgba(0,255,200,.12) }
+	.metrics .kpi .num.warn{  color:#ffc66d; text-shadow:0 0 8px  rgba(255,198,109,.12) }
+	.metrics .kpi .num.bad{   color:#ff6b6b; text-shadow:0 0 8px  rgba(255,107,107,.15) }
     .badge:hover{transform:translateY(-2px); filter:saturate(1.25) drop-shadow(0 10px 24px rgba(0,0,0,.45))}
 
     /* 4) Форма лида (с согласиями и UTM) */
@@ -387,17 +395,17 @@
           <div class="card-h">Метрики результата</div>
           <div class="card-b">
             <div class="metrics">
-              <div class="kpi">
+              <div class="kpi" data-metric="leads">
                 <div class="label">Заявок в месяц</div>
                 <div class="num" data-min="90" data-max="180"></div>
                 <div class="small">после запуска</div>
               </div>
-              <div class="kpi">
+              <div class="kpi" data-metric="conv">
                 <div class="label">Конверсия</div>
                 <div class="num" data-min="2.5" data-max="6.5" data-suffix="%" data-decimals="1"></div>
                 <div class="small">средняя по проектам</div>
               </div>
-              <div class="kpi">
+              <div class="kpi" data-metric="speed">
                 <div class="label">Скорость загрузки</div>
                 <div class="num" data-min="0.9" data-max="1.6" data-suffix="s" data-decimals="1"></div>
                 <div class="small">на главной секции</div>
@@ -548,10 +556,35 @@
           const p = Math.min(1, (t - t0) / dur);
           const v = from + (to - from) * ease(p);
           el.textContent = decs ? v.toFixed(decs) + suffix : Math.round(v) + suffix;
+		  applyColor(el, decs ? +v.toFixed(decs) : Math.round(v));
           if(p < 1) requestAnimationFrame(step); else done && done();
         };
         requestAnimationFrame(step);
       }
+      function applyColor(el, value){
+        const kpi = el.closest('.kpi');
+        const type = kpi?.dataset.metric;
+
+        // снимаем старые классы
+        el.classList.remove('good','warn','bad');
+
+        if(type === 'speed'){            // скорость (s) — меньше лучше
+          if(value < 1.2)       el.classList.add('good');
+          else if(value <= 1.6) el.classList.add('warn');
+          else                  el.classList.add('bad');
+        }
+        else if(type === 'conv'){        // конверсия (%) — больше лучше
+          if(value >= 5.0)       el.classList.add('good');
+          else if(value >= 3.0)  el.classList.add('warn');
+          else                   el.classList.add('bad');
+        }
+        else if(type === 'leads'){       // заявки/мес — больше лучше
+          if(value >= 150)       el.classList.add('good');
+          else if(value >= 100)  el.classList.add('warn');
+          else                   el.classList.add('bad');
+        }
+      }
+
       function loopNumber(el){
         const min = parseFloat(el.dataset.min ?? '0');
         const max = parseFloat(el.dataset.max ?? '100');
@@ -570,6 +603,7 @@
         };
         // стартовое значение
         el.textContent = decs ? current.toFixed(decs) + suffix : Math.round(current) + suffix;
+		applyColor(el, decs ? +current.toFixed(decs) : Math.round(current));
         tick();
       }
       // Запускаем, когда блок .metrics виден
