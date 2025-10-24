@@ -196,35 +196,40 @@
       min-height:1.15em;
     }
 
-    .kpi .num{
-      position:relative;                      /* для псевдоэлемента */
+    /* ЧИСТОЕ ЧИСЛО — без фона и рамок */
+    .metrics .kpi .num{
+      position:relative;
       display:inline-flex; align-items:center; justify-content:center;
       white-space:nowrap; text-align:center;
       font-weight:900; color:#e9faff;
       font-size:36px; line-height:1.05;
 
-      /* ровная ширина цифр — ничего не «прыгает» */
+      /* Ровная ширина цифр — не «пляшут» */
       font-variant-numeric: tabular-nums;
       -webkit-font-feature-settings:"tnum" 1; font-feature-settings:"tnum" 1;
 
-      /* стабильная ширина «контента» числа — под проценты/секунды */
+      /* Стабильная ширина под 3–4 знака, %, s */
       min-width:6.8ch;
-      padding:6px 8px;                        /* минимальный внутренний отступ */
-
-      /* ВАЖНО: убираем фон и рамки, чтобы не было «пилюли» */
-      background:none;
-      box-shadow:none;
+          padding:6px 8px;
+    
+      /* Гасим любые старые оформления насильно */
+      background:none !important;
+      box-shadow:none !important;
+      border:0 !important;
     }
-    .kpi .num::after{
+    /* На всякий случай выключаем возможный старый ::before */
+    .metrics .kpi .num::before{ content:none !important; }
+
+    /* ТОЛЬКО тонкая подсветка НИЖЕ числа */
+    .metrics .kpi .num::after{
       content:"";
       position:absolute; left:50%; transform:translateX(-50%);
-      bottom:-10px;                             /* расстояние до числа */
-      width:68%; height:10px;                   /* длина/высота «капсулы» */
+      bottom:-14px;                 /* расстояние от цифры */
+      width:54%; height:8px;        /* длина и толщина полоски */
       border-radius:999px;
       background:
-        radial-gradient(60% 120% at 50% 50%, rgba(0,255,200,.18), transparent 70%),
-        linear-gradient(145deg, rgba(0,255,200,.22), rgba(124,77,255,.12));
-      box-shadow: 0 0 0 1px rgba(0,255,200,.18) inset;
+        radial-gradient(60% 140% at 50% 50%, rgba(0,255,200,.16), transparent 70%),
+        linear-gradient(145deg, rgba(0,255,200,.18), rgba(124,77,255,.10));
       opacity:.9;
       pointer-events:none;
     }
