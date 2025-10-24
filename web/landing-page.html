@@ -192,7 +192,7 @@
 
       /* раскладка внутри: слева подписи (две строки), справа крупное число */
       display:grid;
-      grid-template-columns: 1fr auto;  /* слева текст, справа число */
+      grid-template-columns: minmax(0,1fr) max-content;  /* слева можно сжимать, справа — ровно по числу */
       grid-template-rows: auto auto;    /* label / small */
       column-gap:16px;
       align-items:center;
@@ -217,10 +217,8 @@
       white-space:nowrap; text-align:right;
 
       font-weight:900; color:#e9faff;
-      font-size:clamp(28px, 4.2vw, 38px);
+      font-size:clamp(26px, 3.4vw, 34px);
       line-height:1.05;
-      overflow:hidden; text-overflow:ellipsis;
-	  max-width:100%;
   
       /* ровные цифры — не «пляшут» при смене */
       font-variant-numeric: tabular-nums;
@@ -229,6 +227,7 @@
       /* стабильная ширина не нужна — число справа, поэтому можно снять min-width */
       min-width:0;
       padding:0;
+	  padding-left:8px;   /* маленький запас слева, чтобы цифра не липла к границе */
 
       /* на всякий случай гасим декоративные хвосты */
       background:none !important;
