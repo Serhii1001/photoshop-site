@@ -23,7 +23,12 @@
         radial-gradient(1200px 400px at 50% -20%, rgba(0,255,200,.08), transparent 60%),
         linear-gradient(180deg,var(--bg1),var(--bg2));
     }
-    section{padding:56px 18px}
+    section{padding:56px 18px}\
+	/* Больше воздуха между последней карточкой и кнопкой */
+    #demos .grid{ margin-bottom: 22px; }
+    @media (min-width:960px){
+      #demos .grid{ margin-bottom: 28px; }
+    }
     /* Секция демо: поджимаем низ, чтобы кнопка была ближе к следующему блоку */
     #demos{ padding-bottom: 10px; }   /* было 56px */
     h1,h2{margin:0 0 10px}
@@ -397,9 +402,9 @@
     .back-wrap{
       text-align:center;
       /* ↑ УВЕЛИЧИЛИ верхний отступ: было 8px */
-      margin: 18px 0 12px;
+      margin: 10px 0 12px !important;  /* верхний отступ небольшой */
     }
-
+    .back-btn{ margin-top:0 !important; }
     /* На ПК даём ещё больше «воздуха» */
     @media (min-width:960px){
       .back-wrap{ margin: 24px 0 14px; }
