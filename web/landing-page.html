@@ -120,19 +120,16 @@
 
     .wf-hero-right{display:grid}
     .wf-img{height:110px; border-radius:10px}
-
+	
+    @keyframes wf-float{ 0%{transform:translateY(0)} 50%{transform:translateY(-3px)} 100%{transform:translateY(0)} }
+    .wf-img{ animation:wf-float 6s ease-in-out infinite }
+	
     .wf-feats{display:grid; grid-template-columns:repeat(3,1fr); gap:10px}
     .wf-feat{height:16px; border-radius:8px}
 
-    /* skeleton + shine */
+    /* skeleton — статичный, без “лоадера” */
     .skeleton{background:linear-gradient(145deg,#0e1327,#0b0f22); position:relative; overflow:hidden}
-    .shine::after{
-      content:""; position:absolute; inset:0;
-      background:linear-gradient(90deg, transparent, rgba(255,255,255,.08), transparent);
-      transform:translateX(-100%);
-      animation:shine 2.2s linear infinite;
-    }
-    @keyframes shine{to{transform:translateX(100%)}}
+    .shine::after{ content:none !important }
 
     /* CTA пульс */
     .pulse{position:relative}
@@ -434,7 +431,7 @@
       <div class="grid">
         <!-- 1. Каркас лендинга (анимированный) -->
         <article class="card reveal metrics-card">
-          <div class="card-h">Метрики результата</div>
+          <div class="card-h">Каркас лендинга (анимированный)</div>
           <div class="card-b">
             <div class="wireframe">
               <div class="wf-top">
