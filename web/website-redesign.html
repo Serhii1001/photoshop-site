@@ -3,400 +3,349 @@
 <head>
   <meta charset="UTF-8"/>
   <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover"/>
-  <title>Редизайн: 2000-е → Современный</title>
+  <title>Редизайн: олдскул → космический модерн</title>
 
-  <!-- Общие стили проекта (кнопки, шрифты и т.д.) -->
+  <!-- Общие стили проекта (кнопки и т.д.) -->
   <link rel="stylesheet" href="../assets/css/styles.css"/>
 
   <style>
     html{ scroll-behavior:smooth }
 
     /* =========================
-       Тема и переменные перехода
+       ТЕМА И ПЕРЕМЕННЫЕ ПЕРЕХОДА
        ========================= */
     .theme{
-      --t: 0; /* 0 = 2000-е, 1 = современный */
+      --t: 0; /* 0 = винтаж, 1 = модерн */
 
-      /* Палитры */
-      --old-bg: #d7e4fe;       /* светло-голубой фон эпохи 2000-х */
-      --old-panel: #eef3ff;
-      --old-text: #0a2458;
-      --old-accent: #1c7dff;
+      /* Цвета */
+      --old-bg: #e0ecff;      --new-bg: #0e1024;
+      --old-panel: #f4f7ff;   --new-panel: #0b0f22;
+      --old-text: #0a2458;    --new-text: #e9faff;
+      --old-accent:#1c7dff;   --new-accent:#00ffc8;
 
-      --new-bg: #0e1024;       /* твой современный фон */
-      --new-panel: #0b0f22;
-      --new-text: #e9faff;
-      --new-accent: #00ffc8;
+      --bg: color-mix(in oklab, var(--old-bg) calc(100% - var(--t)*100%), var(--new-bg) calc(var(--t)*100%));
+      --panel: color-mix(in oklab, var(--old-panel) calc(100% - var(--t)*100%), var(--new-panel) calc(var(--t)*100%));
+      --text: color-mix(in oklab, var(--old-text) calc(100% - var(--t)*100%), var(--new-text) calc(var(--t)*100%));
+      --accent: color-mix(in oklab, var(--old-accent) calc(100% - var(--t)*100%), var(--new-accent) calc(var(--t)*100%));
 
-      /* Смешанные значения через color-mix (оклаб визуально ровнее) */
-      --bg: color-mix(in oklab, var(--old-bg) calc(100% - (var(--t)*100%)), var(--new-bg) calc(var(--t)*100%));
-      --panel: color-mix(in oklab, var(--old-panel) calc(100% - (var(--t)*100%)), var(--new-panel) calc(var(--t)*100%));
-      --text: color-mix(in oklab, var(--old-text) calc(100% - (var(--t)*100%)), var(--new-text) calc(var(--t)*100%));
-      --accent: color-mix(in oklab, var(--old-accent) calc(100% - (var(--t)*100%)), var(--new-accent) calc(var(--t)*100%));
-
-      /* Геометрия и тени */
-      --radius: calc(6px + (16px - 6px) * var(--t));
-      --shadow: 0 calc(2px + 4px*var(--t)) calc(8px + 12px*var(--t)) rgba(0,0,0, calc(.12 + .22*var(--t)));
+      /* Геометрия/тени/зерно */
+      --radius: calc(4px + (18px - 4px) * var(--t));
+      --shadow: 0 calc(2px + 6px*var(--t)) calc(10px + 18px*var(--t)) rgba(0,0,0, calc(.12 + .25*var(--t)));
+      --grain: calc(.8 * (1 - var(--t)));
+      --glow: calc(.25 * var(--t));
 
       background: var(--bg);
       color: var(--text);
       min-height: 100dvh;
     }
 
-    /* Контейнер */
     .wrap{ max-width:1100px; margin:0 auto; padding:0 18px }
+    section{ padding: 44px 18px }
+    @media (min-width:960px){ section{ padding: 64px 18px } }
 
-    /* Общие секции (подлиннее страница) */
-    section{ padding: 40px 18px }
-    @media (min-width:960px){ section{ padding: 56px 18px } }
-
-    /* Reveal-анимации при появлении (добавляется классом .visible) */
-    .reveal{ opacity:0; transform:translateY(14px); transition:.6s ease }
+    /* Reveal */
+    .reveal{ opacity:0; transform:translateY(16px); transition:.6s ease }
     .reveal.visible{ opacity:1; transform:none }
 
     /* =========================
-       Хедер-герой: 2000-е → современный
+       ВЕРХ: ВИНТАЖНЫЙ ДЕСКТОП (FULL BLEED)
        ========================= */
-    .retro-hero{
+    .desktop{
       width:100vw; margin-left:calc(50% - 50vw); margin-right:calc(50% - 50vw);
-      overflow:hidden; position:relative; padding:0;
+      position:relative; overflow:hidden; padding:0;
       background:
+        radial-gradient(120% 80% at 50% -10%, rgba(255,255,255,.6), transparent 60%),
         linear-gradient(180deg,
-          color-mix(in oklab, #ffffff calc(60% - var(--t)*60%), #121432 calc(var(--t)*100%)) 0%,
-          color-mix(in oklab, #d7e4fe calc(100% - var(--t)*100%), #0e1024 calc(var(--t)*100%)) 100%);
-      color: var(--text);
+         color-mix(in oklab, #ffffff calc(60% - var(--t)*60%), #15193a calc(var(--t)*100%)) 0%,
+         var(--bg) 100%);
+      isolation:isolate;
     }
-    .retro-hero::after{
-      content:""; position:absolute; inset:0;
+    /* CRT скан-линии + зерно, исчезают по мере t */
+    .desktop::after{
+      content:""; position:absolute; inset:0; pointer-events:none;
       background:
-        radial-gradient(120% 60% at 50% -10%, rgba(255,255,255,.45), transparent 60%),
-        repeating-linear-gradient(0deg, rgba(0,0,0,calc(.06*(1 - var(--t)))), transparent 3px, transparent 6px);
-      mix-blend-mode:soft-light;
-      pointer-events:none;
-      opacity: calc(.8 * (1 - var(--t)));
+        repeating-linear-gradient(0deg, rgba(0,0,0, .06*(1 - var(--t))) 0 2px, transparent 2px 4px),
+        radial-gradient(200% 120% at 50% -20%, rgba(0,0,0,.25), transparent 50%);
+      mix-blend-mode:soft-light; opacity: calc(.75 * (1 - var(--t)));
     }
-    .hero-inner{
-      display:grid; gap:18px; align-items:center;
-      grid-template-columns:1.1fr 1fr;
-      padding: clamp(26px, 7vw, 72px) 18px;
-    }
-    @media (max-width:959.98px){ .hero-inner{ grid-template-columns:1fr } }
 
-    .hero-card{
-      background: var(--panel);
+    .desk-inner{
+      display:grid; grid-template-columns:1.1fr 1fr; gap:18px; align-items:center;
+      padding: clamp(28px, 7vw, 84px) 18px clamp(24px, 9vw, 120px);
+    }
+    @media (max-width:959.98px){ .desk-inner{ grid-template-columns:1fr } }
+
+    /* Винтажное окно (синяя шапка) → плавно модернизируется */
+    .win{
+      background: color-mix(in oklab, #f6f9ff calc(100% - var(--t)*100%), var(--panel) calc(var(--t)*100%));
       border-radius: var(--radius);
+      border:1px solid color-mix(in oklab, #ffffff 45%, rgba(255,255,255,.08) calc(var(--t)*100%));
       box-shadow: var(--shadow);
-      border:1px solid color-mix(in oklab, #ffffff 20%, rgba(255,255,255,.08) calc(var(--t)*100%));
-      padding: 18px;
+      overflow:hidden;
     }
-    .hero-title{
-      margin:0 0 10px;
-      font-size:clamp(22px,4.8vw,38px);
-      line-height:1.18;
-      background:linear-gradient(90deg,#000,#333 40%,#999 70%,#000);
+    .win-title{
+      display:flex; align-items:center; gap:10px; padding:10px 12px;
+      background: linear-gradient(#2e78df, #1b4e9f);
+      color:#fff; font-weight:700; letter-spacing:.2px;
+      opacity: calc(1 - var(--t));
+    }
+    .win-title .dots{ margin-left:auto; display:flex; gap:6px }
+    .win-title .d{ width:14px; height:14px; border-radius:2px; background:linear-gradient(#fff,#ddd); box-shadow: inset 0 0 0 1px rgba(0,0,0,.25) }
+
+    .mod-bar{
+      opacity: var(--t); transform: translateY(calc(8px*(1 - var(--t))));
+      transition: opacity .2s linear, transform .2s linear;
+      display:flex; align-items:center; gap:12px; padding:12px;
+    }
+    .mod-bar .dot{ width:10px; height:10px; border-radius:50%; background:#00ffc8; box-shadow:0 0 10px rgba(0,255,200,.6) }
+
+    .win-body{ padding:14px 12px 18px }
+    .win-body h1{
+      margin:0 0 10px; font-size:clamp(22px,4.8vw,40px); line-height:1.18;
+      background:linear-gradient(90deg,#000,#444 40%,#aaa 70%,#000);
       -webkit-background-clip:text; background-clip:text; color:transparent;
-      filter: saturate(calc(.4 + .6*var(--t)));
+      filter:saturate(calc(.4 + .6*var(--t)));
     }
-    .hero-sub{ margin:0; color: color-mix(in oklab, #0a2458 70%, #b7c0cb calc(var(--t)*100%)) }
+    .win-body p{ margin:0; color: color-mix(in oklab, #0a2458 calc(100% - var(--t)*100%), #b7c0cb calc(var(--t)*100%)) }
 
-    .hero-cta{ display:flex; gap:10px; flex-wrap:wrap; margin-top:12px }
-    .hero-cta .cta-button{ margin-top:0 }
-
-    /* Псевдо-«макет» справа: морфинг */
-    .mock{
-      position:relative; height:240px; border-radius: calc(10px + 10px*var(--t));
+    /* ИКОНКИ: винтаж → модерн (кроссфейд + движения) */
+    .icons{
+      position:relative; height:260px;
+      border-radius: calc(10px + 12px*var(--t));
       background:
         linear-gradient(145deg,
-          color-mix(in oklab, #ffffff calc(80% - var(--t)*80%), #1a213e calc(var(--t)*100%)),
-          color-mix(in oklab, #e9efff calc(100% - var(--t)*100%), #0b0f22 calc(var(--t)*100%)));
+          color-mix(in oklab, #ffffff calc(85% - var(--t)*85%), #1a203f calc(var(--t)*100%)),
+          color-mix(in oklab, #e8f0ff calc(100% - var(--t)*100%), #0b0f22 calc(var(--t)*100%)));
       border:1px solid color-mix(in oklab, #ffffff 45%, rgba(255,255,255,.1) calc(var(--t)*100%));
       box-shadow: var(--shadow);
       overflow:hidden;
     }
-    .mock .bar{
-      position:absolute; left:0; right:0; top:0; height:38px;
-      background: linear-gradient(180deg, #f0f4ff, #cfdcff);
-      border-bottom:1px solid rgba(0,0,0,.08);
-      opacity: calc(1 - var(--t));
-      display:flex; align-items:center; gap:8px; padding:0 10px;
+    .icon{
+      position:absolute; width:56px; height:56px; display:grid; place-items:center;
+      border-radius:12px; font-weight:900;
+      transition: transform .8s ease;
+      filter: drop-shadow(0 6px 16px rgba(0,0,0,.25));
     }
-    .mock .dots{
-      margin-left:auto; display:flex; gap:6px;
-      opacity: calc(.8 * (1 - var(--t)));
+    .icon.v1{ left:10%; top:12%; background:#fff; color:#0a2458; transform: rotate(-6deg) }
+    .icon.v2{ left:28%; top:55%; background:#fff; color:#0a2458; transform: rotate(4deg) }
+    .icon.v3{ left:62%; top:22%; background:#fff; color:#0a2458; transform: rotate(-3deg) }
+
+    /* современные «глоу»-аналоги поверх (кроссфейд) */
+    .icon-modern{
+      position:absolute; width:56px; height:56px; display:grid; place-items:center;
+      border-radius:14px;
+      background: radial-gradient(120% 120% at 50% 10%, rgba(255,255,255,.35), transparent 60%),
+                  linear-gradient(145deg,#2bd9ff,#7f5aff 35%,#00ffc8 70%,#ff6aa2);
+      color:#0b0f22; font-weight:900;
+      box-shadow:
+        0 0 0 1px rgba(255,255,255,.18) inset,
+        0 10px 28px rgba(127,77,255,.35),
+        0 2px 0 rgba(255,255,255,.15) inset;
+      opacity: calc(.05 + .95*var(--t));
+      transform: translateY(calc(12px*(1 - var(--t))));
+      filter: drop-shadow(0 10px 24px rgba(0,0,0,.35));
     }
-    .mock .dot{ width:12px; height:12px; border-radius:50%; background:#fff; box-shadow: inset 0 0 0 1px rgba(0,0,0,.2) }
-    .mock .modern-bar{
-      position:absolute; left:12px; right:12px; top:12px;
-      height:38px; border-radius:12px;
-      background: linear-gradient(145deg,#10142a,#0b0f22);
-      opacity: var(--t);
-      transform: translateY(calc(6px * (1 - var(--t))));
-      transition: opacity .2s linear, transform .2s linear;
-      border:1px solid rgba(255,255,255,.08);
+    .icon-modern.m1{ left:12%; top:16% }
+    .icon-modern.m2{ left:32%; top:58% }
+    .icon-modern.m3{ left:65%; top:26% }
+
+    /* лёгкая орбита для modern-иконок */
+    @keyframes orbit { 0%{ transform:translateY(0) } 50%{ transform:translateY(-6px) } 100%{ transform:translateY(0) } }
+    .icon-modern{ animation: orbit 6s ease-in-out infinite }
+
+    /* Мягкий «неоновый» фон */
+    .aurora{
+      position:absolute; inset:-30% -20% auto -20%; height:60vh; pointer-events:none; z-index:0;
+      background: conic-gradient(from 0deg,#27d7ff,#7c4dff,#00ffc8,#27d7ff);
+      filter: blur(50px) saturate(1.2); opacity: calc(.25*var(--t));
+      animation: spin 18s linear infinite;
     }
-    .mock .content{
-      position:absolute; inset:58px 12px 12px 12px;
-      display:grid; gap:10px;
-    }
-    .mock .line{
-      height:14px; border-radius:6px;
-      background: linear-gradient(145deg, #e6edff, #cfe0ff);
-      box-shadow: inset 0 1px 0 rgba(255,255,255,.35);
-      opacity: calc(1 - var(--t));
-    }
-    .mock .card{
-      height:48px; border-radius:12px;
-      background: linear-gradient(145deg,#10142a,#0b0f22);
-      border:1px solid rgba(255,255,255,.08);
-      opacity: var(--t);
-      transform: translateY(calc(8px * (1 - var(--t))));
-      transition: opacity .2s linear, transform .2s linear;
-    }
+    @keyframes spin{ to{ transform:rotate(360deg) } }
 
     /* =========================
-       Лента преимуществ (длинный текст) с параллаксом
+       ПЕРЕХОДНЫЕ ЛЕНТЫ И ПАНЕЛИ
        ========================= */
-    .marquee{
-      overflow:hidden; position:relative;
-      background:linear-gradient(180deg, transparent, rgba(0,0,0,.08));
-      border-radius: var(--radius);
-      border:1px solid rgba(255,255,255,.06);
+    .ribbon{
+      width:100%; border-radius: calc(6px + 12px*var(--t));
+      background: linear-gradient(90deg,
+        #1461d9 0%,
+        #1fb14f 18%,
+        #ffd35a 36%,
+        #7f5aff 54%,
+        #2bd9ff 72%,
+        #00ffc8 100%);
+      height: 10px; box-shadow: 0 10px 28px rgba(0,0,0,.25) inset, 0 6px 14px rgba(0,0,0,.25);
+      position:relative; overflow:hidden;
     }
-    .marquee-track{
-      display:flex; gap:28px; align-items:center;
-      padding:10px 14px; white-space:nowrap;
-      animation:marquee 24s linear infinite;
-      opacity:.92;
+    .ribbon::after{
+      content:""; position:absolute; inset:0;
+      background: linear-gradient(90deg, transparent, rgba(255,255,255,.35), transparent);
+      transform: translateX(-100%); animation: line 4s linear infinite;
+      opacity: .6;
     }
-    .marquee strong{ color: var(--accent) }
-    @keyframes marquee{
-      from{ transform:translateX(0) } to{ transform:translateX(-50%) }
-    }
+    @keyframes line{ to{ transform: translateX(100%) } }
 
-    /* =========================
-       Галерея/сетка секций лендинга
-       ========================= */
-    .grid{ display:grid; gap:16px }
-    @media (min-width:960px){ .grid{ grid-template-columns:repeat(3,1fr) } }
-    @media (min-width:600px) and (max-width:959.98px){ .grid{ grid-template-columns:repeat(2,1fr) } }
-    .card{
-      background: var(--panel);
-      border:1px solid rgba(255,255,255,.08);
-      border-radius: var(--radius);
-      box-shadow: var(--shadow);
-      overflow:hidden;
-      display:grid;
-    }
-    .card img{ width:100%; display:block; aspect-ratio:16/10; object-fit:cover }
-    .card-body{ padding:14px }
-    .card-body h3{ margin:0 0 6px; color:var(--text); font-size:18px }
-    .card-body p{ margin:0 0 10px; color:#b7c0cb; font-size:14px }
-    .card-footer{ padding:0 14px 14px }
-    .cta-row{ display:flex; flex-wrap:wrap; gap:10px; align-items:center }
-
-    /* =========================
-       Секция сравнения До/После (CSS-only)
-       ========================= */
-    .compare{
-      display:grid; gap:16px; grid-template-columns:1fr 1fr;
-    }
-    @media (max-width:959.98px){ .compare{ grid-template-columns:1fr } }
     .panel{
       background: var(--panel);
       border:1px solid rgba(255,255,255,.08);
       border-radius: var(--radius);
       box-shadow: var(--shadow);
-      padding:14px;
+      padding: 18px;
     }
-    .panel h3{ margin:0 0 6px }
-    .panel .fake{
-      height:160px; border-radius:12px; overflow:hidden; position:relative;
-      background: linear-gradient(180deg, #f4f7ff, #dfe9ff);
-      box-shadow: inset 0 1px 0 rgba(255,255,255,.35);
-    }
-    .panel .fake::after{
-      content:"2000-е макет"; position:absolute; inset:auto 10px 8px auto; font-size:12px; color:#244;
-      opacity:.7;
-    }
-    .panel.modern .fake{
-      background: linear-gradient(145deg, #10142a, #0b0f22);
-      border:1px solid rgba(255,255,255,.08);
-      box-shadow:none;
-    }
-    .panel.modern .fake::after{ content:"современный макет"; color:#9ad }
+
+    .muted{ color:#b7c0cb }
 
     /* =========================
-       CTA-блок длинный
+       СОВРЕМЕННЫЙ КОСМО-БЛОК
        ========================= */
-    .cta-big{
-      background: linear-gradient(145deg, #10142a, #0b0f22);
-      border:1px solid rgba(255,255,255,.08);
-      border-radius: 18px;
+    .cosmo{
+      position:relative; overflow:hidden; border-radius:18px;
+      background: radial-gradient(120% 80% at 50% -20%, rgba(0,255,200,.08), transparent 60%),
+                  linear-gradient(180deg,#10142a,#0b0f22);
       box-shadow: var(--shadow);
-      display:grid; gap:12px; padding:18px;
+      border:1px solid rgba(255,255,255,.08);
     }
-    .cta-big h2{ margin:0 }
-    .cta-big p{ margin:0; color:#b7c0cb; max-width:720px }
+    .cosmo .head{
+      display:flex; align-items:center; gap:10px; padding:16px 16px 8px 16px;
+    }
+    .cosmo .head .pulse{
+      width:10px; height:10px; border-radius:50%;
+      background:#00ffc8; box-shadow:0 0 10px rgba(0,255,200,.8);
+      animation: pulse 2.2s ease-in-out infinite;
+    }
+    @keyframes pulse{ 0%{opacity:.4; transform:scale(1)} 50%{opacity:1; transform:scale(1.2)} 100%{opacity:.4; transform:scale(1)} }
+    .cosmo .body{ padding: 8px 16px 18px 16px }
+
+    /* Частицы */
+    canvas.stars{
+      position:absolute; inset:0; z-index:0; pointer-events:none;
+      opacity: calc(.25 + .35*var(--t));
+    }
 
     /* =========================
-       Контакты: full-bleed
+       КОНТАКТЫ FULL-BLEED (как на остальных страницах)
        ========================= */
     #contacts.full-bleed{
-      width:100vw;
-      margin-left:calc(50% - 50vw);
-      margin-right:calc(50% - 50vw);
-      padding:24px 0;
-      background:#1e1f24;
-      box-shadow:0 -1px 0 rgba(255,255,255,.06) inset;
+      width:100vw; margin-left:calc(50% - 50vw); margin-right:calc(50% - 50vw);
+      padding:24px 0; background:#1e1f24; box-shadow:0 -1px 0 rgba(255,255,255,.06) inset;
     }
     #contacts.full-bleed .wrap{ max-width:1100px; margin:0 auto; padding:0 18px }
     #contacts .contact-buttons{ display:flex; flex-wrap:wrap; gap:10px; justify-content:center }
     #contacts .contact-buttons .cta-button{ width:auto; min-width:0; padding:12px 18px; margin-top:0; border-radius:999px }
-
-    /* Якорь — чтобы якорь попадал с небольшим отступом */
     #contacts{ scroll-margin-top:24px }
 
+    /* Анимации по предпочтениям пользователя */
+    @media (prefers-reduced-motion:reduce){
+      .icon-modern, .aurora, .cosmo .head .pulse{ animation:none }
+      .reveal{ transition:none }
+      .desktop::after{ opacity:.2 }
+    }
   </style>
 </head>
 <body>
 
   <main class="theme">
 
-    <!-- Герой: 2000-е → современный -->
-    <section class="retro-hero">
-      <div class="hero-inner wrap">
-        <div class="hero-card reveal">
-          <h1 class="hero-title">Редизайн: из 2000-х в сегодняшний день</h1>
-          <p class="hero-sub">Обновляю UI/UX: структура, типографика, акценты, скорость и анимации — без перегруза и лишних кликов.</p>
-          <div class="hero-cta">
-            <a href="../index.html" class="cta-button">Вернуться на главную</a>
+    <!-- ВЕРХ: ВИНТАЖНЫЙ ДЕСКТОП -->
+    <section class="desktop">
+      <div class="aurora"></div>
+
+      <div class="desk-inner wrap">
+        <div class="win reveal">
+          <div class="win-title">
+            <span>Сайт — окно</span>
+            <div class="dots"><span class="d"></span><span class="d"></span><span class="d"></span></div>
+          </div>
+          <div class="mod-bar">
+            <span class="dot"></span><strong>Современный режим</strong>
+            <span class="muted">гладкий рендер, неон, микро-анимации</span>
+          </div>
+          <div class="win-body">
+            <h1>Олдскул → Космический модерн</h1>
+            <p>Заходишь — олдскул. Скроллишь — интерфейс живёт: иконки оживают, фон мерцает,
+              панели меняют форму и текстуру. Внизу — как на всех страницах: контакты и кнопка «назад».</p>
+            <div style="margin-top:12px; display:flex; gap:10px; flex-wrap:wrap">
+              <a href="../index.html" class="cta-button">Вернуться на главную</a>
+              <a href="#contacts" class="cta-button">Связаться</a>
+            </div>
+          </div>
+        </div>
+
+        <!-- ИКОНОГРАФИКА: ВИНТАЖ → МОДЕРН -->
+        <div class="icons reveal" aria-hidden="true">
+          <!-- винтажные -->
+          <div class="icon v1" title="Дискета">💾</div>
+          <div class="icon v2" title="Папка">🗂️</div>
+          <div class="icon v3" title="Мышь">🖱️</div>
+
+          <!-- модерн поверх (космический глоу) -->
+          <div class="icon-modern m1" title="Cloud">☁️</div>
+          <div class="icon-modern m2" title="Rocket">🚀</div>
+          <div class="icon-modern m3" title="Spark">✨</div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ПЕРЕХОДНАЯ ЛЕНТА -->
+    <section class="wrap reveal" style="padding-top:20px">
+      <div class="ribbon" aria-hidden="true"></div>
+    </section>
+
+    <!-- ПАНЕЛЬ: ОПИСАНИЕ С ПЕРЕМЕННОЙ СТИЛИСТИКОЙ -->
+    <section class="wrap reveal">
+      <div class="panel">
+        <h2 style="margin:0 0 8px">Что происходит при скролле</h2>
+        <p class="muted" style="margin:0">
+          Текстуры и сетка теряют «винтажную» зернистость, скругления и тени переходят к современным.
+          Иконки сменяют облик, а фон аккуратно «дышит». Переход программируем переменной <code>--t</code>
+          (от 0 до 1) — она управляется скроллом.
+        </p>
+      </div>
+    </section>
+
+    <!-- КОСМО-БЛОК С ЧАСТИЦАМИ -->
+    <section class="wrap reveal">
+      <div class="cosmo">
+        <canvas class="stars" id="stars"></canvas>
+        <div class="head">
+          <span class="pulse" aria-hidden="true"></span>
+          <strong>Современный рендер</strong>
+          <span class="muted">гладкие градиенты, мягкие микродвижения</span>
+        </div>
+        <div class="body">
+          <p class="muted" style="margin:0 0 10px">
+            Здесь можно показывать ключевые эффекты: неоновые акценты, частички, «ауру» и реакцию
+            на действия пользователя. Всё ненавязчиво и без перегруза.
+          </p>
+          <div style="display:grid; grid-template-columns:1fr 1fr; gap:12px">
+            <div class="panel" style="padding:12px">
+              <strong>Анимации</strong>
+              <p class="muted" style="margin:6px 0 0">Орбита и мерцание — по таймингу, который не раздражает.</p>
+            </div>
+            <div class="panel" style="padding:12px">
+              <strong>Визуальные слои</strong>
+              <p class="muted" style="margin:6px 0 0">Свет/тень, «аура» и зерно дают глубину и атмосферу.</p>
+            </div>
+          </div>
+          <div style="margin-top:12px">
             <a href="#contacts" class="cta-button">Связаться</a>
           </div>
         </div>
-
-        <div class="mock reveal" aria-hidden="true">
-          <div class="bar">
-            <span style="font-weight:700; color:#0a2458">Сайт — окно</span>
-            <div class="dots"><span class="dot"></span><span class="dot"></span><span class="dot"></span></div>
-          </div>
-          <div class="modern-bar"></div>
-          <div class="content">
-            <div class="line"></div>
-            <div class="line" style="width:72%"></div>
-            <div class="card"></div>
-            <div class="card"></div>
-          </div>
-        </div>
       </div>
     </section>
 
-    <!-- Лента преимуществ (длинная строка, создаёт «движение» страницы) -->
-    <section class="wrap reveal" aria-label="Что я улучшаю">
-      <div class="marquee" role="img" aria-label="Структура, заголовки, оффер, доверие, форма, скорость, анимации, аналитика">
-        <div class="marquee-track">
-          <span><strong>Структура</strong> секций</span>
-          <span>чёткий <strong>оффер</strong></span>
-          <span><strong>заголовки</strong> и микро-тексты</span>
-          <span><strong>скорость</strong> и рендер</span>
-          <span><strong>доверие</strong> и отзывы</span>
-          <span>понятная <strong>форма</strong></span>
-          <span><strong>аналитика</strong> и цели</span>
-
-          <!-- дублируем для бесконечной ленты -->
-          <span><strong>Структура</strong> секций</span>
-          <span>чёткий <strong>оффер</strong></span>
-          <span><strong>заголовки</strong> и микро-тексты</span>
-          <span><strong>скорость</strong> и рендер</span>
-          <span><strong>доверие</strong> и отзывы</span>
-          <span>понятная <strong>форма</strong></span>
-          <span><strong>аналитика</strong> и цели</span>
-        </div>
-      </div>
-    </section>
-
-    <!-- Галерея примеров секций -->
-    <section class="wrap">
-      <div class="grid">
-        <article class="card reveal">
-          <img src="../images/web5.png" alt="Геро-секция"/>
-          <div class="card-body">
-            <h3>Геро-секция</h3>
-            <p>Ясный заголовок + подзаголовок и заметный CTA. Без лишнего визуального шума.</p>
-          </div>
-          <div class="card-footer"><a href="#contacts" class="cta-button small">Обсудить</a></div>
-        </article>
-        <article class="card reveal">
-          <img src="../images/web5.png" alt="Блок выгод"/>
-          <div class="card-body">
-            <h3>Выгоды/оффер</h3>
-            <p>Показываю ценность с точки зрения клиента, не характеристик. Убираю «воду».</p>
-          </div>
-          <div class="card-footer"><a href="#contacts" class="cta-button small">Обсудить</a></div>
-        </article>
-        <article class="card reveal">
-          <img src="../images/web5.png" alt="Доверие и отзывы"/>
-          <div class="card-body">
-            <h3>Доверие и соц.доказательства</h3>
-            <p>Отзывы, метрики, логотипы, гарантия — ровно там, где влияет на решение.</p>
-          </div>
-          <div class="card-footer"><a href="#contacts" class="cta-button small">Обсудить</a></div>
-        </article>
-        <article class="card reveal">
-          <img src="../images/web5.png" alt="Форма и аналитика"/>
-          <div class="card-body">
-            <h3>Форма + аналитика</h3>
-            <p>Поля, согласия, UTM, цели — всё на месте. Отправка AJAX, интеграции.</p>
-          </div>
-          <div class="card-footer"><a href="#contacts" class="cta-button small">Обсудить</a></div>
-        </article>
-        <article class="card reveal">
-          <img src="../images/web5.png" alt="Анимации и рендер"/>
-          <div class="card-body">
-            <h3>Микро-анимации</h3>
-            <p>Лёгкие, уместные, без «ярмарки». Важен ритм появления и отклик на действия.</p>
-          </div>
-          <div class="card-footer"><a href="#contacts" class="cta-button small">Обсудить</a></div>
-        </article>
-        <article class="card reveal">
-          <img src="../images/web5.png" alt="Адаптивность"/>
-          <div class="card-body">
-            <h3>Адаптивность</h3>
-            <p>Телефон/планшет/ПК — единый смысл, разные ракурсы. Без «ломающихся» сеток.</p>
-          </div>
-          <div class="card-footer"><a href="#contacts" class="cta-button small">Обсудить</a></div>
-        </article>
-      </div>
-    </section>
-
-    <!-- Сравнение: До/После -->
+    <!-- ЕЩЁ ОДНА ПАНЕЛЬ ДЛЯ ДЛИНЫ СТРАНИЦЫ -->
     <section class="wrap reveal">
-      <div class="compare">
-        <div class="panel">
-          <h3>До (2000-е)</h3>
-          <div class="fake"></div>
-          <p style="margin:10px 0 0; color:#7a8aa5">Случайные акценты, перегруженные панели, неочевидные CTA.</p>
-        </div>
-        <div class="panel modern">
-          <h3>После (современный)</h3>
-          <div class="fake"></div>
-          <p style="margin:10px 0 0; color:#b7c0cb">Очередность блоков, ясный текст, внятная кнопка и лёгкая анимация.</p>
-        </div>
+      <div class="panel">
+        <h2 style="margin:0 0 8px">Зачем это всё</h2>
+        <p class="muted" style="margin:0">
+          Такая подача моментально показывает подход к редизайну: не «перекрасить», а переосмыслить —
+          структуру, визуальный язык и ощущения. Переход 2000-е → модерн иллюстрирует путь и вкус.
+        </p>
       </div>
     </section>
 
-    <!-- Длинный CTA-блок -->
-    <section class="wrap reveal">
-      <div class="cta-big">
-        <h2>Готов обсудить редизайн</h2>
-        <p>Если у вас уже есть сайт 2000-х (или просто «усталый» дизайн), соберу новую версию — быстрее, понятнее, с упором на конверсию. Начнём с короткого созвона и структуры.</p>
-        <div class="cta-row">
-          <a href="#contacts" class="cta-button">Связаться</a>
-          <a href="../index.html" class="cta-button">Вернуться на главную</a>
-        </div>
-      </div>
-    </section>
-
-    <!-- Контакты (full-bleed, как на остальных страницах) -->
+    <!-- КОНТАКТЫ (как в остальных страницах) -->
     <section id="contacts" class="full-bleed">
       <div class="wrap" style="text-align:center">
         <h2>Связаться со мной</h2>
@@ -412,24 +361,19 @@
     <footer>
       <p>&copy; 2025 Ваше имя. Все права защищены. <a href="#">Политика конфиденциальности</a></p>
     </footer>
-
   </main>
 
-  <!-- Скролл → переменная темы --t -->
+  <!-- Скролл → переменная --t -->
   <script>
     (function(){
       const root = document.querySelector('.theme');
       if(!root) return;
-
-      // сколько прокрутки нужно для полного перехода (подстрой по вкусу)
-      const RANGE = 800;
-
+      const RANGE = 1100; // длина «превращения»: увеличь/уменьши по вкусу
       const setT = () => {
         const y = window.scrollY || document.documentElement.scrollTop || 0;
         const t = Math.max(0, Math.min(1, y / RANGE));
         root.style.setProperty('--t', t.toFixed(3));
       };
-
       setT();
       window.addEventListener('scroll', setT, {passive:true});
     })();
@@ -438,16 +382,55 @@
   <!-- Reveal по IntersectionObserver -->
   <script>
     (function(){
-      const io = new IntersectionObserver((entries)=>{
-        entries.forEach(e=>{
-          if(e.isIntersecting){ e.target.classList.add('visible'); io.unobserve(e.target); }
-        });
-      },{ rootMargin: "0px 0px -10% 0px", threshold: .12 });
+      const io = new IntersectionObserver((ents)=>{
+        ents.forEach(e=>{ if(e.isIntersecting){ e.target.classList.add('visible'); io.unobserve(e.target); }});
+      },{ rootMargin:"0px 0px -10% 0px", threshold:.12 });
+      document.querySelectorAll('.reveal').forEach((el,i)=>{ el.style.transitionDelay=(i*50)+'ms'; io.observe(el); });
+    })();
+  </script>
 
-      document.querySelectorAll('.reveal').forEach((el,i)=>{
-        el.style.transitionDelay = (i*40)+'ms';
-        io.observe(el);
-      });
+  <!-- Частицы (звёзды) в космо-блоке -->
+  <script>
+    (function(){
+      const c = document.getElementById('stars');
+      if(!c) return;
+      const ctx = c.getContext('2d');
+      let w, h, stars=[];
+      const DPR = Math.min(2, window.devicePixelRatio || 1);
+
+      function resize(){
+        w = c.clientWidth; h = c.clientHeight;
+        c.width = Math.floor(w * DPR); c.height = Math.floor(h * DPR);
+        ctx.setTransform(DPR,0,0,DPR,0,0);
+        makeStars();
+      }
+      function makeStars(){
+        const COUNT = Math.floor((w*h)/6000);
+        stars = Array.from({length:COUNT}, ()=>({
+          x: Math.random()*w,
+          y: Math.random()*h,
+          r: Math.random()*1.6+0.4,
+          vx: (Math.random()-.5)*0.05,
+          vy: (Math.random()-.5)*0.05,
+          a: Math.random()*1
+        }));
+      }
+      function draw(){
+        ctx.clearRect(0,0,w,h);
+        for(const s of stars){
+          s.x += s.vx; s.y += s.vy; s.a += 0.02;
+          if(s.x<0) s.x=w; if(s.x>w) s.x=0;
+          if(s.y<0) s.y=h; if(s.y>h) s.y=0;
+          const alpha = .35 + .35*Math.sin(s.a);
+          ctx.beginPath();
+          ctx.arc(s.x, s.y, s.r, 0, Math.PI*2);
+          ctx.fillStyle = `rgba(255,255,255,${alpha})`;
+          ctx.fill();
+        }
+        requestAnimationFrame(draw);
+      }
+      resize(); draw();
+      new ResizeObserver(resize).observe(c);
     })();
   </script>
 </body>
