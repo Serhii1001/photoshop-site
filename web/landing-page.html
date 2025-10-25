@@ -94,6 +94,114 @@
     }
 
     /* ===== DEMOS (под лендинг) ===== */
+	/* === Лендинг-конструктор: анимация сборки секций === */
+	.builder{
+	  width:100%;
+ 	 display:grid;
+ 	 grid-template-columns:1.1fr 1fr;
+  	gap:16px;
+  	align-items:center;
+	}
+		.builder-left{display:grid; gap:10px; align-content:start}
+	.builder-h{font-weight:800; font-size:clamp(18px,2.2vw,22px); color:#e9faff}
+	.builder-p{color:#cfe; font-size:14px}
+	.builder-cta{
+	  border:1px dashed rgba(255,255,255,.25);
+	  background:transparent;
+ 	 color:#e9faff;
+ 	 padding:10px 14px;
+ 	 border-radius:10px;
+ 	 width:max-content;
+	}
+
+	/* телефон-фрейм */
+	.phone-frame{
+	  position:relative;
+ 	 height:220px;
+ 	 border-radius:18px;
+ 	 background:linear-gradient(160deg,#10142a,#0b0f22);
+ 	 border:1px solid rgba(255,255,255,.08);
+ 	 box-shadow:0 10px 24px rgba(0,0,0,.35);
+ 	 overflow:hidden;
+ 	 isolation:isolate;
+ 	 display:grid;
+ 	 place-items:end center;
+ 	 padding:12px 10px;
+	}
+
+	/* стек секций внутри телефона */
+	.stack{
+	  width:92%;
+ 	 display:grid;
+ 	 gap:8px;
+  	transform:translateY(12px); /* лёгкое смещение вниз для объёма */
+	}
+
+	/* одна «секция» лендинга */
+	.seg{
+	  height:18px;
+	  border-radius:8px;
+ 	 position:relative;
+ 	 overflow:hidden;
+ 	 background:linear-gradient(145deg,#0e1327,#0b0f22);
+ 	 border:1px solid rgba(255,255,255,.06);
+ 	 box-shadow: inset 0 1px 0 rgba(255,255,255,.03);
+ 	 opacity:0;
+ 	 transform:translateY(16px) scale(.98);
+ 	 animation:seg-in 1.2s ease forwards;
+	}
+	.seg.hero{ height:24px; background:linear-gradient(145deg,#172042,#0d122e) }
+	.seg.offer{ background:linear-gradient(145deg,#12263a,#0d182a) }
+	.seg.trust{ background:linear-gradient(145deg,#153229,#0e1f18) }
+	.seg.form{ background:linear-gradient(145deg,#2a1a22,#1a1016) }
+
+	/* перелив “контента” без лоадер-ощущения */
+	.seg::after{
+ 	 content:"";
+ 	 position:absolute; inset:0;
+ 	 background:linear-gradient(90deg, transparent, rgba(255,255,255,.07), transparent);
+  	transform:translateX(-100%);
+ 	 animation:shine-slow 4.2s linear infinite;
+ 	 opacity:.7;
+ 	 pointer-events:none;
+	}
+
+	/* задержки — секции появляются по очереди и зацикливаются */
+	.seg.hero{ animation-delay:.0s }
+	.seg.offer{ animation-delay:.25s }
+	.seg.trust{ animation-delay:.50s }
+	.seg.form{ animation-delay:.75s }
+
+	/* аккуратный цикл: исчезли — и снова поехали */
+	@keyframes seg-in{
+	  0%   { opacity:0; transform:translateY(16px) scale(.98) }
+	 20%  { opacity:1; transform:translateY(0)    scale(1) }
+ 	 70%  { opacity:1; transform:translateY(0)    scale(1) }
+ 	 100% { opacity:0; transform:translateY(-10px) scale(1) }
+	}
+	@keyframes shine-slow{
+	  0%   { transform:translateX(-100%) }
+ 	 100% { transform:translateX(100%)  }
+	}
+
+	/* лёгкая анимация “дыхания” у телефона */
+	@keyframes phone-breathe{
+ 	 0%,100%{ box-shadow:0 10px 24px rgba(0,0,0,.35) }
+ 	 50%    { box-shadow:0 12px 28px rgba(0,0,0,.42) }
+	}
+	.phone-frame{ animation:phone-breathe 5s ease-in-out infinite }
+
+	/* адаптация */
+	@media (max-width:959.98px){
+	  .builder{ grid-template-columns:1fr; }
+ 	 .phone-frame{ height:200px }
+	}
+	@media (prefers-reduced-motion:reduce){
+ 	 .seg, .phone-frame{ animation:none }
+  	.seg{ opacity:1; transform:none }
+ 	 .seg::after{ display:none }
+	}
+
     /* 1) Above-the-fold герой (структура заголовка/подзаголовка/CTA) */
     .aof{
       width:100%; border-radius:12px; background:#0b0f22; padding:18px;
@@ -429,34 +537,27 @@
       <h2>Что входит в продающий лендинг</h2>
       <p>На ПК ниже — карточки одинаковой высоты; на мобильных — авто-высота.</p>
       <div class="grid">
-        <!-- 1. Каркас лендинга (анимированный) -->
+        <!-- 1. Лендинг-конструктор (сборка секций) -->
         <article class="card reveal metrics-card">
-          <div class="card-h">Каркас лендинга (анимированный)</div>
+          <div class="card-h">Лендинг-конструктор (анимация сборки)</div>
           <div class="card-b">
-            <div class="wireframe">
-              <div class="wf-top">
-                <div class="wf-logo skeleton shine"></div>
-                <div class="wf-menu skeleton shine"></div>
+            <div class="builder">
+              <div class="builder-left">
+                <div class="builder-h">Собираю лендинги из проверенных секций</div>
+                <div class="builder-p">Герой с оффером, блоки выгод, доверие, форма — всё в правильном порядке и с акцентом на конверсию.</div>
+                <button class="builder-cta">Обсудить структуру</button>
               </div>
-              <div class="wf-hero">
-                <div class="wf-hero-left">
-                  <div class="wf-h1 skeleton shine"></div>
-                  <div class="wf-p skeleton shine"></div>
-                  <button class="wf-cta pulse">Целевое действие</button>
+              <div class="phone-frame">
+                <div class="stack">
+                  <div class="seg hero"></div>
+                  <div class="seg offer"></div>
+                  <div class="seg trust"></div>
+                  <div class="seg form"></div>
                 </div>
-                <div class="wf-hero-right">
-                  <div class="wf-img skeleton shine"></div>
-                </div>
-              </div>
-              <div class="wf-feats">
-                <div class="wf-feat skeleton shine"></div>
-                <div class="wf-feat skeleton shine"></div>
-                <div class="wf-feat skeleton shine"></div>
               </div>
             </div>
           </div>
         </article>
-
 
         <!-- 2. Три УТП -->
         <article class="card reveal">
