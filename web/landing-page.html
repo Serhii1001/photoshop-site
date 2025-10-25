@@ -371,7 +371,7 @@
       margin-right:calc(50% - 50vw);
 
       /* вертикальные отступы делаем компактными, боковые = 0 */
-      padding:22px 0 26px;      /* было 56px сверху и снизу от section{} */
+      padding:24px 0;         /* ровно сверху и снизу */
 
       background:#1e1f24;
       box-shadow:0 -1px 0 rgba(255,255,255,.06) inset;
@@ -399,22 +399,15 @@
       border-radius:999px;
     }
     /* Кнопка "Вернуться на главную" — компактные отступы */
+    /* Кнопка "Вернуться на главную" — симметричные отступы вокруг */
     .back-wrap{
       text-align:center;
-      /* ↑ УВЕЛИЧИЛИ верхний отступ: было 8px */
-      margin: 10px 0 12px !important;  /* верхний отступ небольшой */
+      margin: 16px 0 16px !important;  /* сверху = снизу, небольшой зазор */
     }
-    .back-btn{ margin-top:0 !important; }
-    /* На ПК даём ещё больше «воздуха» */
-    @media (min-width:960px){
-      .back-wrap{ margin: 24px 0 14px; }
-    }
-    .back-btn{
-      margin-top: 0 !important;      /* перекрываем общее .cta-button{ margin-top:24px } */
-    }
+    .back-btn{ margin-top:0 !important; } /* не даём общему .cta-button добавлять сверху */
 
     @media (min-width:960px){
-      .back-wrap{ margin: 10px 0 16px; }  /* на ПК чуть больше «воздуха» */
+      .back-wrap{ margin: 20px 0 20px !important; } /* на ПК чуть больше, тоже симметрично */
     }
 
   </style>
