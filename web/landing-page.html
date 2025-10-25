@@ -149,7 +149,8 @@
   	  radial-gradient(1.3px 1.3px at 72% 18%, #fff, transparent 55%);
  	 opacity:.55;
  	 pointer-events:none;
- 	 animation:nebula-twinkle 3.2s ease-in-out infinite alternate;
+     animation: nebula-twinkle 2.8s ease-in-out infinite alternate;
+     will-change: transform, opacity, filter;
 	}
 
 	/* орбитальный блик */
@@ -182,15 +183,20 @@
 
 	/* анимации */
 	@keyframes nebula-orbit { to { transform:rotate(360deg) } }
-	@keyframes nebula-twinkle {
- 	 0%  { opacity:.25; transform:translateY(0) }
- 	 100%{ opacity:.85; transform:translateY(-1px) }
+	@keyframes nebula-twinkle{
+	  0%   { opacity:.25; transform:translate(0,0) scale(1);     filter:blur(0) }
+  	50%  { opacity:.9;  transform:translate(-2px,-1px) scale(1.03); filter:blur(.4px) }
+  	100% { opacity:.4;  transform:translate(1px,0) scale(1);   filter:blur(0) }
 	}
 
 	/* уважение к prefers-reduced-motion */
 	@media (prefers-reduced-motion:reduce){
- 	 .builder-cta.nebula-btn::before,
+ 	 /* орбитальный блик отключаем, он самый активный */
  	 .builder-cta.nebula-btn::after{ animation:none }
+ 	 /* звёздочки оставляем мягко мерцать, но медленнее */
+ 	 .builder-cta.nebula-btn::before{
+ 	   animation: nebula-twinkle 4s ease-in-out infinite alternate;
+	  }
 	}
 
 
