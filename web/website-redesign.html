@@ -17,18 +17,19 @@
     .theme{
       --t: 0; /* 0 = винтаж, 1 = модерн */
 
-      /* Цвета */
+      /* Базовые палитры */
       --old-bg: #e0ecff;      --new-bg: #0e1024;
       --old-panel: #f4f7ff;   --new-panel: #0b0f22;
       --old-text: #0a2458;    --new-text: #e9faff;
       --old-accent:#1c7dff;   --new-accent:#00ffc8;
 
-      --bg: color-mix(in oklab, var(--old-bg) calc(100% - var(--t)*100%), var(--new-bg) calc(var(--t)*100%));
-      --panel: color-mix(in oklab, var(--old-panel) calc(100% - var(--t)*100%), var(--new-panel) calc(var(--t)*100%));
-      --text: color-mix(in oklab, var(--old-text) calc(100% - var(--t)*100%), var(--new-text) calc(var(--t)*100%));
-      --accent: color-mix(in oklab, var(--old-accent) calc(100% - var(--t)*100%), var(--new-accent) calc(var(--t)*100%));
+      /* Fallback (если нет color-mix) — сразу современная тема */
+      --bg: var(--new-bg);
+      --panel: var(--new-panel);
+      --text: var(--new-text);
+      --accent: var(--new-accent);
 
-      /* Геометрия/тени/зерно */
+      /* Геометрия/тени/зерно/глоу */
       --radius: calc(4px + (18px - 4px) * var(--t));
       --shadow: 0 calc(2px + 6px*var(--t)) calc(10px + 18px*var(--t)) rgba(0,0,0, calc(.12 + .25*var(--t)));
       --grain: calc(.8 * (1 - var(--t)));
@@ -37,6 +38,15 @@
       background: var(--bg);
       color: var(--text);
       min-height: 100dvh;
+    }
+    /* Включаем плавные смеси только там, где поддерживается color-mix */
+    @supports (color: color-mix(in oklab, #000 50%, #fff)) {
+      .theme{
+        --bg: color-mix(in oklab, var(--old-bg) calc(100% - (var(--t)*100%)), var(--new-bg) calc(var(--t)*100%));
+        --panel: color-mix(in oklab, var(--old-panel) calc(100% - (var(--t)*100%)), var(--new-panel) calc(var(--t)*100%));
+        --text: color-mix(in oklab, var(--old-text) calc(100% - (var(--t)*100%)), var(--new-text) calc(var(--t)*100%));
+        --accent: color-mix(in oklab, var(--old-accent) calc(100% - (var(--t)*100%)), var(--new-accent) calc(var(--t)*100%));
+      }
     }
 
     .wrap{ max-width:1100px; margin:0 auto; padding:0 18px }
@@ -52,15 +62,14 @@
        ========================= */
     .desktop{
       width:100vw; margin-left:calc(50% - 50vw); margin-right:calc(50% - 50vw);
-      position:relative; overflow:hidden; padding:0;
+      position:relative; overflow:hidden; padding:0; isolation:isolate;
       background:
         radial-gradient(120% 80% at 50% -10%, rgba(255,255,255,.6), transparent 60%),
         linear-gradient(180deg,
          color-mix(in oklab, #ffffff calc(60% - var(--t)*60%), #15193a calc(var(--t)*100%)) 0%,
          var(--bg) 100%);
-      isolation:isolate;
     }
-    /* CRT скан-линии + зерно, исчезают по мере t */
+    /* CRT скан-линии + виньетка, исчезают по мере t */
     .desktop::after{
       content:""; position:absolute; inset:0; pointer-events:none;
       background:
@@ -75,7 +84,7 @@
     }
     @media (max-width:959.98px){ .desk-inner{ grid-template-columns:1fr } }
 
-    /* Винтажное окно (синяя шапка) → плавно модернизируется */
+    /* Винтажное окно → модернизируется */
     .win{
       background: color-mix(in oklab, #f6f9ff calc(100% - var(--t)*100%), var(--panel) calc(var(--t)*100%));
       border-radius: var(--radius);
@@ -122,15 +131,13 @@
     }
     .icon{
       position:absolute; width:56px; height:56px; display:grid; place-items:center;
-      border-radius:12px; font-weight:900;
-      transition: transform .8s ease;
+      border-radius:12px; font-weight:900; transition: transform .8s ease;
       filter: drop-shadow(0 6px 16px rgba(0,0,0,.25));
     }
     .icon.v1{ left:10%; top:12%; background:#fff; color:#0a2458; transform: rotate(-6deg) }
     .icon.v2{ left:28%; top:55%; background:#fff; color:#0a2458; transform: rotate(4deg) }
     .icon.v3{ left:62%; top:22%; background:#fff; color:#0a2458; transform: rotate(-3deg) }
 
-    /* современные «глоу»-аналоги поверх (кроссфейд) */
     .icon-modern{
       position:absolute; width:56px; height:56px; display:grid; place-items:center;
       border-radius:14px;
@@ -148,12 +155,10 @@
     .icon-modern.m1{ left:12%; top:16% }
     .icon-modern.m2{ left:32%; top:58% }
     .icon-modern.m3{ left:65%; top:26% }
-
-    /* лёгкая орбита для modern-иконок */
     @keyframes orbit { 0%{ transform:translateY(0) } 50%{ transform:translateY(-6px) } 100%{ transform:translateY(0) } }
     .icon-modern{ animation: orbit 6s ease-in-out infinite }
 
-    /* Мягкий «неоновый» фон */
+    /* АУРА (космическая) */
     .aurora{
       position:absolute; inset:-30% -20% auto -20%; height:60vh; pointer-events:none; z-index:0;
       background: conic-gradient(from 0deg,#27d7ff,#7c4dff,#00ffc8,#27d7ff);
@@ -162,29 +167,22 @@
     }
     @keyframes spin{ to{ transform:rotate(360deg) } }
 
-    /* =========================
-       ПЕРЕХОДНЫЕ ЛЕНТЫ И ПАНЕЛИ
-       ========================= */
+    /* ПЕРЕХОДНАЯ ЛЕНТА */
     .ribbon{
       width:100%; border-radius: calc(6px + 12px*var(--t));
       background: linear-gradient(90deg,
-        #1461d9 0%,
-        #1fb14f 18%,
-        #ffd35a 36%,
-        #7f5aff 54%,
-        #2bd9ff 72%,
-        #00ffc8 100%);
+        #1461d9 0%, #1fb14f 18%, #ffd35a 36%, #7f5aff 54%, #2bd9ff 72%, #00ffc8 100%);
       height: 10px; box-shadow: 0 10px 28px rgba(0,0,0,.25) inset, 0 6px 14px rgba(0,0,0,.25);
       position:relative; overflow:hidden;
     }
     .ribbon::after{
       content:""; position:absolute; inset:0;
       background: linear-gradient(90deg, transparent, rgba(255,255,255,.35), transparent);
-      transform: translateX(-100%); animation: line 4s linear infinite;
-      opacity: .6;
+      transform: translateX(-100%); animation: line 4s linear infinite; opacity: .6;
     }
     @keyframes line{ to{ transform: translateX(100%) } }
 
+    /* ПАНЕЛИ */
     .panel{
       background: var(--panel);
       border:1px solid rgba(255,255,255,.08);
@@ -192,12 +190,9 @@
       box-shadow: var(--shadow);
       padding: 18px;
     }
-
     .muted{ color:#b7c0cb }
 
-    /* =========================
-       СОВРЕМЕННЫЙ КОСМО-БЛОК
-       ========================= */
+    /* СОВРЕМЕННЫЙ КОСМО-БЛОК */
     .cosmo{
       position:relative; overflow:hidden; border-radius:18px;
       background: radial-gradient(120% 80% at 50% -20%, rgba(0,255,200,.08), transparent 60%),
@@ -205,9 +200,7 @@
       box-shadow: var(--shadow);
       border:1px solid rgba(255,255,255,.08);
     }
-    .cosmo .head{
-      display:flex; align-items:center; gap:10px; padding:16px 16px 8px 16px;
-    }
+    .cosmo .head{ display:flex; align-items:center; gap:10px; padding:16px 16px 8px 16px }
     .cosmo .head .pulse{
       width:10px; height:10px; border-radius:50%;
       background:#00ffc8; box-shadow:0 0 10px rgba(0,255,200,.8);
@@ -215,16 +208,9 @@
     }
     @keyframes pulse{ 0%{opacity:.4; transform:scale(1)} 50%{opacity:1; transform:scale(1.2)} 100%{opacity:.4; transform:scale(1)} }
     .cosmo .body{ padding: 8px 16px 18px 16px }
+    canvas.stars{ position:absolute; inset:0; z-index:0; pointer-events:none; opacity: calc(.25 + .35*var(--t)) }
 
-    /* Частицы */
-    canvas.stars{
-      position:absolute; inset:0; z-index:0; pointer-events:none;
-      opacity: calc(.25 + .35*var(--t));
-    }
-
-    /* =========================
-       КОНТАКТЫ FULL-BLEED (как на остальных страницах)
-       ========================= */
+    /* КОНТАКТЫ (как на остальных страницах) */
     #contacts.full-bleed{
       width:100vw; margin-left:calc(50% - 50vw); margin-right:calc(50% - 50vw);
       padding:24px 0; background:#1e1f24; box-shadow:0 -1px 0 rgba(255,255,255,.06) inset;
@@ -234,11 +220,17 @@
     #contacts .contact-buttons .cta-button{ width:auto; min-width:0; padding:12px 18px; margin-top:0; border-radius:999px }
     #contacts{ scroll-margin-top:24px }
 
-    /* Анимации по предпочтениям пользователя */
+    /* Пользователь просит меньше анимаций */
     @media (prefers-reduced-motion:reduce){
       .icon-modern, .aurora, .cosmo .head .pulse{ animation:none }
       .reveal{ transition:none }
       .desktop::after{ opacity:.2 }
+    }
+    /* На мобильных отключаем самые тяжёлые эффекты */
+    @media (hover:none) and (pointer:coarse) {
+      .aurora{ animation: none; opacity: .18 }
+      .icon-modern{ animation: none }
+      .desktop::after{ opacity: .4 }
     }
   </style>
 </head>
@@ -277,7 +269,6 @@
           <div class="icon v1" title="Дискета">💾</div>
           <div class="icon v2" title="Папка">🗂️</div>
           <div class="icon v3" title="Мышь">🖱️</div>
-
           <!-- модерн поверх (космический глоу) -->
           <div class="icon-modern m1" title="Cloud">☁️</div>
           <div class="icon-modern m2" title="Rocket">🚀</div>
@@ -291,14 +282,13 @@
       <div class="ribbon" aria-hidden="true"></div>
     </section>
 
-    <!-- ПАНЕЛЬ: ОПИСАНИЕ С ПЕРЕМЕННОЙ СТИЛИСТИКОЙ -->
+    <!-- ПАНЕЛЬ: ОПИСАНИЕ -->
     <section class="wrap reveal">
       <div class="panel">
         <h2 style="margin:0 0 8px">Что происходит при скролле</h2>
         <p class="muted" style="margin:0">
           Текстуры и сетка теряют «винтажную» зернистость, скругления и тени переходят к современным.
-          Иконки сменяют облик, а фон аккуратно «дышит». Переход программируем переменной <code>--t</code>
-          (от 0 до 1) — она управляется скроллом.
+          Иконки сменяют облик, а фон аккуратно «дышит». Переход управляется переменной <code>--t</code> от 0 до 1.
         </p>
       </div>
     </section>
@@ -334,7 +324,7 @@
       </div>
     </section>
 
-    <!-- ЕЩЁ ОДНА ПАНЕЛЬ ДЛЯ ДЛИНЫ СТРАНИЦЫ -->
+    <!-- ДЛИННЫЙ ЗАКЛЮЧИТЕЛЬНЫЙ БЛОК -->
     <section class="wrap reveal">
       <div class="panel">
         <h2 style="margin:0 0 8px">Зачем это всё</h2>
@@ -345,7 +335,7 @@
       </div>
     </section>
 
-    <!-- КОНТАКТЫ (как в остальных страницах) -->
+    <!-- КОНТАКТЫ (full-bleed, как на остальных страницах) -->
     <section id="contacts" class="full-bleed">
       <div class="wrap" style="text-align:center">
         <h2>Связаться со мной</h2>
@@ -368,7 +358,7 @@
     (function(){
       const root = document.querySelector('.theme');
       if(!root) return;
-      const RANGE = 1100; // длина «превращения»: увеличь/уменьши по вкусу
+      const RANGE = 1100; // длина «превращения»; увеличь/уменьши при желании
       const setT = () => {
         const y = window.scrollY || document.documentElement.scrollTop || 0;
         const t = Math.max(0, Math.min(1, y / RANGE));
@@ -376,6 +366,17 @@
       };
       setT();
       window.addEventListener('scroll', setT, {passive:true});
+    })();
+  </script>
+
+  <!-- Пауза ауры при скрытой вкладке (ресурсосбережение) -->
+  <script>
+    (function(){
+      const aurora = document.querySelector('.aurora');
+      if(!aurora) return;
+      const onVis = () => { aurora.style.animationPlayState = document.hidden ? 'paused' : 'running'; };
+      document.addEventListener('visibilitychange', onVis);
+      onVis();
     })();
   </script>
 
@@ -389,12 +390,13 @@
     })();
   </script>
 
-  <!-- Частицы (звёзды) в космо-блоке -->
+  <!-- Частицы (звёзды) в космо-блоке: безопасно и легко -->
   <script>
     (function(){
       const c = document.getElementById('stars');
       if(!c) return;
       const ctx = c.getContext('2d');
+      const hasRO = typeof ResizeObserver !== 'undefined';
       let w, h, stars=[];
       const DPR = Math.min(2, window.devicePixelRatio || 1);
 
@@ -405,14 +407,19 @@
         makeStars();
       }
       function makeStars(){
-        const COUNT = Math.floor((w*h)/6000);
-        stars = Array.from({length:COUNT}, ()=>({
-          x: Math.random()*w,
-          y: Math.random()*h,
-          r: Math.random()*1.6+0.4,
-          vx: (Math.random()-.5)*0.05,
-          vy: (Math.random()-.5)*0.05,
-          a: Math.random()*1
+        let COUNT = Math.floor((w * h) / 7000); // чуть реже
+        const MAX = 160;                         // ограничение сверху
+        if (COUNT > MAX) COUNT = MAX;
+        const isMobile = matchMedia('(hover:none) and (pointer:coarse)').matches;
+        if (isMobile) COUNT = Math.min(COUNT, 90);
+
+        stars = Array.from({length: COUNT}, () => ({
+          x: Math.random() * w,
+          y: Math.random() * h,
+          r: Math.random() * 1.6 + 0.4,
+          vx: (Math.random() - .5) * 0.04,
+          vy: (Math.random() - .5) * 0.04,
+          a: Math.random() * 1
         }));
       }
       function draw(){
@@ -421,7 +428,7 @@
           s.x += s.vx; s.y += s.vy; s.a += 0.02;
           if(s.x<0) s.x=w; if(s.x>w) s.x=0;
           if(s.y<0) s.y=h; if(s.y>h) s.y=0;
-          const alpha = .35 + .35*Math.sin(s.a);
+          const alpha = .28 + .28 * Math.sin(s.a);
           ctx.beginPath();
           ctx.arc(s.x, s.y, s.r, 0, Math.PI*2);
           ctx.fillStyle = `rgba(255,255,255,${alpha})`;
@@ -430,7 +437,8 @@
         requestAnimationFrame(draw);
       }
       resize(); draw();
-      new ResizeObserver(resize).observe(c);
+      if(hasRO){ new ResizeObserver(resize).observe(c); }
+      else { window.addEventListener('resize', resize, {passive:true}); }
     })();
   </script>
 </body>
