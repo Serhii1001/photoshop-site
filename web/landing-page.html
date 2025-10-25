@@ -396,7 +396,13 @@
     /* Кнопка "Вернуться на главную" — компактные отступы */
     .back-wrap{
       text-align:center;
-      margin: 8px 0 14px;            /* было 10/30 — стало компактнее */
+      /* ↑ УВЕЛИЧИЛИ верхний отступ: было 8px */
+      margin: 18px 0 12px;
+    }
+
+    /* На ПК даём ещё больше «воздуха» */
+    @media (min-width:960px){
+      .back-wrap{ margin: 24px 0 14px; }
     }
     .back-btn{
       margin-top: 0 !important;      /* перекрываем общее .cta-button{ margin-top:24px } */
