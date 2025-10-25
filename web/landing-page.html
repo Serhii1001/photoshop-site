@@ -392,7 +392,18 @@
       margin-top:0;           /* перебиваем .cta-button{margin-top:24px} */
       border-radius:999px;
     }
+    /* Кнопка "Вернуться на главную" — компактные отступы */
+    .back-wrap{
+      text-align:center;
+      margin: 8px 0 14px;            /* было 10/30 — стало компактнее */
+    }
+    .back-btn{
+      margin-top: 0 !important;      /* перекрываем общее .cta-button{ margin-top:24px } */
+    }
 
+    @media (min-width:960px){
+      .back-wrap{ margin: 10px 0 16px; }  /* на ПК чуть больше «воздуха» */
+    }
 
   </style>
 </head>
