@@ -116,6 +116,83 @@
 	 text-decoration:none;
 	 cursor:pointer;
 	}
+	/* Космическая версия кнопки */
+	.builder-cta.nebula-btn{
+ 	 position:relative;
+ 	 padding:12px 18px;                 /* чуть крупнее ядро */
+ 	 border-radius:999px;
+  	border:0;
+ 	 color:#0b0f22;                     /* тёмный текст на ярком фоне */
+ 	 font-weight:700;
+  	letter-spacing:.2px;
+  	background:
+ 	   radial-gradient(60% 200% at 50% 0%, rgba(255,255,255,.35), transparent 60%),
+ 	   linear-gradient(135deg,#2bd9ff,#7f5aff 35%,#00ffc8 70%,#ff6aa2);
+ 	 box-shadow:
+  	  0 0 0 1px rgba(255,255,255,.18) inset,
+  	  0 10px 28px rgba(127,77,255,.35),
+   	 0 2px 0 rgba(255,255,255,.15) inset;
+ 	 transition: transform .2s ease, filter .2s ease, box-shadow .2s ease;
+ 	 overflow:hidden;
+	}
+
+	/* «звёздная пыль» поверх градиента */
+	.builder-cta.nebula-btn::before{
+ 	 content:"";
+ 	 position:absolute; inset:-2px;
+ 	 border-radius:inherit;
+ 	 background:
+ 	  radial-gradient(2px 2px at 18% 32%, #fff, transparent 55%),
+  	  radial-gradient(1.5px 1.5px at 64% 70%, #fff, transparent 55%),
+  	  radial-gradient(1.7px 1.7px at 82% 42%, #fff, transparent 55%),
+  	  radial-gradient(2px 2px at 34% 84%, #fff, transparent 55%),
+  	  radial-gradient(1.3px 1.3px at 72% 18%, #fff, transparent 55%);
+ 	 opacity:.55;
+ 	 pointer-events:none;
+ 	 animation:nebula-twinkle 3.2s ease-in-out infinite alternate;
+	}
+
+	/* орбитальный блик */
+	.builder-cta.nebula-btn::after{
+	  content:"";
+	  position:absolute; inset:-35% -45%;
+	  border-radius:inherit;
+	  background:conic-gradient(from 0deg at 50% 50%,
+ 	             rgba(255,255,255,0) 10%,
+ 	             rgba(255,255,255,.35) 25%,
+ 	             rgba(255,255,255,0) 45%);
+ 	 filter:blur(22px);
+ 	 animation:nebula-orbit 6s linear infinite;
+ 	 pointer-events:none;
+	}
+
+	/* интеракции */
+	.builder-cta.nebula-btn:hover{
+ 	 transform:translateY(-1px);
+ 	 box-shadow:
+  	  0 0 0 1px rgba(255,255,255,.22) inset,
+  	  0 14px 36px rgba(127,77,255,.45),
+  	  0 3px 0 rgba(255,255,255,.18) inset;
+	}
+	.builder-cta.nebula-btn:active{ transform:translateY(0) scale(.98) }
+	.builder-cta.nebula-btn:focus-visible{
+ 	 outline:2px solid rgba(0,255,200,.8);
+ 	 outline-offset:2px;
+	}
+
+	/* анимации */
+	@keyframes nebula-orbit { to { transform:rotate(360deg) } }
+	@keyframes nebula-twinkle {
+ 	 0%  { opacity:.25; transform:translateY(0) }
+ 	 100%{ opacity:.85; transform:translateY(-1px) }
+	}
+
+	/* уважение к prefers-reduced-motion */
+	@media (prefers-reduced-motion:reduce){
+ 	 .builder-cta.nebula-btn::before,
+ 	 .builder-cta.nebula-btn::after{ animation:none }
+	}
+
 
 	/* телефон-фрейм */
 	.phone-frame{
@@ -548,7 +625,7 @@
               <div class="builder-left">
                 <div class="builder-h">Собираю лендинги из проверенных секций</div>
                 <div class="builder-p">Герой с оффером, блоки выгод, доверие, форма — всё в правильном порядке и с акцентом на конверсию.</div>
-                <a href="#contacts" class="builder-cta">Обсудить структуру</a>
+                <a href="#contacts" class="builder-cta nebula-btn">Обсудить структуру</a>
               </div>
               <div class="phone-frame">
                 <div class="stack">
