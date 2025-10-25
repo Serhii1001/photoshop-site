@@ -26,8 +26,15 @@
     section{padding:56px 18px}
     /* Больше воздуха между последней карточкой и кнопкой — одинаково на моб/ПК */
     #demos .grid{ margin-bottom: 24px; }
-    /* Секция демо: поджимаем низ, чтобы кнопка была ближе к следующему блоку */
-    #demos{ padding-bottom: 10px; }   /* было 56px */
+    /* Стыкуем блок демо ближе к герою */
+    #demos{
+      padding-top: 28px;     /* было 56px — подтянули ближе */
+      padding-bottom: 10px;  /* как и было, низ компактный */
+    }
+
+    @media (min-width:960px){
+      #demos{ padding-top: 24px; }  /* на ПК чуть плотнее ещё */
+    }
     h1,h2{margin:0 0 10px}
     p{margin:0 0 12px;color:var(--muted)}
     .wrap{max-width:1100px;margin:0 auto}
